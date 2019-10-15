@@ -1,11 +1,33 @@
 <template>
   <q-page padding>
-    <!-- content -->
+
+<p v-for="datoras in dats" :key="datoras">
+  
+  
+  
+   data {{dats.nome}}
+   
+   
+   
+   </p>
+
+
   </q-page>
 </template>
 
 <script>
 export default {
-  // name: 'PageName',
+
+data(){
+  return{
+      dadoras: [
+           {nome : 'faruque'}
+         ]
+
+
+  }
+}
+
+
 }
 </script>

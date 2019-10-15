@@ -48,7 +48,7 @@
       v-model="leftDrawerOpen"
       show-if-above
       bordered
-      content-class="bg-red-2"
+      content-class="bg-red-3"
     >
       <q-list bordered class="rounded-borders">
         <q-item-label header>Menu</q-item-label>
@@ -61,6 +61,31 @@
             <q-item-label caption>pagina principal</q-item-label>
           </q-item-section>
         </q-item>
+
+
+<q-expansion-item
+          expand-separator
+          icon="nature_people"
+          label="Grupo Sanguineo"
+          caption=" Gerenciar Grupo Sanguineo"
+          default-opened
+        >
+
+          <q-expansion-item 
+          switch-toggle-side dense-toggle label="Lista de grupos"
+           :header-inset-level="1"
+            :content-inset-level="2">
+           
+           
+  
+
+          </q-expansion-item>
+
+          <q-expansion-item  switch-toggle-side dense-toggle label="Adicionar grupos" :header-inset-level="1" :content-inset-level="2">
+          </q-expansion-item>
+
+        </q-expansion-item>
+
 
  <q-expansion-item
           expand-separator
@@ -116,28 +141,6 @@
 
         </q-expansion-item>
 
-<q-expansion-item
-          expand-separator
-          icon="nature_people"
-          label="Doacoes"
-          caption="Gerenciar Doacoes"
-          default-opened
-        >
-
-          <q-expansion-item 
-          switch-toggle-side dense-toggle label="Lista de Doacoes"
-           :header-inset-level="1"
-            :content-inset-level="2">
-           
-           
-  
-
-          </q-expansion-item>
-
-          <q-expansion-item  switch-toggle-side dense-toggle label="Adicionar Doacoess" :header-inset-level="1" :content-inset-level="2">
-          </q-expansion-item>
-
-        </q-expansion-item>
 
 
 <q-expansion-item
@@ -222,6 +225,66 @@
           </q-expansion-item>
 
         </q-expansion-item>
+
+
+
+        <q-expansion-item
+          expand-separator
+          icon="nature_people"
+          label="Triagem"
+          caption="Gerenciar Triagens"
+          default-opened
+        >
+
+          <q-expansion-item 
+          switch-toggle-side dense-toggle label="Lista de Triagens"
+           :header-inset-level="1"
+            :content-inset-level="2" >
+
+<q-item clickable tag="a" to="/triagem">
+          <q-item-section avatar>
+            <q-icon name="eco" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Todos </q-item-label>
+          </q-item-section>
+        </q-item>
+
+
+          </q-expansion-item>
+
+          <q-expansion-item  switch-toggle-side dense-toggle label="Adicionar Triagens" :header-inset-level="1" :content-inset-level="2">
+          </q-expansion-item>
+
+        </q-expansion-item>
+
+<q-expansion-item
+          expand-separator
+          icon="nature_people"
+          label="Doacoes"
+          caption="Gerenciar Doacoes"
+          default-opened
+        >
+
+          <q-expansion-item 
+          switch-toggle-side dense-toggle label="Lista de Doacoes"
+           :header-inset-level="1"
+            :content-inset-level="2">
+           
+           
+  
+
+          </q-expansion-item>
+
+          <q-expansion-item  switch-toggle-side dense-toggle label="Adicionar Doacoess" :header-inset-level="1" :content-inset-level="2">
+          </q-expansion-item>
+
+        </q-expansion-item>
+
+
+        
+
+
 
          <q-item clickable tag="a" target="_blank">
           <q-item-section avatar>

@@ -8,7 +8,9 @@ const routes = [
       { path: 'dash', component: () => import('pages/dash.vue') },
       { path: 'produto', component: () => import('pages/produto.vue') },
       { path: 'dadores', component: () => import('pages/dadores.vue') },
-      { path: 'registroDador', component: () => import('pages/forms/registroDador.vue') }
+      { path: 'registroDador', component: () => import('pages/forms/registroDador.vue') },
+      { path: 'triagem', component: () => import('pages/Triagem.vue') }
+
 
     ]
   }

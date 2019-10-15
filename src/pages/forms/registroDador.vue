@@ -1,90 +1,47 @@
 <template>
-  <q-page padding>
- <div class="q-pa-md">
-    <div class="q-gutter-lg row">
-      
-    <q-input standout bottom-slots v-model="nome" label="Nome" counter :dense="dense">
+ <div class="q-pa-xl">
+    <div class="q-gutter-lg row items-center">
+
+   <q-input filled bottom-slots v-model="text" label="Label" counter :dense="dense">
         <template v-slot:prepend>
-          <q-icon name="person" />
+          <q-icon name="place" />
         </template>
         <template v-slot:append>
-          <q-icon name="close" @click="nome = ''" class="cursor-pointer" />
-        </template>
-
-        <template v-slot:hint>
-          Joao Felix
-        </template>
-      </q-input>
-
-
-      <q-input standout  bottom-slots v-model="text" label="Apelido" counter :dense="dense">
-        <template v-slot:prepend>
-          <q-icon name="person" />
-        </template>
-        <template v-slot:append>
-          <q-icon name="close" @click="Apelido = ''" class="cursor-pointer" />
-        </template>
-
-        <template v-slot:hint>
-          Aveiro
-        </template>
-      </q-input>
-
-      <q-select filled bottom-slots v-model="model" :options="options" label="Label" counter :dense="dense" :options-dense="denseOpts" >
-        <template v-slot:prepend>
-          <q-icon name="place" @click.stop />
-        </template>
-        <template v-slot:append>
-          <q-icon name="close" @click.stop="model = ''" class="cursor-pointer" />
+          <q-icon name="close" @click="text = ''" class="cursor-pointer" />
         </template>
 
         <template v-slot:hint>
           Field hint
         </template>
-      </q-select>
+      </q-input>
 
-
-        <q-input standout  bottom-slots v-model="text" label="Apelido" counter :dense="dense">
+      <q-input filled bottom-slots v-model="text" label="Label" counter :dense="dense">
         <template v-slot:prepend>
-          <q-icon name="person" />
+          <q-icon name="place" />
         </template>
         <template v-slot:append>
-          <q-icon name="close" @click="Apelido = ''" class="cursor-pointer" />
+          <q-icon name="close" @click="text = ''" class="cursor-pointer" />
         </template>
 
         <template v-slot:hint>
-          Aveiro
+          Field hint
         </template>
-      </q-input>
-        <q-input standout  bottom-slots v-model="text" label="Apelido" counter :dense="dense">
+      </q-input><q-input filled bottom-slots v-model="text" label="Label" counter :dense="dense">
         <template v-slot:prepend>
-          <q-icon name="person" />
+          <q-icon name="place" />
         </template>
         <template v-slot:append>
-          <q-icon name="close" @click="Apelido = ''" class="cursor-pointer" />
+          <q-icon name="close" @click="text = ''" class="cursor-pointer" />
         </template>
 
         <template v-slot:hint>
-          Aveiro
+          Field hint
         </template>
       </q-input>
-        <q-input standout  bottom-slots v-model="text" label="Apelido" counter :dense="dense">
-        <template v-slot:prepend>
-          <q-icon name="person" />
-        </template>
-        <template v-slot:append>
-          <q-icon name="close" @click="Apelido = ''" class="cursor-pointer" />
-        </template>
-
-        <template v-slot:hint>
-          Aveiro
-        </template>
-      </q-input>
-
-    </div>
   </div>
+    </div>
 
-  </q-page>
+  
 </template>
 
 <script>
