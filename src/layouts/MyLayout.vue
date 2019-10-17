@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
-      <q-toolbar class="bg-red-5 text-white">
+      <q-toolbar class="brand">
         <q-btn
           flat
           dense
@@ -48,26 +48,26 @@
       v-model="leftDrawerOpen"
       show-if-above
       bordered
-      content-class="bg-red-3"
+      content-class="brand"
     >
       <q-list bordered class="rounded-borders">
-        <q-item-label header>Menu</q-item-label>
+        <q-item-label header class="caption">Menu</q-item-label>
         <q-item clickable tag="a" to="/dash">
           <q-item-section avatar>
             <q-icon name="dashboard" />
           </q-item-section>
-          <q-item-section>
-            <q-item-label>Home</q-item-label>
-            <q-item-label caption>pagina principal</q-item-label>
+          <q-item-section > 
+            <q-item-label text-color="white" >Home</q-item-label>
+            <q-item-label  class="caption" >pagina principal</q-item-label>
           </q-item-section>
         </q-item>
 
 
 <q-expansion-item
           expand-separator
-          icon="nature_people"
+          icon="hdr_strong"
           label="Grupo Sanguineo"
-          caption=" Gerenciar Grupo Sanguineo"
+        
           default-opened
         >
 
@@ -87,11 +87,10 @@
         </q-expansion-item>
 
 
- <q-expansion-item
+    <q-expansion-item
           expand-separator
           icon="person"
           label="Dadores"
-          caption="Gerenciar Dadores"
           default-opened
         >
 
@@ -100,7 +99,8 @@
            
          <q-item clickable tag="a" to="/dadores">
           <q-item-section avatar>
-            <q-icon name="eco" />
+            <q-icon name="people
+" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Todos </q-item-label>
@@ -109,7 +109,7 @@
 
          <q-item clickable tag="a" to="/dadores">
           <q-item-section avatar>
-            <q-icon name="eco" />
+            <q-icon name="person_add_disabled" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Reprovados</q-item-label>
@@ -118,7 +118,7 @@
 
            <q-item clickable tag="a" to="/dadores">
           <q-item-section avatar>
-            <q-icon name="eco" />
+            <q-icon name="sentiment_satisfied_alt" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Atendidos</q-item-label>
@@ -127,7 +127,7 @@
 
            <q-item clickable tag="a" to="/dadores">
           <q-item-section avatar>
-            <q-icon name="eco" />
+            <q-icon name="sentiment_very_dissatisfied" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Faltosos</q-item-label>
@@ -147,7 +147,6 @@
           expand-separator
           icon="calendar_today"
           label="Agendamentos"
-          caption="Gerenciar Agendamentos"
           default-opened
         >
 
@@ -230,9 +229,8 @@
 
         <q-expansion-item
           expand-separator
-          icon="nature_people"
+          icon="how_to_reg"
           label="Triagem"
-          caption="Gerenciar Triagens"
           default-opened
         >
 
@@ -260,9 +258,8 @@
 
 <q-expansion-item
           expand-separator
-          icon="nature_people"
+          icon="favorite"
           label="Doacoes"
-          caption="Gerenciar Doacoes"
           default-opened
         >
 
@@ -276,7 +273,7 @@
 
           </q-expansion-item>
 
-          <q-expansion-item  switch-toggle-side dense-toggle label="Adicionar Doacoess" :header-inset-level="1" :content-inset-level="2">
+          <q-expansion-item  switch-toggle-side dense-toggle label="Adicionar Doacoes" :header-inset-level="1" :content-inset-level="2">
           </q-expansion-item>
 
         </q-expansion-item>
@@ -292,7 +289,7 @@
           </q-item-section>
           <q-item-section>
             <q-item-label>Produto gerado / Stock</q-item-label>
-            <q-item-label caption>Gerenciar Produto gerado e stock</q-item-label>
+            <q-item-label caption class="caption">Gerenciar Produto gerado e stock</q-item-label>
           </q-item-section>
         </q-item>
         <q-item clickable tag="a" target="_blank">
@@ -301,7 +298,7 @@
           </q-item-section>
           <q-item-section>
             <q-item-label>Relatorios</q-item-label>
-            <q-item-label caption>Gerenciar Relatorios</q-item-label>
+            <q-item-label caption class="caption">Gerenciar Relatorios</q-item-label>
           </q-item-section>
         </q-item>
         <q-item clickable tag="a" target="_blank" >
@@ -310,7 +307,7 @@
           </q-item-section>
           <q-item-section>
             <q-item-label>Definiçoes</q-item-label>
-            <q-item-label caption>Configurar alguns itens do sistema</q-item-label>
+            <q-item-label caption class="caption">Configurar alguns itens do sistema</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -321,6 +318,33 @@
     </q-page-container>
   </q-layout>
 </template>
+
+<style lang="sass">
+
+.brand
+
+    background-image: -webkit-linear-gradient(135deg,#C0602B 30%,#A42153 90%)
+    background-image: linear-gradient(135deg,#C0602B 30%,#A42153 90%)
+    color: white
+    font-size : 16px;
+ 
+ 
+
+</style>
+
+<style lang="sass">
+
+.caption
+    pading-top: 2px;
+    color: white
+    font-size : 11px;
+ 
+
+</style>
+
+
+
+
 
 <script>
 export default {
