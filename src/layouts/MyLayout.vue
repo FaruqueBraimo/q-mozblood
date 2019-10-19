@@ -71,19 +71,10 @@
           default-opened
         >
 
-          <q-expansion-item 
-          switch-toggle-side dense-toggle label="Lista de grupos"
-           :header-inset-level="1"
-            :content-inset-level="2">
-           
-           
-  
-
+         <q-expansion-item to="sangue"  switch-toggle-side dense-toggle label="Lista de grupos" :header-inset-level="1" :content-inset-level="2">
           </q-expansion-item>
 
-          <q-expansion-item  switch-toggle-side dense-toggle label="Adicionar grupos" :header-inset-level="1" :content-inset-level="2">
-          </q-expansion-item>
-
+          
         </q-expansion-item>
 
 
@@ -107,7 +98,7 @@
           </q-item-section>
         </q-item>
 
-         <q-item clickable tag="a" to="/dadores">
+         <q-item clickable tag="a" to="/reprovados">
           <q-item-section avatar>
             <q-icon name="person_add_disabled" />
           </q-item-section>
@@ -116,7 +107,7 @@
           </q-item-section>
         </q-item>
 
-           <q-item clickable tag="a" to="/dadores">
+           <q-item clickable tag="a" to="/atendidos">
           <q-item-section avatar>
             <q-icon name="sentiment_satisfied_alt" />
           </q-item-section>
@@ -125,7 +116,7 @@
           </q-item-section>
         </q-item>
 
-           <q-item clickable tag="a" to="/dadores">
+           <q-item clickable tag="a" to="/faltosos">
           <q-item-section avatar>
             <q-icon name="sentiment_very_dissatisfied" />
           </q-item-section>
@@ -153,36 +144,36 @@
           <q-expansion-item switch-toggle-side dense-toggle label="Visualizar" :header-inset-level="1" :content-inset-level="2">
            
            
-         <q-item clickable tag="a" to="/agendamentos">
+         <q-item clickable tag="a" to="">
           <q-item-section avatar>
-            <q-icon name="eco" />
+            <q-icon name="post_add" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Todos </q-item-label>
           </q-item-section>
         </q-item>
 
-         <q-item clickable tag="a" to="/dadores">
+         <q-item clickable tag="a" to="/confirmados">
           <q-item-section avatar>
-            <q-icon name="eco" />
+            <q-icon name="done" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Confirmados</q-item-label>
           </q-item-section>
         </q-item>
 
-           <q-item clickable tag="a" to="/dadores">
+           <q-item clickable tag="a" to="/cancelados">
           <q-item-section avatar>
-            <q-icon name="eco" />
+            <q-icon name="clear" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Cancelados</q-item-label>
           </q-item-section>
         </q-item>
 
-           <q-item clickable tag="a" to="/dadores">
+           <q-item clickable tag="a" to="/adiados">
           <q-item-section avatar>
-            <q-icon name="eco" />
+            <q-icon name="refresh" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Adiados</q-item-label>
@@ -191,30 +182,30 @@
 
           </q-expansion-item>
 
-          <q-expansion-item  switch-toggle-side dense-toggle label="Agendar" :header-inset-level="1" :content-inset-level="2">
+          <q-expansion-item  switch-toggle-side dense-toggle label="Mais" :header-inset-level="1" :content-inset-level="2">
 
                 
-         <q-item clickable tag="a" to="/dadores">
+         <q-item clickable tag="a" to="/marcar">
           <q-item-section avatar>
-            <q-icon name="eco" />
+            <q-icon name="post_add" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Marcar</q-item-label>
           </q-item-section>
         </q-item>
 
-<q-item clickable tag="a" to="/dadores">
+<q-item clickable tag="a" to="">
           <q-item-section avatar>
-            <q-icon name="eco" />
+            <q-icon name="cancel" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Cancelar</q-item-label>
           </q-item-section>
         </q-item>
 
-        <q-item clickable tag="a" to="/dadores">
+        <q-item clickable tag="a" to="">
           <q-item-section avatar>
-            <q-icon name="eco" />
+            <q-icon name="refresh" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Adiar</q-item-label>
@@ -239,7 +230,7 @@
            :header-inset-level="1"
             :content-inset-level="2" >
 
-<q-item clickable tag="a" to="/triagem">
+<q-item clickable tag="a" to="triagem">
           <q-item-section avatar>
             <q-icon name="eco" />
           </q-item-section>
