@@ -232,7 +232,6 @@ methods:{
       setTimeout(() => {
         // delay simulated, we are done,
         // now restoring submit to its initial state
-        alert('hello')
         
             
 
