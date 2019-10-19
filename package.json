@@ -9,9 +9,11 @@
   "private": true,
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",
-   "build": "quasar build",
-"start": "node server.js",
-"heroku-postbuild": "yarn && yarn build"
+    "build": "quasar build",
+    "start": "node server.js",
+    "heroku-postbuild": "yarn && yarn build",
+    "postinstall": "npm run build"
+
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
