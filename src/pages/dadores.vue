@@ -145,38 +145,46 @@ export default {
        remover(codigo){
 
 
-
-    for(let v of this.selected){
     
-    axios.delete('https://sanguemozapi.herokuapp.com/api/'  + codigo )
+    axios.delete('https://sanguemozapi.herokuapp.com/api/dador/'  + codigo )
+    
     .then(response => this.selected.splice(index,1) )
+
+    
+
+
     .catch(e => {
-     
+    
     })
-   
-
-   
-
-  }
+         this.showNotif();
+          this.listar();
+          
 
 
  }
-
-
 ,
+showNotif () {
+      this.$q.notify({
+        message: 'Dador Apagado',
+        color: 'dark'
+        
+       
+      })
+    },
+
 listar(){
-//    this.$q.loading.show({
-//    delay: 400 ,
-//    message: 'Por favor aguarde',
-//    sanitize: true
-// })
+   this.$q.loading.show({
+   delay: 400 ,
+   message: 'Por favor aguarde',
+   sanitize: true
+})
      Dador.listar() 
     .then(response => {
      this.dadores = response.data;
-    // this.$q.loading.hide(  {
-    // })
+    this.$q.loading.hide(  {
+    })
     
-     console.log(response.data)
+     
 
     })
 }
@@ -200,7 +208,7 @@ listar(){
          filter: '',
           selected: [],
           dadores:[],
-
+          mensagem : '',    
 
 
       columns: [
