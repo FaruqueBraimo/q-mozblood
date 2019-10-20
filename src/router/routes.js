@@ -10,7 +10,8 @@ const routes = [
       { path: 'dadores', component: () => import('pages/dadores.vue') },
       { path: 'sangue', component: () => import('pages/sangue.vue') },
       { path: 'registroDador', component: () => import('pages/forms/registroDador.vue') },
-      { path: 'triagem', component: () => import('pages/Triagem.vue') }
+      { path: 'triagem', component: () => import('pages/Triagem.vue') },
+      { path: 'marcar', component: () => import('pages/agendamento.vue') }
 
 
     ]
