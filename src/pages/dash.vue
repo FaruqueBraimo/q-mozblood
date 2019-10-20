@@ -21,7 +21,7 @@
       size="50px"
       :thickness="0.22"
       color="teal"
-      track-color="teal-3"
+      track-color="grey-3"
      
     />
         </q-card-section>

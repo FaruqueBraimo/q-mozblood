@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-lg q-ma-lg">
+  <div class="q-pa-md q-ma-md">
     
 
 <q-dialog v-model="card">
@@ -10,7 +10,7 @@
 
          <div class="q-gutter-md row items-end">
 
-       <q-input filled bottom-slots  label="Tipo" counter :dense="dense">
+       <q-input filled bottom-slots  label="Tipo" counter :dense="dense" v-model="data.nome">
         <template v-slot:prepend>
           <q-icon name="sentiment_satisfied_alt" />
         </template>
@@ -32,16 +32,22 @@
 
 
 
-<div class="q-pt-md" style="max-width: 300px">
+<div class="q-pt-md" style="max-width: 300px" >
+
     <q-input
-      v-model="text"
+
+
+      v-model="data.descricao"
       filled
       type="textarea"
       label="Descrição"
+
     >
 
       <template v-slot:hint>
-         Judite
+          
+       
+
         </template>
     </q-input>
   </div>
@@ -53,7 +59,7 @@
         <q-separator />
 
         <q-card-actions  class="row justify-end">
-          <q-btn  flat color="primary" v-close-popup>Gravar</q-btn>
+          <q-btn  flat color="primary" v-close-popup @click="salvar()">Gravar</q-btn>
            
         </q-card-actions>
       </q-card>
@@ -65,7 +71,7 @@
 
 
 
-    <q-list bordered class="rounded-borders"   v-for="dat in data" :key="dat.name">
+    <q-list bordered class="rounded-borders"   v-for="dat in data" :key="dat.codigo">
       <q-item-label header>Grupo</q-item-label>
 
       <q-item>
@@ -74,16 +80,17 @@
         </q-item-section>
 
         <q-item-section top class="col-2 gt-sm">
-          <q-item-label class="q-mt-sm">{{dat.name}}</q-item-label>
+          <q-item-label class="q-mt-sm">{{dat.nome}}</q-item-label>
         </q-item-section>
 
         <q-item-section top>
           <q-item-label lines="1">
             <span class="text-weight-large">Descrição</span>
            
+           
           </q-item-label >
           <q-item-label caption lines="1" >
-            @rstoenescu in #3: > Generic type parameter for props
+             {{dat.descricao}}
           </q-item-label>
           <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-primary text-uppercase">
            
@@ -136,8 +143,75 @@
 
 
 
+
+
+
+
 <script>
+
+
+import axios from 'axios';
+
+
+
+
+
 export default {
+
+mounted()  { 
+    
+  axios.get(`https://sanguemozapi.herokuapp.com/api/sangue`)
+    .then(response => {
+      // JSON responses are automatically parsed.
+      this.data = response.data
+      console.log(this.data)
+      console.log("--------------")
+    })
+    .catch(e => {
+      this.errors.push(e)
+    })
+    
+
+ },
+
+methods:{
+
+   salvar(){
+
+    axios.post('https://sanguemozapi.herokuapp.com/api/sangue'  ,{
+
+           
+        nome:      this.data.nome,
+        descricao: this.data.descricao,
+     
+                })
+                .then(function (response) {
+                   
+                })
+                .catch(function (error) {
+                });
+
+  }
+  ,
+  listar(){
+
+    axios.get('https://sanguemozapi.herokuapp.com/api/sangue')
+                .then(function (response) {
+                    this.grupo = response.data;
+                    console.log(this.grupo)
+
+
+})
+                .catch(function (error) {
+                });
+
+  }
+
+
+}
+,
+
+
   data () {
     
 
@@ -147,34 +221,20 @@ export default {
          filter: '',
          card: false,
           sizes: ['lg'],
-       icons: [
+          icons: [
         
         'add'
       ],
 
-
+       grupo:[],
     
       data: [
         {
-          name: 'A',
+          nome: '',
           descricao: ''
          
-        },
-        {
-         name: 'A+',
-          descricao: ''
-          
-        },
-        {
-          name: 'B',
-           descricao: ''
-         
-        },
-        {
-         name: 'A-',
-           descricao: ''
-         
-        },
+        }
+      
        
       ]
     }
