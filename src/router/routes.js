@@ -11,7 +11,10 @@ const routes = [
       { path: 'sangue', component: () => import('pages/sangue.vue') },
       { path: 'registroDador', component: () => import('pages/forms/registroDador.vue') },
       { path: 'triagem', component: () => import('pages/Triagem.vue') },
-      { path: 'marcar', component: () => import('pages/agendamento.vue') }
+      { path: 'agendamento', component: () => import('pages/agendamento.vue') },
+      { path: 'marcar', component: () => import('pages/forms/marcarAgendamento.vue') },
+      { path: 'marcarTriagem', component: () => import('pages/forms/marcarTriagem.vue') }
+
 
 
     ]

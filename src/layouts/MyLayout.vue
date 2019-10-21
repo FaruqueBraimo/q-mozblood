@@ -144,7 +144,7 @@
           <q-expansion-item switch-toggle-side dense-toggle label="Visualizar" :header-inset-level="1" :content-inset-level="2">
            
            
-         <q-item clickable tag="a" to="">
+         <q-item clickable tag="a" to="/agendamento">
           <q-item-section avatar>
             <q-icon name="post_add" />
           </q-item-section>
@@ -242,7 +242,7 @@
 
           </q-expansion-item>
 
-          <q-expansion-item  switch-toggle-side dense-toggle label="Adicionar Triagens" :header-inset-level="1" :content-inset-level="2">
+          <q-expansion-item  switch-toggle-side dense-toggle label="Adicionar Triagens" :header-inset-level="1" :content-inset-level="2" to="/marcarTriagem">
           </q-expansion-item>
 
         </q-expansion-item>

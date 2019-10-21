@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-lg q-ma-lg">
     <q-table
-      title="Triagens"
+      title="Dadores"
       :data="dadores"
       :columns="columns"
       row-key="name"
@@ -99,7 +99,7 @@ Aaa
   .q-table__top,
   .q-table__bottom,
   thead tr:first-child th 
-    background-color: #c1f4cd
+    background-color:  #f5f5dc
 
   thead tr:first-child th
     position: sticky
@@ -208,7 +208,8 @@ listar(){
          filter: '',
           selected: [],
           dadores:[],
-          mensagem : '',    
+          mensagem : '',  
+            
 
 
       columns: [
