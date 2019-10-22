@@ -96,12 +96,14 @@ export default {
 ,
 methods: {
    salvar(){
-
-    axios.post('https://sanguemozapi.herokuapp.com/api/agendamento/'  +  this.dador.value, {
+//https://sanguemozapi.herokuapp.com/api/agendamento/
+    axios.post(`https://sanguemozapi.herokuapp.com/api/agendamento/`  +  this.dador.value, {
 
            
              descricao : this.lista.desc,
-             data_agendada : this.agendamento.data_marcada
+             data_agendada : this.agendamento.data_marcada,
+             hora: this.agendamento.hora_marcada,
+             
        
                 })
                 .then(function (response) {
@@ -129,11 +131,6 @@ methods: {
       this.errors.push(e)
     })
     
-
-
-    
-
-
  }
 ,
 
