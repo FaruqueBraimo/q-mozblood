@@ -100,7 +100,7 @@
   .q-table__top,
   .q-table__bottom,
   thead tr:first-child th 
-    background-color: #c1f4cd
+    background-color: #f5f5dc
 
   thead tr:first-child th
     position: sticky

@@ -24,7 +24,7 @@
 
        <q-input filled bottom-slots v-model="dador.nome" label="Nome" counter :dense="dense">
         <template v-slot:prepend>
-          <q-icon name="sentiment_satisfied_alt" />
+          <q-icon name="person_outline" />
         </template>
         <template v-slot:append>
           <q-icon name="close" @click="dador.nome = ''" class="cursor-pointer" />
@@ -38,14 +38,14 @@
 
   <q-input filled bottom-slots v-model="dador.apelido" label="Apelido" counter :dense="dense">
         <template v-slot:prepend>
-          <q-icon name="sentiment_satisfied_alt" />
+          <q-icon name="person_outline" />
         </template>
         <template v-slot:append>
           <q-icon name="close" @click="dador.apelido = ''" class="cursor-pointer" />
         </template>
 
         <template v-slot:hint>
-         Judite
+         Manjate
         </template>
       </q-input>
 
@@ -105,7 +105,7 @@
         :options="nacionalidade"
          stack-label
         label="Nacionalidade"
-        hint="Angolana"
+        hint="Moçambicana"
         style="width: 250px"
       />
    
@@ -115,7 +115,7 @@
         :options="provincia"
           stack-label
         label="Provincia"
-        hint="Luanda"
+        hint="Maputo"
         style="width: 250px"
       />
 
@@ -130,8 +130,8 @@
 
       <q-step
         :name="2"
-        title="Dados intermediarios"
-        caption="opcionais"
+        title="Dados Intermediários"
+        caption="Opcionais"
         icon="create_new_folder"
         :done="step > 2"
       >
@@ -148,7 +148,7 @@
    <div class="q-pa-lg">
     <div class="q-gutter-md row items-end">
 
-       <q-input filled bottom-slots v-model="dador.nome" label="Nome de Pai" counter :dense="dense">
+       <q-input filled bottom-slots v-model="dador.nomePai" label="Nome de Pai" counter :dense="dense">
         <template v-slot:prepend>
           <q-icon name="sentiment_satisfied_alt" />
         </template>
@@ -162,9 +162,9 @@
       </q-input>
 
 
-  <q-input filled bottom-slots v-model="dador.apelido" label="Nome de Mae" counter :dense="dense">
+  <q-input filled bottom-slots v-model="dador.nomeMae" label="Nome de Mãe" counter :dense="dense">
         <template v-slot:prepend>
-          <q-icon name="sentiment_satisfied_alt" />
+          <q-icon name="face" />
         </template>
         <template v-slot:append>
           <q-icon name="close" @click="dador.apelido = ''" class="cursor-pointer" />
@@ -176,7 +176,7 @@
       </q-input>
 
 
-  <q-input filled bottom-slots v-model="dador.telefone" label="Telefone Parente" counter :dense="dense">
+  <q-input filled bottom-slots v-model="dador.telefoneParente" label="Telefone do Parente" counter :dense="dense">
         <template v-slot:prepend>
           <q-icon name="phone_enabled" />
         </template>
@@ -196,10 +196,10 @@
 
  <q-select
         filled
-        v-model="dador.sexo"
-        :options="sexo"
+        v-model="dador.grau"
+        :options="grau"
           stack-label
-        label="grau parentesco"
+        label="Grau de Parentesco"
         hint="Irmão"
         style="width: 250px"
       />
@@ -207,7 +207,7 @@
       <q-select
         filled
         v-model="model"
-        :options="options"
+        :options="rh"
          stack-label
         label="Fator RH"
         hint="RH+"
@@ -253,8 +253,8 @@
 
        <q-select
         filled
-        v-model="dador.sexo"
-        :options="sexo"
+        v-model="dador.documento"
+        :options="documento"
           stack-label
         label="Documento"
         hint="BI"
@@ -262,12 +262,9 @@
       />
 
 
-       <q-input filled bottom-slots v-model="dador.nome" label="Doc Numero" counter :dense="dense">
+       <q-input filled bottom-slots v-model="dador.nome" label="Número do Doc" counter :dense="dense">
         <template v-slot:prepend>
           <q-icon name="sentiment_satisfied_alt" />
-        </template>
-        <template v-slot:append>
-          <q-icon name="close" @click="dador.nome = ''" class="cursor-pointer" />
         </template>
 
         <template v-slot:hint>
@@ -311,7 +308,7 @@
 
       <template v-slot:navigation>
         <q-stepper-navigation>
-          <q-btn     @click="$refs.stepper.next()" color="deep-orange" :label="step === 3 ? 'Finalizado' : 'Continuar'" />
+          <q-btn     @click="$refs.stepper.next()" color="deep-orange" :label="step === 3 ? 'Finalizar' : 'Continuar'" />
           <q-btn v-if="step > 1" flat color="deep-orange" @click="$refs.stepper.previous()" label="Voltar" class="q-ml-sm" />
         </q-stepper-navigation>
       </template>
@@ -335,11 +332,6 @@ export default {
     .catch(e => {
       this.errors.push(e)
     })
-    
-
-
-    
-
 
  }
 ,
@@ -374,10 +366,13 @@ if(val.length){
       sangue_cod:null,
       options: [],
       sexo: ['Masculino', 'Feminino','Outro'],
+      grau: ['Irmão(a)', 'Mãe','Pai','Outro'],
+      documento: ['BI','Passaporte','DIRE','Cartão de Eleitor','Outro'],
       date: '2019/02/01',
       s:'',
-      nacionalidade: ['Angola','Mocambique'],
-      provincia : ['Nampula','Luanda']
+      rh: ['RH+','RH-'],
+      nacionalidade: ['Moçambique','Angola'],
+      provincia : ['Maputo','Gaza','Inhambane','Manica','Sofala','Tete','Nampula','Zambezia','Niassa','Cabo Delgado']
 
 
 
@@ -400,7 +395,8 @@ if(val.length){
         situacaoAptidao: "",
         provincia: "",
         fatorRH: "",
-        apelido: ""
+        apelido: "",
+        grau: ""
         
       },
      
