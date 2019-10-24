@@ -3,18 +3,15 @@
        <div class="q-pa-lg">
     <div class="q-gutter-md row items-end">
 
-       <q-input filled bottom-slots v-model="dador.nome" label="Nome" counter :dense="dense">
-        <template v-slot:prepend>
-          <q-icon name="sentiment_satisfied_alt" />
-        </template>
-        <template v-slot:append>
-          <q-icon name="close" @click="dador.nome = ''" class="cursor-pointer" />
-        </template>
-
-        <template v-slot:hint>
-         Judite
-        </template>
-      </q-input>
+        <q-select
+        filled
+        v-model="dador.provincia"
+        :options="provincia"
+          stack-label
+        label="Dador"
+        hint="Joao Felix"
+        style="width: 250px"
+      />
 
 
 

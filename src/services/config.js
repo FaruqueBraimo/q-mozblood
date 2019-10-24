@@ -3,6 +3,7 @@ import axios from 'axios'
 
 
 export const http = axios.create({
-    baseURL: `https://sanguemozapi.herokuapp.com/api/`
+    //http://localhost:8085/api || https://sanguemozapi.herokuapp.com/api/
+    baseURL: `http://localhost:8085/api`
 
 })
