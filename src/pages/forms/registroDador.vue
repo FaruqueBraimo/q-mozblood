@@ -323,7 +323,7 @@ export default {
 
  mounted(){
 
-  axios.get(`https://sanguemozapi.herokuapp.com/api/sangue`)
+  axios.get(`http://localhost:8086//api/sangue`)
     .then(response => {
       this.lista  = response.data     
       console.log("--------------")
@@ -415,6 +415,32 @@ if(val.length){
 
 methods:{
 
+
+
+  editar() {
+
+ axios.put('http://localhost:8086/api/dador/'  + this.sangue_cod.value, {
+
+           
+        nome: this.dador.nome,
+        endereco: this.dador.endereco,
+        sexo: this.dador.sexo,
+        telefone:this.dador.telefone,
+        email: this.dador.apelido
+                })
+                .then(function (response) {
+                    currentObj.output = response.data;
+                })
+                .catch(function (error) {
+                    currentObj.output = error;
+                });
+ 
+
+
+  }
+
+,
+
   simulateSubmit () {
       this.submitting = true
 
@@ -435,7 +461,7 @@ methods:{
 ,
   salvar(){
 
-    axios.post('https://sanguemozapi.herokuapp.com/api/dador/'  + this.sangue_cod.value, {
+    axios.post('http://localhost:8086/api/dador/'  + this.sangue_cod.value, {
 
            
         nome: this.dador.nome,

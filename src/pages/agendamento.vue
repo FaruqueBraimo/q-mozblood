@@ -7,11 +7,10 @@
 
   <div class="q-pa-lg q-ma-lg">
 
-<ul>
 
 
+   
 
-</ul>
 
     <q-table
       title="Agendamentos"
@@ -36,33 +35,30 @@
 
       <template v-slot:body="props">
         <q-tr :props="props">
-          <q-td key="desc" :props="props">
+          <q-td key="Dador" :props="props">
             {{ props.row.name }}
-            <q-popup-edit v-model="props.row.name">
-              <q-input v-model="props.row.name" dense autofocus counter />
-            </q-popup-edit>
+         
           </q-td>
-          <q-td key="calories" :props="props">
-            {{ props.row.calories }}
-            <q-popup-edit v-model="props.row.calories" title="Update calories" buttons>
-              <q-input type="number" v-model="props.row.calories" dense autofocus />
-            </q-popup-edit>
+          <q-td key="data_agendada" :props="props">
+            {{ props.row.data_agendada }}
+           
           </q-td>
-          <q-td key="fat" :props="props">
-            <div class="text-pre-wrap">{{ props.row.fat }}</div>
-            <q-popup-edit v-model="props.row.fat">
-              <q-input type="textarea" v-model="props.row.fat" dense autofocus />
-            </q-popup-edit>
+          <q-td key="data_marcada" :props="props">
+            {{ props.row.data_marcada }}
+           
           </q-td>
-          <q-td key="carbs" :props="props">
-            {{ props.row.carbs }}
-            <q-popup-edit v-model="props.row.carbs" title="Update carbs" buttons persistent>
-              <q-input type="number" v-model="props.row.carbs" dense autofocus hint="Use buttons to close" />
-            </q-popup-edit>
+          <q-td key="hora" :props="props">
+            {{ props.row.hora }}
+           
           </q-td>
-          <q-td key="protein" :props="props">{{ props.row.protein }}</q-td>
-          <q-td key="sodium" :props="props">{{ props.row.sodium }}</q-td>
-          <q-td key="calcium" :props="props">{{ props.row.calcium }}</q-td>
+        
+
+          
+         <q-td key="descricao" :props="props">
+            {{ props.row.descricao }}
+           
+          </q-td>
+        
 
           <q-td key="iron" :props="props">
 
@@ -136,8 +132,9 @@ export default {
 
 
 mounted()  { 
-    
-  axios.get(`https://sanguemozapi.herokuapp.com/api/agendamento`)
+        //http://localhost:8085/api || https://sanguemozapi.herokuapp.com/api/
+
+  axios.get(`http://localhost:8085/api/agendamento`)
     .then(response => {
       // JSON responses are automatically parsed.
       this.data = response.data
@@ -175,10 +172,10 @@ mounted()  {
           sortable: true
           
         },
-        { name: 'calories', align: 'center', label: 'Data  Agendanda', field: 'data_agendada', sortable: true , },
-        { name: 'fat', label: 'Data de  Agendamento', field: 'data_agendada', sortable: true, style: 'width: 10px' },
-        { name: 'carbs', label: 'Hora de Agendamento', field: 'hora' },
-        { name: 'protein', label: 'descricao', field: 'protein' },
+        { name: 'data_agendada', align: 'center', label: 'Data  Agendanda', field: 'data_agendada', sortable: true , },
+        { name: 'data_marcada', label: 'Data de  Agendamento', field: 'data_marcada', sortable: true, style: 'width: 10px' },
+        { name: 'hora', label: 'Hora de Agendamento', field: 'hora' },
+        { name: 'descricao', label: 'descricao', field: 'descricao' },
         { name: 'iron',align: 'center', label: 'Accão', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
       ],
     }

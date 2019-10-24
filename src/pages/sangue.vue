@@ -159,8 +159,7 @@ import axios from 'axios';
 export default {
 
 mounted()  { 
-    
-  axios.get(`https://sanguemozapi.herokuapp.com/api/sangue`)
+  axios.get(`http://localhost:8085//api/sangue`)
     .then(response => {
       // JSON responses are automatically parsed.
       this.data = response.data
@@ -177,8 +176,7 @@ mounted()  {
 methods:{
 
    salvar(){
-
-    axios.post('https://sanguemozapi.herokuapp.com/api/sangue'  ,{
+    axios.post('http://localhost:8085//api/sangue'  ,{
 
            
         nome:      this.data.nome,
@@ -195,7 +193,7 @@ methods:{
   ,
   listar(){
 
-    axios.get('https://sanguemozapi.herokuapp.com/api/sangue')
+    axios.get('http://localhost:8085//api/sangue')
                 .then(function (response) {
                     this.grupo = response.data;
                     console.log(this.grupo)

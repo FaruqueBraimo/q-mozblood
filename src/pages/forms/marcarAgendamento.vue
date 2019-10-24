@@ -78,7 +78,7 @@ export default {
     return {
     time: '10:56',
       date: '2019/02/01',
-      options: [''],
+      options: [],
       dador : '',
       obs : '',
 
@@ -97,7 +97,7 @@ export default {
 methods: {
    salvar(){
 //https://sanguemozapi.herokuapp.com/api/agendamento/
-    axios.post(`https://sanguemozapi.herokuapp.com/api/agendamento/`  +  this.dador.value, {
+    axios.post(`http://localhost:8086/api/agendamento/`  +  this.dador.value, {
 
            
              descricao : this.lista.desc,
@@ -121,7 +121,7 @@ methods: {
 
  mounted(){
 
-  axios.get(`https://sanguemozapi.herokuapp.com/api/dadores`)
+  axios.get(`http://localhost:8086/api/dadores`)
     .then(response => {
       this.lista  = response.data     
       console.log("--------------")
