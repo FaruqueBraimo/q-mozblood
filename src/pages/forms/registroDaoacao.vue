@@ -13,32 +13,32 @@
         style="width: 250px"
       />
 
-<!-- style="min-width: 250px; max-width: 300px ,top: 20px" -->
-   <q-input filled v-model="agendamento.data_marcada" mask="date" :rules="['date']" @click="$refs.qDateProxy.show()"  hint="Data"  style="width: 250px" >
-      <template v-slot:append>
-        <q-icon name="event" class="cursor-pointer">
-          <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
-            <q-date title= "Aniversario" v-model="agendamento.data_marcada" @input="() => $refs.qDateProxy.hide()" />
-          </q-popup-proxy>
-        </q-icon>
-      </template>
-    </q-input>
+  <q-input filled bottom-slots  v-model="nr" label="Codigo Bolsa" counter :dense="dense">
+        <template v-slot:prepend>
+          <q-icon name="sentiment_satisfied_alt" />
+        </template>
 
-    <q-input filled v-model="agendamento.hora_marcada" mask="time" :rules="['time']"  hint="Hora">
-      <template v-slot:append>
-        <q-icon name="access_time" class="cursor-pointer">
-          <q-popup-proxy :breakpoint="800">
-             <q-time
-                v-model="agendamento.hora_marcada"
-              />
-          </q-popup-proxy>
-        </q-icon>
-      </template>
-
-    </q-input>
+        <template v-slot:hint>
+        7775JA
+        </template>
+      </q-input>
 
 
-    <q-input filled v-model="lista.desc" mask="" :rules="['']"  hint="Observação"  
+
+<q-input filled bottom-slots  v-model="vulume" label="Volume coletado" counter :dense="dense">
+        <template v-slot:prepend>
+          <q-icon name="sentiment_satisfied_alt" />
+        </template>
+
+        <template v-slot:hint>
+       0.5l
+        </template>
+      </q-input>
+
+    
+
+
+    <q-input filled v-model="obs" mask="" :rules="['']"  hint="Reação/Observação"  
       autogrow>
      
 
@@ -78,39 +78,43 @@ export default {
       options: [],
       dador : '',
       obs : '',
+      nr: '',
 
       lista : [],
-
-        agendamento: {
-        data_marcada: "2019/02/01",
-        data_hoje: "",
-        hora_marcada: "10:56",
-        desc: "",
-        
-      },
+      vulume: ''
+      
+     
     }
   }
 ,
 methods: {
    salvar(){
 //https://sanguemozapi.herokuapp.com/api/agendamento/
-    axios.post(`https://sanguemozapi.herokuapp.com/api/agendamento/`  +  this.dador.value, {
+    axios.post(`https://sanguemozapi.herokuapp.com/api/doacao/`  +  this.dador.value, {
 
            
-             descricao : this.lista.desc,
-             data_agendada : this.agendamento.data_marcada,
-             hora: this.agendamento.hora_marcada,
+             volume_coletado : this.vulume,
+             obs :   this.obs,
+             numero_bolsa : this.nr
              
-       
                 })
                 .then(function (response) {
                     currentObj.output = response.data;
+                    this.showNotif();
                 })
                 .catch(function (error) {
                     currentObj.output = error;
                 });
 
-  }
+  },
+  showNotif () {
+      this.$q.notify({
+        message: 'Senha ou Usuario incorretoss',
+        color: 'dark',
+       
+
+      })
+    }
 }
 
 
@@ -118,7 +122,7 @@ methods: {
 
  mounted(){
 
-  axios.get(`https://sanguemozapi.herokuapp.com/api/dadores/`)
+  axios.get(`https://sanguemozapi.herokuapp.com/api/triagem/`)
     .then(response => {
       this.lista  = response.data     
       console.log("--------------")
@@ -140,7 +144,7 @@ lista(val){
 if(val.length){
   this.options = this.lista.map(o => {
   return {
-      label:  o.nome,
+      label:  o.agendamento.dador.nome,
       value:  o.codigo
   }
   console.log(this.options);

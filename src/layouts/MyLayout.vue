@@ -24,9 +24,8 @@
     >
       <div class="row no-wrap q-pa-md">
         <div class="column">
-          <div class="text-h6 q-mb-md">Definicoes</div>
-          <q-toggle v-model="mobileData" label="Use Mobile Data" />
-          <q-toggle v-model="bluetooth" label="Bluetooth" />
+          <div class="text-h6 q-mb-md">Minha Conta</div>
+         
         </div>
 
         <q-separator vertical inset class="q-mx-lg" />
@@ -99,33 +98,6 @@
           </q-item-section>
         </q-item>
 
-         <q-item clickable tag="a" to="/reprovados">
-          <q-item-section avatar>
-            <q-icon name="person_add_disabled" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Reprovados</q-item-label>
-          </q-item-section>
-        </q-item>
-
-           <q-item clickable tag="a" to="/atendidos">
-          <q-item-section avatar>
-            <q-icon name="sentiment_satisfied_alt" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Atendidos</q-item-label>
-          </q-item-section>
-        </q-item>
-
-           <q-item clickable tag="a" to="/faltosos">
-          <q-item-section avatar>
-            <q-icon name="sentiment_very_dissatisfied" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Faltosos</q-item-label>
-          </q-item-section>
-        </q-item>
-
           </q-expansion-item>
 
           <q-expansion-item to="registroDador"  switch-toggle-side dense-toggle label="Adicionar Dador" :header-inset-level="1" :content-inset-level="2">
@@ -154,32 +126,7 @@
           </q-item-section>
         </q-item>
 
-         <q-item clickable tag="a" to="/confirmados">
-          <q-item-section avatar>
-            <q-icon name="done" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Confirmados</q-item-label>
-          </q-item-section>
-        </q-item>
-
-           <q-item clickable tag="a" to="/cancelados">
-          <q-item-section avatar>
-            <q-icon name="clear" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Cancelados</q-item-label>
-          </q-item-section>
-        </q-item>
-
-           <q-item clickable tag="a" to="/adiados">
-          <q-item-section avatar>
-            <q-icon name="refresh" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Adiados</q-item-label>
-          </q-item-section>
-        </q-item>
+       
 
           </q-expansion-item>
 
@@ -258,14 +205,15 @@
           <q-expansion-item 
           switch-toggle-side dense-toggle label="Lista de Doacoes"
            :header-inset-level="1"
-            :content-inset-level="2">
+            :content-inset-level="2" 
+            to="/doacao">
            
            
   
 
           </q-expansion-item>
 
-          <q-expansion-item  switch-toggle-side dense-toggle label="Adicionar Doacoes" :header-inset-level="1" :content-inset-level="2">
+          <q-expansion-item  switch-toggle-side dense-toggle label="Adicionar Doacoes" :header-inset-level="1" :content-inset-level="2" to="/registroDaocao">
           </q-expansion-item>
 
         </q-expansion-item>

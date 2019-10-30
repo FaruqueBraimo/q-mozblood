@@ -78,11 +78,11 @@
     
 
 <!-- style="min-width: 250px; max-width: 300px ,top: 20px" -->
- <q-input filled v-model="date" mask="date" :rules="['date']" @click="$refs.qDateProxy.show()"  hint="Data de Nascimento"  style="width: 250px" >
+ <q-input filled v-model="dador.nasc" mask="date" :rules="['date']" @click="$refs.qDateProxy.show()"  hint="Data de Nascimento"  style="width: 250px" >
       <template v-slot:append>
         <q-icon name="event" class="cursor-pointer">
           <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
-            <q-date title= "Aniversario" v-model="date" @input="() => $refs.qDateProxy.hide()" />
+            <q-date title= "Aniversario" v-model="dador.nasc" @input="() => $refs.qDateProxy.hide()" />
           </q-popup-proxy>
         </q-icon>
       </template>
@@ -153,7 +153,7 @@
           <q-icon name="sentiment_satisfied_alt" />
         </template>
         <template v-slot:append>
-          <q-icon name="close" @click="dador.nome = ''" class="cursor-pointer" />
+          <q-icon name="close" @click="dador.nomePai = ''" class="cursor-pointer" />
         </template>
 
         <template v-slot:hint>
@@ -167,7 +167,7 @@
           <q-icon name="face" />
         </template>
         <template v-slot:append>
-          <q-icon name="close" @click="dador.apelido = ''" class="cursor-pointer" />
+          <q-icon name="close" @click="dador.nomeMae = ''" class="cursor-pointer" />
         </template>
 
         <template v-slot:hint>
@@ -206,14 +206,20 @@
 
       <q-select
         filled
-        v-model="model"
+        v-model="dador.fatorRH"
         :options="rh"
          stack-label
         label="Fator RH"
         hint="RH+"
         style="width: 250px"
       />
-   
+
+
+      
+       
+
+
+
       <q-select
         filled
         v-model="sangue_cod"
@@ -251,9 +257,11 @@
     <div class="q-gutter-md row items-end">
 
 
+
+ 
        <q-select
         filled
-        v-model="dador.documento"
+        v-model="dador.tipoDocumento"
         :options="documento"
           stack-label
         label="Documento"
@@ -261,8 +269,9 @@
         style="width: 250px"
       />
 
+        
 
-       <q-input filled bottom-slots v-model="dador.nome" label="Número do Doc" counter :dense="dense">
+       <q-input filled bottom-slots  v-model="dador.numeroDocumento" label="Número do Doc" counter :dense="dense">
         <template v-slot:prepend>
           <q-icon name="sentiment_satisfied_alt" />
         </template>
@@ -323,7 +332,7 @@ export default {
 
  mounted(){
 
-  axios.get(`http://localhost:8086//api/sangue`)
+  axios.get(`https://sanguemozapi.herokuapp.com/api/sangue`)
     .then(response => {
       this.lista  = response.data     
       console.log("--------------")
@@ -396,7 +405,8 @@ if(val.length){
         provincia: "",
         fatorRH: "",
         apelido: "",
-        grau: ""
+        grau: "",
+        nasc: ""
         
       },
      
@@ -426,7 +436,19 @@ methods:{
         endereco: this.dador.endereco,
         sexo: this.dador.sexo,
         telefone:this.dador.telefone,
-        email: this.dador.apelido
+        email: this.dador.email,
+        data_nasc: this.dador.nasc,
+        fatorRH: this.dador.fatorRH,
+        nacionalidade: this.dador.nacionalidade,
+        nomeMae: this.dador.nomeMae,
+        nomePai: this.dador.nomePai,
+        numeroDeDoacoes: "",
+        numeroDocumento: this.dador.numeroDocumento,
+        provincia: this.dador.provincia,
+        situacaoAptidao: "",
+        tipoDocumento: this.dador.tipoDocumento,
+
+
                 })
                 .then(function (response) {
                     currentObj.output = response.data;
@@ -461,14 +483,17 @@ methods:{
 ,
   salvar(){
 
-    axios.post('http://localhost:8086/api/dador/'  + this.sangue_cod.value, {
+    axios.post('https://sanguemozapi.herokuapp.com/api/dador/'  + this.sangue_cod.value, {
 
            
         nome: this.dador.nome,
         endereco: this.dador.endereco,
         sexo: this.dador.sexo,
         telefone:this.dador.telefone,
-        email: this.dador.apelido
+        email: this.dador.apelido,
+        data_nasc: this.dador.nasc,
+
+
                 })
                 .then(function (response) {
                     currentObj.output = response.data;

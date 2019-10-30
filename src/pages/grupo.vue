@@ -69,6 +69,70 @@
 
 
 
+<q-dialog v-model="edit">
+      <q-card>
+
+        <q-card-section>
+          
+
+         <div class="q-gutter-md row items-end">
+
+       <q-input filled bottom-slots  label="Tipo" counter :dense="dense" v-model="nome">
+        <template v-slot:prepend>
+          <q-icon name="sentiment_satisfied_alt" />
+        </template>
+        <template v-slot:append>
+          <q-icon name="close"    class="cursor-pointer" />
+        </template>
+
+        <template v-slot:hint>
+         A
+        </template>
+      </q-input>
+      
+
+
+     
+          </div>
+
+              <q-space />
+
+
+
+<div class="q-pt-md" style="max-width: 300px" >
+
+    <q-input
+
+
+      v-model="descricao"
+      filled
+      type="textarea"
+      label="Descrição"
+
+    >
+
+      <template v-slot:hint>
+          
+       
+
+        </template>
+    </q-input>
+  </div>
+        
+        </q-card-section>
+
+      
+
+        <q-separator />
+
+        <q-card-actions  class="row justify-end">
+          <q-btn  flat color="primary" v-close-popup @click="editar()">Alterar</q-btn>
+           
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+
+
 
 
     <q-list bordered class="rounded-borders"   v-for="dat in data" :key="dat.codigo">
@@ -102,8 +166,8 @@
 
         <q-item-section top side>
           <div class="text-grey-8 q-gutter-xs">
-            <q-btn class="gt-xs" size="12px" flat dense round icon="delete"   text-color="deep-orange" />
-            <q-btn class="gt-xs" size="12px" flat dense round icon="create"  text-color="secondary"  />
+            <q-btn class="gt-xs" size="12px" flat dense round icon="delete"   text-color="deep-orange" @click="getSelectedString(dat.codigo)" />
+            <q-btn class="gt-xs" size="12px" flat dense round icon="create"  text-color="secondary"   @click=" edit = true  , nome = dat.nome, descricao= dat.descricao, key = dat.codigo " />
           </div>
         </q-item-section>
       </q-item>
@@ -153,7 +217,7 @@ import axios from 'axios';
 export default {
 
 mounted()  { 
-  axios.get(`http://localhost:8086//api/sangue`)
+  axios.get(`https://sanguemozapi.herokuapp.com/api/sangue`)
     .then(response => {
       // JSON responses are automatically parsed.
       this.data = response.data
@@ -170,7 +234,7 @@ mounted()  {
 methods:{
 
    salvar(){
-    axios.post('http://localhost:8086//api/sangue'  ,{
+    axios.post('https://sanguemozapi.herokuapp.com/api/sangue'  ,{
 
            
         nome:      this.data.nome,
@@ -178,16 +242,93 @@ methods:{
      
                 })
                 .then(function (response) {
+                  
+                })
+                .catch(function (error) {
+                });
+                this.showNotif();
+
+  },
+
+showNotif () {
+      this.$q.notify({
+        message: 'Senha ou Usuario incorretoss',
+        color: 'dark',
+       
+
+      })
+    }
+
+
+editar(){
+  axios.put('https://sanguemozapi.herokuapp.com/api/sangue'  ,{
+
+        codigo : this.key,   
+        nome:      this.nome,
+        descricao: this.descricao,
+
+     
+                })
+                .then(function (response) {
+                   this.listar();
+
                    
                 })
                 .catch(function (error) {
                 });
 
+
   }
+  
   ,
+
+   getSelectedString (codigo) {
+   this.$q.dialog({
+        dark: true,
+        message: 'Deseja apagar?',
+        cancel: true,
+        title: 'Confirmacão',
+        persistent: true
+      }).onOk(() => {
+        
+          this.remover(codigo);
+
+        
+
+      }).onCancel(() => {
+        // console.log('Cancel')
+      }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+      })
+   },
+
+   remover(codigo){
+
+
+
+    
+    axios.delete('https://sanguemozapi.herokuapp.com/api/sangue/'  + codigo )
+    
+    
+    .then(response => this.selected.splice(index,1) )
+         
+    
+
+
+    .catch(e => {
+    
+    })
+         
+         
+          
+
+
+ },
+
+ 
   listar(){
 
-    axios.get('http://localhost:8086//api/sangue')
+    axios.get('https://sanguemozapi.herokuapp.com/api/sangue')
                 .then(function (response) {
                     this.grupo = response.data;
                     console.log(this.grupo)
@@ -212,18 +353,21 @@ methods:{
 
          filter: '',
          card: false,
+         edit: false,
           sizes: ['lg'],
           icons: [
         
         'add'
       ],
-
+ nome: '',
+          descricao: '',
        grupo:[],
     
       data: [
         {
           nome: '',
-          descricao: ''
+          descricao: '',
+          key: ''
          
         }
       

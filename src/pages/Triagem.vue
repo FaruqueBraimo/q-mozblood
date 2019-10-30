@@ -1,5 +1,54 @@
 <template>
   <div class="q-pa-lg q-ma-lg">
+
+<q-dialog v-model="edit">
+      <q-card>
+
+        <q-card-section>
+          
+
+         <div class="q-gutter-md row items-end">
+
+     
+          </div>
+
+              <q-space />
+
+
+
+<div class="q-pt-md" style="max-width: 300px" >
+
+    <q-input
+
+
+      v-model="descricao"
+      filled
+      type="textarea"
+      label="Motivos"
+
+    >
+
+      <template v-slot:hint>
+          
+       
+
+        </template>
+    </q-input>
+  </div>
+        
+        </q-card-section>
+
+      
+
+        <q-separator />
+
+        <q-card-actions  class="row justify-end">
+          <q-btn  flat color="primary" v-close-popup @click="editar()">Alterar</q-btn>
+           
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+
     <q-table
       title="Triagens"
       :data="data"
@@ -23,33 +72,25 @@
 
       <template v-slot:body="props">
         <q-tr :props="props">
-          <q-td key="desc" :props="props">
-            {{ props.row.name }}
-            <q-popup-edit v-model="props.row.name">
-              <q-input v-model="props.row.name" dense autofocus counter />
-            </q-popup-edit>
+          <q-td key="agendamento.dador.nome" :props="props">
+            {{ props.row.agendamento.dador.nome }}
+          
           </q-td>
-          <q-td key="calories" :props="props">
-            {{ props.row.calories }}
-            <q-popup-edit v-model="props.row.calories" title="Update calories" buttons>
-              <q-input type="number" v-model="props.row.calories" dense autofocus />
-            </q-popup-edit>
+          <q-td key="pressao_arterial" :props="props">
+            {{ props.row.pressao_arterial }}
+          
           </q-td>
-          <q-td key="fat" :props="props">
-            <div class="text-pre-wrap">{{ props.row.fat }}</div>
-            <q-popup-edit v-model="props.row.fat">
-              <q-input type="textarea" v-model="props.row.fat" dense autofocus />
-            </q-popup-edit>
+          <q-td key="peso" :props="props">
+            <div class="text-pre-wrap">{{ props.row.peso }}</div>
+           
           </q-td>
-          <q-td key="carbs" :props="props">
-            {{ props.row.carbs }}
-            <q-popup-edit v-model="props.row.carbs" title="Update carbs" buttons persistent>
-              <q-input type="number" v-model="props.row.carbs" dense autofocus hint="Use buttons to close" />
-            </q-popup-edit>
+          <q-td key="altura" :props="props">
+            {{ props.row.altura }}
+          
           </q-td>
-          <q-td key="protein" :props="props">{{ props.row.protein }}</q-td>
-          <q-td key="sodium" :props="props">{{ props.row.sodium }}</q-td>
-          <q-td key="calcium" :props="props">{{ props.row.calcium }}</q-td>
+          <q-td key="temperatura" :props="props">{{ props.row.temperatura }}</q-td>
+          <q-td key="Observacoes" :props="props">{{ props.row.Observacoes }}</q-td>
+          <q-td key="Data_triagem" :props="props">{{ props.row.Data_triagem }}</q-td>
 
           <q-td key="iron" :props="props">
 
@@ -72,7 +113,7 @@
          >
         Editar</q-tooltip> </q-btn>
         
-      <q-btn  icon="visibility"  text-color="deep-orange" style="width: 13px"  v-model="props.row.iron">
+      <q-btn  icon="explore_off"  text-color="deep-orange" style="width: 13px"  v-model="props.row.iron" @click="inapto">
 
 
 
@@ -81,7 +122,7 @@
          transition-show="rotate"
           transition-hide="rotate"
          >
-        Ver detahes</q-tooltip> </q-btn>
+        Marcar Inaptidao</q-tooltip> </q-btn>
       
     </q-btn-group>
 
@@ -114,7 +155,31 @@
 
 
 <script>
+
+import axios from 'axios';
+
 export default {
+
+
+mounted()  { 
+        //http://localhost:8085/api || https://sanguemozapi.herokuapp.com/api/
+
+  axios.get(`https://sanguemozapi.herokuapp.com/api/triagem/`)
+    .then(response => {
+      // JSON responses are automatically parsed.
+      this.data = response.data
+      console.log(response.data
+      )
+      console.log("--------------")
+    })
+    .catch(e => {
+      this.errors.push(e)
+    })
+    
+
+ },
+
+
   data () {
     return {
 
@@ -125,124 +190,25 @@ export default {
       columns: [
         {
           
-          name: 'desc',
+          name: 'agendamento.dador.nome',
           required: true,
           label: 'Dador',
           align: 'left',
           field: row => row.name,
           format: val => `${val}`,
-          sortable: true
+          sortable: true,
+          edit : false
           
         },
-        { name: 'calories', align: 'center', label: 'Pressão arterial', field: 'calories', sortable: true , },
-        { name: 'fat', label: 'Peso (kg)', field: 'fat', sortable: true, style: 'width: 10px' },
-        { name: 'carbs', label: 'Altura, (m)', field: 'carbs' },
-        { name: 'protein', label: 'Protein (g)', field: 'protein' },
-        { name: 'sodium', label: 'Data da Triagem', field: 'sodium' },
-        { name: 'calcium', label: 'Temperatura', field: 'calcium', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
+        { name: 'pressao_arterial', align: 'center', label: 'Pressão arterial', field: 'pressao_arterial', sortable: true , },
+        { name: 'peso', label: 'Peso (kg)', field: 'peso', sortable: true, style: 'width: 10px' },
+        { name: 'altura', label: 'Altura, (m)', field: 'altura' },
+        { name: 'temperatura', label: 'Temperatura', field: 'c', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
+       { name: 'Observacoes', label: 'Observacoes', field: 'Observacoes', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
+       { name: 'Data_triagem', label: 'Data da Triagem', field: 'Data_triagem' },
         { name: 'iron',align: 'center', label: 'Accão', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
       ],
       data: [
-        {
-          name: 'Frozen Yogurt',
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-          sodium: 87,
-          calcium: '14%',
-          iron: '1%'
-        },
-        {
-          name: 'Ice cream sandwich',
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-          sodium: 129,
-          calcium: '8%',
-          iron: '1%'
-        },
-        {
-          name: 'Eclair',
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-          sodium: 337,
-          calcium: '6%',
-          iron: '7%'
-        },
-        {
-          name: 'Cupcake',
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-          sodium: 413,
-          calcium: '3%',
-          iron: '8%'
-        },
-        {
-          name: 'Gingerbread',
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-          sodium: 327,
-          calcium: '7%',
-          iron: '16%'
-        },
-        {
-          name: 'Jelly bean',
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-          sodium: 50,
-          calcium: '0%',
-          iron: '0%'
-        },
-        {
-          name: 'Lollipop',
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-          sodium: 38,
-          calcium: '0%',
-          iron: '2%'
-        },
-        {
-          name: 'Honeycomb',
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-          sodium: 562,
-          calcium: '0%',
-          iron: '45%'
-        },
-        {
-          name: 'Donut',
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-          sodium: 326,
-          calcium: '2%',
-          iron: '22%'
-        },
-        {
-          name: 'KitKat',
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-          sodium: 54,
-          calcium: '12%',
-          iron: '6%'
-        }
       ]
     }
   }
