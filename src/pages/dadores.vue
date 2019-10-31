@@ -47,8 +47,8 @@ Aaa
             </q-popup-edit>
           </q-td>
           <q-td key="telefone" :props="props">{{ props.row.telefone }}</q-td>
-          <q-td key="nascimento" :props="props">{{ props.row.nascimento }}</q-td>
-          <q-td key="grupo" :props="props">{{ props.row.grupo }}</q-td>
+          <q-td key="data_nasc" :props="props">{{ props.row.data_nasc }}</q-td>
+          <q-td key="sangue.nome" :props="props">{{ props.row.sangue.nome }}</q-td>
 
           <q-td key="iron" :props="props">
 
@@ -228,8 +228,8 @@ listar(){
         { name: 'endereco', label: 'Endereco', field: 'endereco', sortable: true },
         { name: 'email', label: 'Email',  field: 'email' , align: 'center',},
         { name: 'telefone', label: 'Telefone', field: 'telefone' },
-        { name: 'nascimento', label: 'Nascimento',  field: 'sodium' },
-        { name: 'grupo', label: 'Grupo Sanguineo', field: 'sangue', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
+        { name: 'data_nasc', label: 'Nascimento',  field: 'data_nasc' },
+        { name: 'sangue.nome', label: 'Grupo Sanguineo', field: 'sangue.nome', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
         { name: 'iron',align: 'center', label: 'Accão', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
       ],
      

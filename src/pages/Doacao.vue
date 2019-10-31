@@ -2,18 +2,18 @@
 
 
 
- 
+   
+
+
+
 
 
   <div class="q-pa-lg q-ma-lg">
-
-
-
    
 
 
     <q-table
-      title="Agendamentos"
+      title="Doaçoes"
       :data="data"
       :columns="columns"
       row-key="name"
@@ -31,33 +31,45 @@
         </q-input>
       </template>
 
+   <template v-slot:top-right>
+        <q-input borderless dense debounce="300" v-model="filter" placeholder="Search">
+          <template v-slot:append>
+            <q-icon name="search" />
+          </template>
+        </q-input>
+      </template>
+
 
 
       <template v-slot:body="props">
         <q-tr :props="props">
-          <q-td key="dador.nome" :props="props">
-            {{ props.row.dador.nome }}
+          <q-td key="numero_bolsa" :props="props">
+            {{ props.row.numero_bolsa }}
          
           </q-td>
-          <q-td key="data_agendada" :props="props">
-            {{ props.row.data_agendada }}
+          <q-td key="triagem.agendamento.dador.sangue.nome" :props="props">
+            {{ props.row.triagem.agendamento.dador.sangue.nome}}
            
           </q-td>
-          <q-td key="data_marcada" :props="props">
-            {{ props.row.data_marcada }}
+          <q-td key="data_coletada" :props="props">
+            {{ props.row.data_coletada }}
            
           </q-td>
-          <q-td key="hora" :props="props">
-            {{ props.row.hora }}
+          <q-td key="hora_coletada" :props="props">
+            {{ props.row.hora_coletada }}
            
           </q-td>
         
-
-          
-         <q-td key="descricao" :props="props">
-            {{ props.row.descricao }}
+<q-td key="volume_coletado" :props="props">
+            {{ props.row.volume_coletado }}
            
           </q-td>
+          
+         <q-td key="obs" :props="props">
+            {{ props.row.obs }}
+           
+          </q-td>
+          
         
 
           <q-td key="iron" :props="props">
@@ -98,6 +110,9 @@
           </q-td>
         </q-tr>
       </template>
+
+
+     
     </q-table>
   </div>
 </template>
@@ -134,7 +149,7 @@ export default {
 mounted()  { 
         //http://localhost:8085/api || https://sanguemozapi.herokuapp.com/api/
 
-  axios.get(`https://sanguemozapi.herokuapp.com/api/agendamento/`)
+  axios.get(`https://sanguemozapi.herokuapp.com/api/doacoes/`)
     .then(response => {
       // JSON responses are automatically parsed.
       this.data = response.data
@@ -161,21 +176,18 @@ mounted()  {
 
 
       columns: [
-        {
-          
-          name: 'dador.nome',
-          required: true,
-          label: 'Dador',
-          align: 'left',
-          field: row => row.name,
-          format: val => `${val}`,
-          sortable: true
-          
-        },
-        { name: 'data_agendada', align: 'center', label: 'Data  Agendanda', field: 'data_agendada', sortable: true , },
-        { name: 'data_marcada', label: 'Data de  Agendamento', field: 'data_marcada', sortable: true, style: 'width: 10px' },
-        { name: 'hora', label: 'Hora de Agendamento', field: 'hora' },
-        { name: 'descricao', label: 'descricao', field: 'descricao' },
+
+       { name: 'numero_bolsa', align: 'center', label: 'Numero de bolsa', field: 'numero_bolsa', sortable: true , },
+,
+         { name: 'triagem.agendamento.dador.sangue.nome', label: 'Grupo sanguineo', field: 'triagem.agendamento.dador.sangue.nome' },
+
+        { name: 'data_coletada', align: 'center', label: 'Data  Coletada', field: 'data_coletada', sortable: true , },
+        { name: 'hora_coletada', label: 'Hora Coletada', field: 'hora_coletada' },
+        { name: 'volume_coletado', label: 'Volume Coletado', field: 'volume_coletado' },
+
+        { name: 'obs', label: 'Observação/Reação', field: 'obs' },
+
+
         { name: 'iron',align: 'center', label: 'Accão', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
       ],
     }

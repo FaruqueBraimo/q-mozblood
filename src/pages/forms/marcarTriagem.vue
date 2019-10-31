@@ -3,10 +3,13 @@
        <div class="q-pa-lg">
     <div class="q-gutter-md row items-end">
 
-        <q-select
+
+
+
+       <q-select
         filled
-        v-model="dador.provincia"
-        :options="provincia"
+        v-model="dador"
+        :options="options"
           stack-label
         label="Dador"
         hint="Joao Felix"
@@ -15,194 +18,128 @@
 
 
 
-  <q-input filled bottom-slots v-model="dador.apelido" label="Apelido" counter :dense="dense">
+  <q-input filled bottom-slots v-model="dadors.peso" label="Peso" counter :dense="dense">
         <template v-slot:prepend>
-          <q-icon name="sentiment_satisfied_alt" />
+          <q-icon name="airline_seat_recline_normal" />
         </template>
         <template v-slot:append>
-          <q-icon name="close" @click="dador.apelido = ''" class="cursor-pointer" />
+          <q-icon name="close" @click="dadors.peso = ''" class="cursor-pointer" />
         </template>
 
         <template v-slot:hint>
-         Judite
+        56
         </template>
       </q-input>
 
-        <q-input filled bottom-slots v-model="dador.email" label="Email" counter :dense="dense">
+        <q-input filled bottom-slots v-model="dadors.altura" label="Altura" counter :dense="dense">
         <template v-slot:prepend>
-          <q-icon name="mail" />
+          <q-icon name="directions_walk" />
         </template>
         <template v-slot:append>
-          <q-icon name="close" @click="dador.email = ''" class="cursor-pointer" />
+          <q-icon name="close" @click="dadors.altura = ''" class="cursor-pointer" />
         </template>
 
         <template v-slot:hint>
-         judite123@gmail.com
+         1.70
         </template>
       </q-input>
 
 
-  <q-input filled bottom-slots v-model="dador.telefone" label="Telefone" counter :dense="dense">
+  
+
+
+
+ <q-input filled bottom-slots v-model="dadors.pressao" label="Pressão Arterial" counter :dense="dense">
         <template v-slot:prepend>
-          <q-icon name="phone_enabled" />
+          <q-icon name="watch" />
         </template>
         <template v-slot:append>
-          <q-icon name="close" @click="dador.telefone = ''" class="cursor-pointer" />
+          <q-icon name="close" @click="dadors.pressao = ''" class="cursor-pointer" />
         </template>
 
         <template v-slot:hint>
-         846771216
+         85
         </template>
       </q-input>
     
+     <q-input filled bottom-slots v-model="dadors.temperatura" label="Temperatura" counter :dense="dense">
+        <template v-slot:prepend>
+          <q-icon name="wb_sunny" />
+        </template>
+        <template v-slot:append>
+          <q-icon name="close" @click="dadors.temperatura = ''" class="cursor-pointer" />
+        </template>
 
-<!-- style="min-width: 250px; max-width: 300px ,top: 20px" -->
- <q-input filled v-model="date" mask="date" :rules="['date']" @click="$refs.qDateProxy.show()"  hint="Data de Nascimento"  style="width: 250px" >
-      <template v-slot:append>
-        <q-icon name="event" class="cursor-pointer">
-          <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
-            <q-date title= "Aniversario" v-model="date" @input="() => $refs.qDateProxy.hide()" />
-          </q-popup-proxy>
-        </q-icon>
-      </template>
-    </q-input>
-
-
- <q-select
-        filled
-        v-model="dador.sexo"
-        :options="sexo"
-          stack-label
-        label="Sexo"
-        hint="Masculino"
-        style="width: 250px"
-      />
-
-      <q-select
-        filled
-        v-model="dador.nacionalidade"
-        :options="nacionalidade"
-         stack-label
-        label="Nacionalidade"
-        hint="Angolana"
-        style="width: 250px"
-      />
-   
-      <q-select
-        filled
-        v-model="dador.provincia"
-        :options="provincia"
-          stack-label
-        label="Provincia"
-        hint="Luanda"
-        style="width: 250px"
-      />
-
-      
+        <template v-slot:hint>
+         25 C
+        </template>
+      </q-input>
 
     </div>
-
+<div class="row justify-end">
+      <q-btn
+        type="submit"
+        :loading="submitting"
+        label="Salvar"
+        class="q-mt-md"
+        color="teal"
+        @click="salvar"
+      >
+        <template v-slot:loading>
+          <q-spinner-facebook />
+        </template>
+      </q-btn>
+    </div>   
    
    
   </div>
 </template>
-
 <script>
-export default {
-     data () {
-    return {
-      lista: [],
-      model: null,
-      sangue_cod:null,
-      options: [],
-      sexo: ['Masculino', 'Feminino','Outro'],
-      date: '2019/02/01',
-      s:'',
-      nacionalidade: ['Angola','Mocambique'],
-      provincia : ['Nampula','Luanda']
+import axios from 'axios';
 
+export default {
+  data () {
+
+    return {
+    time: '10:56',
+      date: '2019/02/01',
+      options: [],
+      dador : '',
+      obs : '',
+
+      dadors:{
+        
+        temperatura: '',
+        peso :  '',
+        altura : '',
+        pressao : '',
+        observacoes: ''
+      }
 ,
-     submitting: false,
-      dador: {
-        nome: "",
-        endereco: "",
-        sexo: "",
-        telefone: "",
-        email: "",
-        numeroDeDoacoes: "",
-        nomeMae: "",
-        nomePai: "",
-        numeroDocumento: "",
-        tipoDocumento: "",
-        nacionalidade: "",
-        situacaoAptidao: "",
-        provincia: "",
-        fatorRH: "",
-        apelido: ""
+      lista : [],
+
+        agendamento: {
+        data_marcada: "2019/02/01",
+        data_hoje: "",
+        hora_marcada: "10:56",
+        desc: "",
         
       },
-     
-
-      
-     text: '',
-     nome: '',
-      ph: '',
-      step: 1,
-
-      dense: false
     }
   }
-
 ,
+methods: {
+   salvar(){
+//https://sanguemozapi.herokuapp.com/api/agendamento/
+    axios.post(`https://sanguemozapi.herokuapp.com/api/triagem/`  +  this.dador.value, {
+  
+    
 
-methods:{
+          peso: this.dadors.peso,
+          altura: this.dadors.altura,
+          temperatura: this.dadors.temperatura,
+          pressao_arterial : this.dadors.pressao ,
 
-  simulateSubmit () {
-      this.submitting = true
-
-      // Simulating a delay here.
-      // When we are done, we reset "submitting"
-      // Boolean to false to restore the
-      // initial state.
-      setTimeout(() => {
-        // delay simulated, we are done,
-        // now restoring submit to its initial state
-        
-   
-
-        this.submitting = false
-      }, 3000)
-
-    },
-
-watch:{
-
-
-lista(val){
-
-
-if(val.length){
-  this.options = this.lista.map(o => {
-  return {
-      label:  o.nome,
-      value:  o.codigo
-  }
-  console.log(this.options);
-
-})
-}
-}}
-,
-  salvar(){
-
-    axios.post('https://sanguemozapi.herokuapp.com/api/dador/'  + this.sangue_cod.value, {
-
-           
-        nome: this.dador.nome,
-        endereco: this.dador.endereco,
-        sexo: this.dador.sexo,
-        telefone:this.dador.telefone,
-        email: this.dador.apelido
                 })
                 .then(function (response) {
                     currentObj.output = response.data;
@@ -214,5 +151,47 @@ if(val.length){
   }
 }
 
+
+,
+
+ mounted(){
+
+  axios.get(`https://sanguemozapi.herokuapp.com/api/agendamento/`)
+    .then(response => {
+      this.lista  = response.data     
+      console.log("--------------")
+
+    })
+    .catch(e => {
+      this.errors.push(e)
+    })
+    
+ }
+,
+
+  watch:{
+
+
+lista(val){
+
+
+if(val.length){
+  this.options = this.lista.map(o => {
+  return {
+      label:  o.dador.nome,
+      value:  o.codigo
+  }
+  console.log(this.options);
+
+})
 }
+}}
+,
+
+
+}
+
+
+
+
 </script>

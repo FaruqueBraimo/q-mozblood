@@ -102,7 +102,7 @@
 
         <q-item-section top side>
           <div class="text-grey-8 q-gutter-xs">
-            <q-btn class="gt-xs" size="12px" flat dense round icon="delete"   text-color="deep-orange" />
+            <q-btn class="gt-xs" size="12px" flat dense round icon="delete"   text-color="deep-orange" @click="remover(dat.codigo)"/>
             <q-btn class="gt-xs" size="12px" flat dense round icon="create"  text-color="secondary"  />
           </div>
         </q-item-section>
