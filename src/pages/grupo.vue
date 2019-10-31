@@ -257,9 +257,7 @@ showNotif () {
        
 
       })
-    }
-
-
+    },
 editar(){
   axios.put('https://sanguemozapi.herokuapp.com/api/sangue'  ,{
 
