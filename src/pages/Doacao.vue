@@ -13,7 +13,7 @@
 
 
     <q-table
-      title="Doaçoes"
+      title="Lista de Doaçoes"
       :data="data"
       :columns="columns"
       row-key="name"
@@ -43,12 +43,9 @@
 
       <template v-slot:body="props">
         <q-tr :props="props">
-          <q-td key="numero_bolsa" :props="props">
-            {{ props.row.numero_bolsa }}
-         
-          </q-td>
-          <q-td key="triagem.agendamento.dador.sangue.nome" :props="props">
-            {{ props.row.triagem.agendamento.dador.sangue.nome}}
+          
+          <q-td key="triagem.agendamento.dador.nome" :props="props">
+            {{ props.row.triagem.agendamento.dador.nome}}
            
           </q-td>
           <q-td key="data_coletada" :props="props">
@@ -177,11 +174,10 @@ mounted()  {
 
       columns: [
 
-       { name: 'numero_bolsa', align: 'center', label: 'Numero de bolsa', field: 'numero_bolsa', sortable: true , },
 ,
-         { name: 'triagem.agendamento.dador.sangue.nome', label: 'Grupo sanguineo', field: 'triagem.agendamento.dador.sangue.nome' },
+         { name: 'triagem.agendamento.dador.nome', align: 'left', label: 'Dador', field: 'triagem.agendamento.dador.nome' },
 
-        { name: 'data_coletada', align: 'center', label: 'Data  Coletada', field: 'data_coletada', sortable: true , },
+        { name: 'data_coletada', align: 'center', label: 'Data Coletada', field: 'data_coletada', sortable: true , },
         { name: 'hora_coletada', label: 'Hora Coletada', field: 'hora_coletada' },
         { name: 'volume_coletado', label: 'Volume Coletado', field: 'volume_coletado' },
 

@@ -135,7 +135,7 @@
 
 
 
-    <q-list bordered class="rounded-borders"   v-for="dat in data" :key="dat.codigo">
+    <q-list bordered class="rounded-borders"  v-model="data" v-for="dat in data" :key="dat.codigo">
       <q-item-label header>Grupo</q-item-label>
 
       <q-item>
@@ -217,7 +217,8 @@ import axios from 'axios';
 export default {
 
 mounted()  { 
-  axios.get(`https://sanguemozapi.herokuapp.com/api/sangue`)
+ 
+ axios.get(`https://sanguemozapi.herokuapp.com/api/sangue`)
     .then(response => {
       // JSON responses are automatically parsed.
       this.data = response.data
@@ -228,12 +229,32 @@ mounted()  {
       this.errors.push(e)
     })
     
-
  },
+
+
+
+
 
 methods:{
 
+  listar(){
+ axios.get(`https://sanguemozapi.herokuapp.com/api/sangue`)
+    .then(response => {
+      // JSON responses are automatically parsed.
+      this.data = response.data
+      console.log(this.data)
+      console.log("--------------")
+    })
+    .catch(e => {
+      this.errors.push(e)
+    })
+    
+  },
+
+
    salvar(){
+
+     
     axios.post('https://sanguemozapi.herokuapp.com/api/sangue'  ,{
 
            
@@ -242,17 +263,19 @@ methods:{
      
                 })
                 .then(function (response) {
-                  
+                  this.mensagem= "ok"
                 })
                 .catch(function (error) {
                 });
-                this.showNotif();
+                this.showNotif("Gravado com sucesso");
+                this.listar();
+
 
   },
 
-showNotif () {
+showNotif (mensagem) {
       this.$q.notify({
-        message: 'Senha ou Usuario incorretoss',
+        message: mensagem,
         color: 'dark',
        
 
@@ -274,6 +297,7 @@ editar(){
                 })
                 .catch(function (error) {
                 });
+                  this.showNotif("Editado com sucesso");
 
 
   }
@@ -319,8 +343,8 @@ editar(){
          
          
           
-
-
+  this.showNotif("Removido com sucesso");
+   this.listar();
  },
 
  
@@ -350,6 +374,7 @@ editar(){
     return {
 
          filter: '',
+         mensagem: '',
          card: false,
          edit: false,
           sizes: ['lg'],

@@ -13,7 +13,7 @@
 
 
     <q-table
-      title="Agendamentos"
+      title="Lista de Agendamentos"
       :data="data"
       :columns="columns"
       row-key="name"
@@ -173,7 +173,7 @@ mounted()  {
           
         },
         { name: 'data_agendada', align: 'center', label: 'Data  Agendanda', field: 'data_agendada', sortable: true , },
-        { name: 'data_marcada', label: 'Data de  Agendamento', field: 'data_marcada', sortable: true, style: 'width: 10px' },
+        { name: 'data_marcada', label: 'Data', field: 'data', sortable: true, style: 'width: 10px' },
         { name: 'hora', label: 'Hora de Agendamento', field: 'hora' },
         { name: 'descricao', label: 'descricao', field: 'descricao' },
         { name: 'iron',align: 'center', label: 'Accão', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }

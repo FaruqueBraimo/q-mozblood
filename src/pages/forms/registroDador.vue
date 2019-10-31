@@ -317,7 +317,7 @@
 
       <template v-slot:navigation>
         <q-stepper-navigation>
-          <q-btn     @click="$refs.stepper.next()" color="deep-orange" :label="step === 3 ? 'Finalizar' : 'Continuar'" />
+          <q-btn     @click="$refs.stepper.next()" :color="step === 3 ? 'white' : 'deep-orange'" :label="step === 3 ? '' : 'Continuar'"   />
           <q-btn v-if="step > 1" flat color="deep-orange" @click="$refs.stepper.previous()" label="Voltar" class="q-ml-sm" />
         </q-stepper-navigation>
       </template>
@@ -380,8 +380,8 @@ if(val.length){
       date: '2019/02/01',
       s:'',
       rh: ['RH+','RH-'],
-      nacionalidade: ['Moçambique','Angola'],
-      provincia : ['Maputo','Gaza','Inhambane','Manica','Sofala','Tete','Nampula','Zambezia','Niassa','Cabo Delgado']
+      nacionalidade: ['Moçambique','Outro'],
+      provincia : ['Maputo','Gaza','Inhambane','Manica','Sofala','Tete','Nampula','Zambezia','Niassa','Cabo Delgado', 'Outro']
 
 
 
@@ -410,7 +410,7 @@ if(val.length){
         
       },
      
-
+  
       
      text: '',
      nome: '',
@@ -462,7 +462,14 @@ methods:{
   }
 
 ,
+showNotif (mensagem) {
+      this.$q.notify({
+        message: mensagem,
+        color: 'dark',
+       
 
+      })
+    },
   simulateSubmit () {
       this.submitting = true
 
@@ -490,9 +497,17 @@ methods:{
         endereco: this.dador.endereco,
         sexo: this.dador.sexo,
         telefone:this.dador.telefone,
-        email: this.dador.apelido,
+        email: this.dador.email,
         data_nasc: this.dador.nasc,
-
+        fatorRH: this.dador.fatorRH,
+        nacionalidade: this.dador.nacionalidade,
+        nomeMae: this.dador.nomeMae,
+        nomePai: this.dador.nomePai,
+        numeroDeDoacoes: "",
+        numeroDocumento: this.dador.numeroDocumento,
+        provincia: this.dador.provincia,
+        situacaoAptidao: "",
+        tipoDocumento: this.dador.tipoDocumento,
 
                 })
                 .then(function (response) {
@@ -501,6 +516,7 @@ methods:{
                 .catch(function (error) {
                     currentObj.output = error;
                 });
+                this.showNotif("Salvo com sucesso");
 
   }
 }

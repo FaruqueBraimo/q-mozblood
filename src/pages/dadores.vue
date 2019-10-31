@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-lg q-ma-lg">
     <q-table
-      title="Dadores"
+      title="Lista de Dadores"
       :data="dadores"
       :columns="columns"
       row-key="name"
@@ -10,7 +10,7 @@
       class="my-sticky-header-table"
 
     >
-Aaa
+
    <template v-slot:top-right>
         <q-input borderless dense debounce="300" v-model="filter" placeholder="Search">
           <template v-slot:append>

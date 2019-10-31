@@ -142,7 +142,8 @@ methods: {
 
                 })
                 .then(function (response) {
-                    currentObj.output = response.data;
+                   alert(response.data);
+
                 })
                 .catch(function (error) {
                     currentObj.output = error;

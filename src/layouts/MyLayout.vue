@@ -35,7 +35,7 @@
             <img src="https://cdn.quasar.dev/img/boy-avatar.png">
           </q-avatar>
 
-          <div class="text-subtitle1 q-mt-md q-mb-xs">Faruque</div>
+          <div class="text-subtitle1 q-mt-md q-mb-xs"> {{ welcome }}</div>
 
         <q-btn round color="red-5" icon="keyboard_arrow_right" />
         </div>
@@ -142,7 +142,7 @@
           </q-item-section>
         </q-item>
 
-<q-item clickable tag="a" to="">
+<q-item clickable tag="a" to="cancelar">
           <q-item-section avatar>
             <q-icon name="cancel" />
           </q-item-section>
@@ -151,7 +151,7 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable tag="a" to="">
+        <q-item clickable tag="a" to="adiar">
           <q-item-section avatar>
             <q-icon name="refresh" />
           </q-item-section>
@@ -188,7 +188,19 @@
         </q-item>
 
 
+<q-item clickable tag="a" to="#">
+          <q-item-section avatar>
+            <q-icon name="eco" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Inaptos </q-item-label>
+          </q-item-section>
+        </q-item>
+
+
           </q-expansion-item>
+
+          
 
           <q-expansion-item  switch-toggle-side dense-toggle label="Adicionar Triagens" :header-inset-level="1" :content-inset-level="2" to="/marcarTriagem">
           </q-expansion-item>
@@ -223,33 +235,16 @@
 
 
 
-         <q-item clickable tag="a" target="_blank">
+         <q-item clickable tag="a"  to="produto">
           <q-item-section avatar>
             <q-icon name="nature_people" />
           </q-item-section>
-          <q-item-section>
-            <q-item-label>Produto gerado / Stock</q-item-label>
+          <q-item-section> 
+            <q-item-label >Produto gerado / Stock</q-item-label>
             <q-item-label caption class="caption">Gerenciar Produto gerado e stock</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable tag="a" target="_blank">
-          <q-item-section avatar>
-            <q-icon name="insert_chart_outlined" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Relatorios</q-item-label>
-            <q-item-label caption class="caption">Gerenciar Relatorios</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" >
-          <q-item-section avatar>
-            <q-icon name="public" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Definiçoes</q-item-label>
-            <q-item-label caption class="caption">Configurar alguns itens do sistema</q-item-label>
-          </q-item-section>
-        </q-item>
+      
       </q-list>
     </q-drawer>
 
@@ -289,11 +284,19 @@
 <script>
 export default {
   name: 'MyLayout',
+  props: ['msg'],
 
   data () {
     return {
-      leftDrawerOpen: false
+      leftDrawerOpen: false,
+       welcome: 'Ella'
     }
-  }
+  },
+   mounted() {
+        if (this.msg) {
+            this.welcome = this.msg;
+        }
+
+    }
 }
 </script>

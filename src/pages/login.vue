@@ -44,7 +44,16 @@
         </template>
       </q-input>
 
-   <q-btn   color="red-5" v-close-popup @click="salvar()">Entrar</q-btn>
+   <q-btn   color="red-5" v-close-popup @click="salvar()">
+
+    <router-link :to="{ name: 'MyLayout', params: {msg} }">
+         Entrar
+      </router-link>
+     
+   </q-btn>
+
+
+
     </div>
        
            
@@ -58,7 +67,17 @@
 
 
 <script>
+import {bus} from '../router'
+
 export default {
+  data(){
+    return {
+      user:{
+        nome:"Faruk",
+        pass:"123"
+      }
+    }
+  },
 
 mounted()  { 
         //http://localhost:8085/api || https://sanguemozapi.herokuapp.com/api/
@@ -84,13 +103,14 @@ mounted()  {
    salvar(){
    
    
-    if((this.text=="Admin") && (this.password=="1234"))
-
+    if((this.text=="Ella") && (this.password=="1234")){
+      bus.$emit("changeMsg", this.user)
        this.$router.push('/') 
+
 
   
 
-  else{
+  }else{
 
   this.showNotif();
 
@@ -110,6 +130,7 @@ mounted()  {
     },
   data () {
     return {
+      msg: 'This is Ali s profile',
       text: '',
       ph: '',
       password: '',

@@ -13,32 +13,10 @@
         style="width: 250px"
       />
 
-  <q-input filled bottom-slots  v-model="nr" label="Codigo Bolsa" counter :dense="dense">
-        <template v-slot:prepend>
-          <q-icon name="sentiment_satisfied_alt" />
-        </template>
-
-        <template v-slot:hint>
-        7775JA
-        </template>
-      </q-input>
 
 
 
-<q-input filled bottom-slots  v-model="vulume" label="Volume coletado" counter :dense="dense">
-        <template v-slot:prepend>
-          <q-icon name="sentiment_satisfied_alt" />
-        </template>
-
-        <template v-slot:hint>
-       0.5l
-        </template>
-      </q-input>
-
-    
-
-
-    <q-input filled v-model="obs" mask="" :rules="['']"  hint="Reação/Observação"  
+    <q-input filled v-model="lista.desc" mask="" :rules="['']"  hint="Motivo"  
       autogrow>
      
 
@@ -48,11 +26,11 @@
 
     </div>
 
-<div class="row justify-end">
+<div class="row justify-start">
       <q-btn
         type="submit"
         :loading="submitting"
-        label="Salvar"
+        label="Cancelar"
         class="q-mt-md"
         color="teal"
         @click="salvar"
@@ -78,51 +56,53 @@ export default {
       options: [],
       dador : '',
       obs : '',
-      nr: '',
+      mensagem : '',
 
       lista : [],
-      vulume: ''
-      
-     
+
+        agendamento: {
+        data_marcada: "2019/11/01",
+        data_hoje: "",
+        hora_marcada: "10:56",
+        desc: "",
+        
+      },
     }
   }
 ,
 methods: {
+
+ 
+  
    salvar(){
 //https://sanguemozapi.herokuapp.com/api/agendamento/
-    axios.post(`https://sanguemozapi.herokuapp.com/api/doacao/`  +  this.dador.value, {
+    axios.put(`https://sanguemozapi.herokuapp.com/api/agendamento/` , {
 
-           
-             volume_coletado : this.vulume,
-             obs :   this.obs,
-             numero_bolsa : this.nr
-             
+             codigo : this.dador.value,
+             descricao : this.agendamento.desc,
+             status: "camcelada"
+       
+
                 })
                 .then(function (response) {
-                     alert(response.data);
+               
+                   alert(response.data);
 
                 })
                 .catch(function (error) {
-                    currentObj.output = error;
+
                 });
 
-  },
-  showNotif () {
-      this.$q.notify({
-        message: 'Senha ou Usuario incorretoss',
-        color: 'dark',
-       
-
-      })
-    }
+  }
+ 
 }
 
 
 ,
 
  mounted(){
-
-  axios.get(`https://sanguemozapi.herokuapp.com/api/aptos/`)
+    
+  axios.get(`https://sanguemozapi.herokuapp.com/api/agendamento/`)
     .then(response => {
       this.lista  = response.data     
       console.log("--------------")
@@ -144,8 +124,8 @@ lista(val){
 if(val.length){
   this.options = this.lista.map(o => {
   return {
-      label:  o.agendamento.dador.nome,
-      value:  o.codigo
+      label:  o.dador.nome,
+      value:  o.dador.codigo
   }
   console.log(this.options);
 

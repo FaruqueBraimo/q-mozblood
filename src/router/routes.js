@@ -6,7 +6,7 @@ const routes = [
     component: () => import('layouts/login.vue'),
     children: [
       { path: '', component: () => import('pages/login.vue') },
-      { path: '/',  component: () => import('layouts/MyLayout.vue') },
+      { path: '/',  component: () => import('layouts/MyLayout.vue'), props: true},
       
  
     ]
@@ -17,9 +17,9 @@ const routes = [
 
   {
     path: '/',
-    component: () => import('layouts/MyLayout.vue'),
+    component: () => import('layouts/MyLayout.vue' ),
     children: [
-      { path: '', component: () => import('pages/Index.vue') },
+      { path: '', component: () => import('pages/Index.vue'), props: true , name: "PageIndex" },
       { path: 'dash', component: () => import('pages/Index.vue') },
       { path: 'produto', component: () => import('pages/produto.vue') },
       { path: 'dadores', component: () => import('pages/dadores.vue') },
@@ -30,7 +30,12 @@ const routes = [
       { path: 'agendamento', component: () => import('pages/agendamento.vue') },
       { path: 'marcar', component: () => import('pages/forms/marcarAgendamento.vue') },
       { path: 'marcarTriagem', component: () => import('pages/forms/marcarTriagem.vue') },
-      { path: 'registroDaocao', component: () => import('pages/forms/registroDaoacao.vue') }
+      { path: 'registroDaocao', component: () => import('pages/forms/registroDaoacao.vue') },
+      { path: 'produto', component: () => import('pages/produto.vue') },
+      { path: 'cancelar', component: () => import('pages/imprevists/cancelar.vue') },
+      { path: 'adiar', component: () => import('pages/imprevists/adiar.vue') }
+
+
 
 
     ]

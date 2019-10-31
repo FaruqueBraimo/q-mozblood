@@ -1,56 +1,9 @@
 <template>
   <div class="q-pa-lg q-ma-lg">
 
-<q-dialog v-model="edit">
-      <q-card>
-
-        <q-card-section>
-          
-
-         <div class="q-gutter-md row items-end">
-
-     
-          </div>
-
-              <q-space />
-
-
-
-<div class="q-pt-md" style="max-width: 300px" >
-
-    <q-input
-
-
-      v-model="descricao"
-      filled
-      type="textarea"
-      label="Motivos"
-
-    >
-
-      <template v-slot:hint>
-          
-       
-
-        </template>
-    </q-input>
-  </div>
-        
-        </q-card-section>
-
-      
-
-        <q-separator />
-
-        <q-card-actions  class="row justify-end">
-          <q-btn  flat color="primary" v-close-popup @click="editar()">Alterar</q-btn>
-           
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
 
     <q-table
-      title="Triagens"
+      title="Lista Triagens"
       :data="data"
       :columns="columns"
       row-key="name"
@@ -105,7 +58,7 @@
         Remover</q-tooltip> </q-btn>
       
       
-      <q-btn icon="edit"   text-color="secondary"  style="width: 12px" v-model="props.row.iron">
+      <q-btn icon="edit"   text-color="secondary"  style="width: 12px" v-model="props.row.iron" >
         <q-tooltip 
         content-class="bg-secondary" :offset="[10, 10]"       
          transition-show="rotate"
@@ -113,7 +66,7 @@
          >
         Editar</q-tooltip> </q-btn>
         
-      <q-btn  icon="explore_off"  text-color="deep-orange" style="width: 13px"  v-model="props.row.iron" @click="inapto">
+      <q-btn  icon="explore_off"  text-color="deep-orange" style="width: 13px"  v-model="props.row.codigo" @click="getSelectedString (props.row.codigo)" >
 
 
 
@@ -164,7 +117,7 @@ export default {
 mounted()  { 
         //http://localhost:8085/api || https://sanguemozapi.herokuapp.com/api/
 
-  axios.get(`https://sanguemozapi.herokuapp.com/api/triagem/`)
+  axios.get(`https://sanguemozapi.herokuapp.com/api/aptos/`)
     .then(response => {
       // JSON responses are automatically parsed.
       this.data = response.data
@@ -179,6 +132,54 @@ mounted()  {
 
  },
 
+
+methods:{
+
+
+
+
+
+getSelectedString (codigo) {
+   this.$q.dialog({
+        dark: true,
+        message: 'Marcar Inaptidao?',
+        cancel: true,
+        title: 'Confirmacão',
+        persistent: true
+      }).onOk(() => {
+        
+          this.ina(codigo);
+
+        
+
+      }).onCancel(() => {
+        // console.log('Cancel')
+      }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+      })
+   },
+ina(cod){
+  axios.put('https://sanguemozapi.herokuapp.com/api/triagem'  ,{
+
+        codigo : cod,   
+        status : "inapto"
+
+     
+                })
+                .then(function (response) {
+                   
+
+                   
+                })
+                .catch(function (error) {
+                });
+  
+          
+  this.showNotif(" Inaptidao registada");
+  
+ },
+
+},
 
   data () {
     return {
