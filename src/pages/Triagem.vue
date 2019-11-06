@@ -9,6 +9,7 @@
       row-key="name"
       binary-state-sort
        :filter="filter"
+     
       class="my-sticky-header-table"
 
     >
@@ -44,6 +45,7 @@
           <q-td key="temperatura" :props="props">{{ props.row.temperatura }}</q-td>
           <q-td key="Observacoes" :props="props">{{ props.row.Observacoes }}</q-td>
           <q-td key="Data_triagem" :props="props">{{ props.row.Data_triagem }}</q-td>
+          <q-td key="status" :props="props">{{ props.row.status }}</q-td>
 
           <q-td key="iron" :props="props">
 
@@ -111,13 +113,14 @@
 
 import axios from 'axios';
 
+
 export default {
 
 
-mounted()  { 
+mounted()  {   
         //http://localhost:8085/api || https://sanguemozapi.herokuapp.com/api/
 
-  axios.get(`https://sanguemozapi.herokuapp.com/api/aptos/`)
+  axios.get(`https://sanguemozapi.herokuapp.com/api/triagem/`)
     .then(response => {
       // JSON responses are automatically parsed.
       this.data = response.data
@@ -207,6 +210,7 @@ ina(cod){
         { name: 'temperatura', label: 'Temperatura', field: 'c', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
        { name: 'Observacoes', label: 'Observacoes', field: 'Observacoes', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
        { name: 'Data_triagem', label: 'Data da Triagem', field: 'Data_triagem' },
+       { name: 'status', label: 'status', field: 'status' , sortable: true },
         { name: 'iron',align: 'center', label: 'Accão', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
       ],
       data: [

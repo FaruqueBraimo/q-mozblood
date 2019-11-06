@@ -6,7 +6,7 @@ const routes = [
     component: () => import('layouts/login.vue'),
     children: [
       { path: '', component: () => import('pages/login.vue') },
-      { path: '/',  component: () => import('layouts/MyLayout.vue'), props: true},
+      { path: '/',  component: () => import('layouts/MyLayout.vue'), props: true, name: "Mylayout"}  
       
  
     ]
@@ -29,6 +29,7 @@ const routes = [
       { path: 'triagem', component: () => import('pages/Triagem.vue') },
       { path: 'agendamento', component: () => import('pages/agendamento.vue') },
       { path: 'marcar', component: () => import('pages/forms/marcarAgendamento.vue') },
+      { path: 'inaptidao', component: () => import('pages/forms/inaptidao.vue') },
       { path: 'marcarTriagem', component: () => import('pages/forms/marcarTriagem.vue') },
       { path: 'registroDaocao', component: () => import('pages/forms/registroDaoacao.vue') },
       { path: 'produto', component: () => import('pages/produto.vue') },

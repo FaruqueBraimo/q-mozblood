@@ -68,6 +68,7 @@
 
 <script>
 import {bus} from '../router'
+import axios from 'axios';
 
 export default {
   data(){
@@ -82,7 +83,7 @@ export default {
 mounted()  { 
         //http://localhost:8085/api || https://sanguemozapi.herokuapp.com/api/
 
-  axios.get(`https://sanguemozapi.herokuapp.com/api/dadores/`)
+  axios.get(`https://sanguemozapi.herokuapp.com/api/dadores`)
     .then(response => {
       // JSON responses are automatically parsed.
       this.data = response.data
@@ -103,9 +104,11 @@ mounted()  {
    salvar(){
    
    
-    if((this.text=="Ella") && (this.password=="1234")){
-      bus.$emit("changeMsg", this.user)
+    if((this.text== "Zucula") && (this.password=="1234")){
+
        this.$router.push('/') 
+
+       localStorage.setItem('id', "Zucula");
 
 
   

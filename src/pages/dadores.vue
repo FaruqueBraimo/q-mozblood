@@ -187,6 +187,10 @@ listar(){
      
 
     })
+     .catch(e => {
+     this.$q.loading.hide(  {
+    })
+    })
 }
 
   },

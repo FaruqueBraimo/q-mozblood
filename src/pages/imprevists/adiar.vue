@@ -13,7 +13,8 @@
         style="width: 250px"
       />
 
-<!-- style="min-width: 250px; max-width: 300px ,top: 20px" -->
+
+
    <q-input filled v-model="agendamento.data_marcada" mask="date" :rules="['date']" @click="$refs.qDateProxy.show()"  hint="Data"  style="width: 250px" >
       <template v-slot:append>
         <q-icon name="event" class="cursor-pointer">
@@ -38,11 +39,13 @@
     </q-input>
 
 
-    <q-input filled v-model="lista.desc" mask="" :rules="['']"  hint="Motivo"  
+    <q-input filled v-model="agendamento.desc" mask="" :rules="['']"  hint="Motivo"  
       autogrow>
      
 
     </q-input>
+
+
 
 
 
@@ -52,7 +55,7 @@
       <q-btn
         type="submit"
         :loading="submitting"
-        label="Adiar"
+        label="adiar"
         class="q-mt-md"
         color="teal"
         @click="salvar"
@@ -98,14 +101,14 @@ methods: {
   
    salvar(){
 //https://sanguemozapi.herokuapp.com/api/agendamento/
-    axios.put(`https://sanguemozapi.herokuapp.com/api/agendamento/` , {
+    axios.put(`https://sanguemozapi.herokuapp.com/api/agendamento` , {
 
              codigo : this.dador.value,
-             descricao : this.lista.desc,
-             data_agendada : this.agendamento.data_marcada,
-             hora: this.agendamento.hora_marcada,
-             status : 'adiada'
-       
+             descricao : this.agendamento.desc,
+             data_agendada : this.agendamento.data_marcada,  
+             hora :  this.agendamento.hora_marcada     
+    
+
                 })
                 .then(function (response) {
                
@@ -125,7 +128,7 @@ methods: {
 
  mounted(){
     
-  axios.get(`https://sanguemozapi.herokuapp.com/api/agendamento/`)
+  axios.get(`https://sanguemozapi.herokuapp.com/api/porrealizar/`)
     .then(response => {
       this.lista  = response.data     
       console.log("--------------")
@@ -148,7 +151,7 @@ if(val.length){
   this.options = this.lista.map(o => {
   return {
       label:  o.dador.nome,
-      value:  o.dador.codigo
+      value:  o.codigo
   }
   console.log(this.options);
 

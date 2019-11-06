@@ -207,18 +207,13 @@
 
 <script>
 
-
 import axios from 'axios';
-
-
-
-
 
 export default {
 
-mounted()  { 
- 
- axios.get(`https://sanguemozapi.herokuapp.com/api/sangue`)
+created ()  { 
+
+       axios.get(`https://sanguemozapi.herokuapp.com/api/sangue`)
     .then(response => {
       // JSON responses are automatically parsed.
       this.data = response.data
@@ -229,16 +224,13 @@ mounted()  {
       this.errors.push(e)
     })
     
+  
  },
-
-
-
-
 
 methods:{
 
   listar(){
- axios.get(`https://sanguemozapi.herokuapp.com/api/sangue`)
+       axios.get(`https://sanguemozapi.herokuapp.com/api/sangue`)
     .then(response => {
       // JSON responses are automatically parsed.
       this.data = response.data
@@ -263,12 +255,15 @@ methods:{
      
                 })
                 .then(function (response) {
-                  this.mensagem= "ok"
+                
+                alert('okk');
+
+              
+                  
                 })
                 .catch(function (error) {
                 });
                 this.showNotif("Gravado com sucesso");
-                this.listar();
 
 
   },

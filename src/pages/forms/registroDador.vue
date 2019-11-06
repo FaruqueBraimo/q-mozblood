@@ -297,28 +297,19 @@
   </div>
 
       
-   <div class="row justify-end">
-      <q-btn
-        type="submit"
-        :loading="submitting"
-        label="Salvar"
-        class="q-mt-md"
-        color="teal"
-        @click="salvar"
-      >
-        <template v-slot:loading>
-          <q-spinner-facebook />
-        </template>
-      </q-btn>
-    </div>
+  
 
 
       </q-step>
 
       <template v-slot:navigation>
         <q-stepper-navigation>
-          <q-btn     @click="$refs.stepper.next()" :color="step === 3 ? 'white' : 'deep-orange'" :label="step === 3 ? '' : 'Continuar'"   />
+
+          <q-btn     @click="salvar()"  v-if="step==3" label="salvar"   color="teal" />
+
+          <q-btn  v-if="step < 3"   @click="$refs.stepper.next()" color="deep-orange"   label="Continuar"    />
           <q-btn v-if="step > 1" flat color="deep-orange" @click="$refs.stepper.previous()" label="Voltar" class="q-ml-sm" />
+       
         </q-stepper-navigation>
       </template>
     </q-stepper>

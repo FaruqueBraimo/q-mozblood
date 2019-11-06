@@ -24,7 +24,7 @@
     >
       <div class="row no-wrap q-pa-md">
         <div class="column">
-          <div class="text-h6 q-mb-md">Minha Conta</div>
+          <div class="text-h6 q-mb-md">Zucula</div>
          
         </div>
 
@@ -35,9 +35,9 @@
             <img src="https://cdn.quasar.dev/img/boy-avatar.png">
           </q-avatar>
 
-          <div class="text-subtitle1 q-mt-md q-mb-xs"> {{ welcome }}</div>
+          <div class="text-subtitle1 q-mt-md q-mb-xs"></div>
 
-        <q-btn round color="red-5" icon="keyboard_arrow_right" />
+        <q-btn round color="red-5" icon="keyboard_arrow_right"  @click="sair()" />
         </div>
       </div>
     </q-btn-dropdown>
@@ -57,7 +57,7 @@
             <q-icon name="dashboard" />
           </q-item-section>
           <q-item-section > 
-            <q-item-label text-color="white" >Home</q-item-label>
+            <q-item-label text-color="white" > Inicio </q-item-label>
             <q-item-label  class="caption" >pagina principal</q-item-label>
           </q-item-section>
         </q-item>
@@ -188,21 +188,14 @@
         </q-item>
 
 
-<q-item clickable tag="a" to="#">
-          <q-item-section avatar>
-            <q-icon name="eco" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Inaptos </q-item-label>
-          </q-item-section>
-        </q-item>
 
 
           </q-expansion-item>
 
           
-
           <q-expansion-item  switch-toggle-side dense-toggle label="Adicionar Triagens" :header-inset-level="1" :content-inset-level="2" to="/marcarTriagem">
+ </q-expansion-item>
+          <q-expansion-item  switch-toggle-side dense-toggle label="Marcar Inaptidão" :header-inset-level="1" :content-inset-level="2" to="/inaptidao">
           </q-expansion-item>
 
         </q-expansion-item>
@@ -282,6 +275,8 @@
 
 
 <script>
+import axios from 'axios';
+import agendamentoVue from '../pages/agendamento.vue';
 export default {
   name: 'MyLayout',
   props: ['msg'],
@@ -289,14 +284,41 @@ export default {
   data () {
     return {
       leftDrawerOpen: false,
-       welcome: 'Ella'
+       welcome: '',
+       agendamento : ''
     }
   },
    mounted() {
-        if (this.msg) {
-            this.welcome = this.msg;
-        }
+       
+            this.welcome = localStorage.getItem('Zucula');
+
+       axios.get(`https://sanguemozapi.herokuapp.com/api/contagem`)
+    .then(response => {
+      // JSON responses are automatically parsed.
+      this.agendamento = response.data
+      console.log(this.agendamento)
+      console.log("--------------")
+    })
+    .catch(e => {
+      this.errors.push(e)
+    })
+    
+  
 
     }
+    ,
+    methods:{
+
+
+    sair(){
+      alert('bro touh a zarpar');
+       this.$router.push('/login') 
+    }
+
+    }
+
+
+
+
 }
 </script>

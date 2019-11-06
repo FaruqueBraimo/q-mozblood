@@ -60,13 +60,13 @@
            
           </q-td>
         
-<q-td key="volume_coletado" :props="props">
-            {{ props.row.volume_coletado }}
+<q-td key="validade" :props="props">
+            {{ props.row.validade }}
            
           </q-td>
           
-         <q-td key="obs" :props="props">
-            {{ props.row.obs }}
+         <q-td key="triagem.agendamento.dador.FatorRH" :props="props">
+            {{ props.row.triagem.agendamento.dador.FatorRH }}
            
           </q-td>
           
@@ -183,9 +183,9 @@ mounted()  {
 
         { name: 'data_coletada', align: 'center', label: 'Data Coletada', field: 'data_coletada', sortable: true , },
         { name: 'hora_coletada', label: 'Hora Coletada', field: 'hora_coletada' },
-        { name: 'volume_coletado', label: 'Valido até', field: 'volume_coletado' },
+        { name: 'validade', label: 'Valido até', field: 'validade' },
 
-        { name: 'obs', label: 'Situacao', field: 'obs' },
+        { name: 'triagem.agendamento.dador.FatorRH', label: 'RH', field: 'triagem.agendamento.dador.FatorRH' },
 
 
         { name: 'iron',align: 'center', label: 'Accão', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }

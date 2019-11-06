@@ -16,7 +16,7 @@
 
 
 
-    <q-input filled v-model="agendamento.desc" mask="" :rules="['']"  hint="Motivo"  
+    <q-input filled v-model="lista.desc" mask="" :rules="['']"  hint="Motivo"  
       autogrow>
      
 
@@ -30,7 +30,7 @@
       <q-btn
         type="submit"
         :loading="submitting"
-        label="Cancelar"
+        label="salvar"
         class="q-mt-md"
         color="teal"
         @click="salvar"
@@ -76,7 +76,7 @@ methods: {
   
    salvar(){
 //https://sanguemozapi.herokuapp.com/api/agendamento/
-    axios.put(`https://sanguemozapi.herokuapp.com/api/agendamento` , {
+    axios.put(`https://sanguemozapi.herokuapp.com/api/triagem` , {
 
              codigo : this.dador.value,
              descricao : this.agendamento.desc,
@@ -101,7 +101,7 @@ methods: {
 
  mounted(){
     
-  axios.get(`https://sanguemozapi.herokuapp.com/api/porrealizar/`)
+  axios.get(`https://sanguemozapi.herokuapp.com/api/aptos/`)
     .then(response => {
       this.lista  = response.data     
       console.log("--------------")
@@ -123,7 +123,7 @@ lista(val){
 if(val.length){
   this.options = this.lista.map(o => {
   return {
-      label:  o.dador.nome,
+      label:  o.agendamento.dador.nome,
       value:  o.codigo
   }
   console.log(this.options);

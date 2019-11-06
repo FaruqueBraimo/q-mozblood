@@ -43,8 +43,8 @@
             {{ props.row.data_agendada }}
            
           </q-td>
-          <q-td key="data_marcada" :props="props">
-            {{ props.row.data_marcada }}
+          <q-td key="data" :props="props">
+            {{ props.row.data }}
            
           </q-td>
           <q-td key="hora" :props="props">
@@ -59,6 +59,11 @@
            
           </q-td>
         
+         
+         <q-td key="status" :props="props">
+            {{ props.row.status }}
+           
+          </q-td>
 
           <q-td key="iron" :props="props">
 
@@ -173,9 +178,11 @@ mounted()  {
           
         },
         { name: 'data_agendada', align: 'center', label: 'Data  Agendanda', field: 'data_agendada', sortable: true , },
-        { name: 'data_marcada', label: 'Data', field: 'data', sortable: true, style: 'width: 10px' },
+        { name: 'data', label: 'Data', field: 'data', sortable: true, style: 'width: 10px' },
         { name: 'hora', label: 'Hora de Agendamento', field: 'hora' },
         { name: 'descricao', label: 'descricao', field: 'descricao' },
+       { name: 'status', label: 'Estado', field: 'status' },
+
         { name: 'iron',align: 'center', label: 'Accão', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
       ],
     }

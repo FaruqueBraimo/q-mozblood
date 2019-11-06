@@ -157,7 +157,7 @@ methods: {
 
  mounted(){
 
-  axios.get(`https://sanguemozapi.herokuapp.com/api/agendamento/`)
+  axios.get(`https://sanguemozapi.herokuapp.com/api/porrealizar/`)
     .then(response => {
       this.lista  = response.data     
       console.log("--------------")
