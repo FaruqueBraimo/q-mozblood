@@ -8,6 +8,25 @@
   <div class="q-pa-lg q-ma-lg">
 
 
+<q-breadcrumbs class="text-brown">
+      <template v-slot:separator>
+        <q-icon
+          size="1.5em"
+          name="chevron_right"
+          color="primary"
+        />
+      </template>
+
+      <q-breadcrumbs-el label="Inicio" icon="home" to="dash" />
+  
+      <q-breadcrumbs-el label="Agendamento" icon="navigation" />
+    </q-breadcrumbs>
+
+
+    <q-space> </q-space>
+
+   <p> ... </p>
+
 
    
 

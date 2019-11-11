@@ -12,34 +12,25 @@
           aria-label="Menu"
         />
 
-        <q-toolbar-title>
-          Moz Sangue App
+     <q-toolbar-title>
+          <q-icon name="favorite" />
+          SGBS
         </q-toolbar-title>
      <q-space />
 
      <q-btn-dropdown
-      split
-      content-class="bg-red-2"
-
+      icon="person_outline"
+    
     >
       <div class="row no-wrap q-pa-md">
-        <div class="column">
-          <div class="text-h6 q-mb-md">Zucula</div>
-         
-        </div>
-
-        <q-separator vertical inset class="q-mx-lg" />
 
         <div class="column items-center">
-          <q-avatar size="72px">
-            <img src="https://cdn.quasar.dev/img/boy-avatar.png">
-          </q-avatar>
-
-          <div class="text-subtitle1 q-mt-md q-mb-xs"></div>
-
-        <q-btn round color="red-5" icon="keyboard_arrow_right"  @click="sair()" />
+      
+        <q-btn label="Terminar Sessão"  @click="sair()"/>
         </div>
       </div>
+
+       
     </q-btn-dropdown>
       </q-toolbar>
     </q-header>
@@ -101,6 +92,10 @@
           </q-expansion-item>
 
           <q-expansion-item to="registroDador"  switch-toggle-side dense-toggle label="Adicionar Dador" :header-inset-level="1" :content-inset-level="2">
+          </q-expansion-item>
+
+          <q-expansion-item to="confirmar"  switch-toggle-side dense-toggle label="Confirmar Dador" :header-inset-level="1" :content-inset-level="2">
+           
           </q-expansion-item>
 
         </q-expansion-item>

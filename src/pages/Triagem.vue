@@ -2,6 +2,27 @@
   <div class="q-pa-lg q-ma-lg">
 
 
+<q-breadcrumbs class="text-brown">
+      <template v-slot:separator>
+        <q-icon
+          size="1.5em"
+          name="chevron_right"
+          color="primary"
+        />
+      </template>
+
+      <q-breadcrumbs-el label="Inicio" icon="home" to="dash" />
+  
+      <q-breadcrumbs-el label="Triagem" icon="navigation" />
+    </q-breadcrumbs>
+
+
+    <q-space> </q-space>
+
+   <p> ... </p>
+
+
+
     <q-table
       title="Lista Triagens"
       :data="data"
@@ -30,22 +51,86 @@
             {{ props.row.agendamento.dador.nome }}
           
           </q-td>
-          <q-td key="pressao_arterial" :props="props">
-            {{ props.row.pressao_arterial }}
+          <q-td key="pressao_arterial" :props="props"   >
+        
+
+            
+             <q-badge   v-if=" props.row.pressao_arterial < 140 "  color="red"  pressao = props.row.pressao_arterial >
+
+             <div class="text-pre-wrap">{{props.row.pressao_arterial }} mmHg </div>
+
+            </q-badge>
+
+            
+             <q-badge  v-else   color="primary" >
+
+             <div class="text-pre-wrap">{{ props.row.pressao_arterial}} mmHg</div>
+
+            </q-badge>
           
           </q-td>
           <q-td key="peso" :props="props">
-            <div class="text-pre-wrap">{{ props.row.peso }}</div>
+
+             <q-badge  v-if=" props.row.peso < 50"  color="red" v-model=" peso"  >
+
+             <div class="text-pre-wrap">{{ props.row.peso }}</div>
+
+            </q-badge>
+
+            
+             <q-badge  v-else   color="primary" >
+
+             <div class="text-pre-wrap">{{ props.row.peso }}</div>
+
+            </q-badge>
            
           </q-td>
           <q-td key="altura" :props="props">
             {{ props.row.altura }}
           
           </q-td>
-          <q-td key="temperatura" :props="props">{{ props.row.temperatura }}</q-td>
+          <q-td key="temperatura" :props="props">
+            
+           
+            
+              <q-badge  v-if=" props.row.temperatura  > 37"  color="red" v-model="temperatura" >
+
+             <div class="text-pre-wrap">{{ props.row.temperatura  }} ° C </div>
+
+            </q-badge>
+
+            
+             <q-badge  v-else   color="primary" >
+
+             <div class="text-pre-wrap">{{props.row.temperatura  }} ° C</div>
+
+            </q-badge>
+            
+            
+            
+            </q-td>
           <q-td key="Observacoes" :props="props">{{ props.row.Observacoes }}</q-td>
-          <q-td key="Data_triagem" :props="props">{{ props.row.Data_triagem }}</q-td>
-          <q-td key="status" :props="props">{{ props.row.status }}</q-td>
+          <q-td key="status" :props="props">
+            
+              <q-badge  v-if=" props.row.status  === 'apto' "  color="yellow" >
+
+             <div class="text-pre-wrap">{{ props.row.status }} </div>
+
+            </q-badge>
+
+            
+             <q-badge  v-else   color="primary" >
+
+             <div class="text-pre-wrap">{{props.row.status }} ° C</div>
+
+            </q-badge>
+            
+            
+         
+            
+            
+            
+            </q-td>
 
           <q-td key="iron" :props="props">
 
@@ -68,7 +153,7 @@
          >
         Editar</q-tooltip> </q-btn>
         
-      <q-btn  icon="explore_off"  text-color="deep-orange" style="width: 13px"  v-model="props.row.codigo" @click="getSelectedString (props.row.codigo)" >
+      <q-btn     icon="explore_off"  text-color="deep-orange" style="width: 13px"      @click="getSelectedString (props.row.codigo)"  >
 
 
 
@@ -84,8 +169,12 @@
              
           </q-td>
         </q-tr>
+
+
       </template>
     </q-table>
+
+    
   </div>
 </template>
 
@@ -162,25 +251,24 @@ getSelectedString (codigo) {
       })
    },
 ina(cod){
-  axios.put('https://sanguemozapi.herokuapp.com/api/triagem'  ,{
-
-        codigo : cod,   
-        status : "inapto"
-
-     
-                })
-                .then(function (response) {
-                   
-
-                   
-                })
-                .catch(function (error) {
-                });
+ 
+  
+  
+   this.marcar = false 
+ alert(this.pressao);
+  }
+  
   
           
-  this.showNotif(" Inaptidao registada");
+ 
   
- },
+
+
+
+
+
+
+
 
 },
 
@@ -188,6 +276,10 @@ ina(cod){
     return {
 
          filter: '',
+         peso : '',
+         temperatura : '',
+         pressao :'',
+         marcar: true,
 
 
 
@@ -209,7 +301,6 @@ ina(cod){
         { name: 'altura', label: 'Altura, (m)', field: 'altura' },
         { name: 'temperatura', label: 'Temperatura', field: 'c', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
        { name: 'Observacoes', label: 'Observacoes', field: 'Observacoes', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
-       { name: 'Data_triagem', label: 'Data da Triagem', field: 'Data_triagem' },
        { name: 'status', label: 'status', field: 'status' , sortable: true },
         { name: 'iron',align: 'center', label: 'Accão', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
       ],

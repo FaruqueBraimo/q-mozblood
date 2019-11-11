@@ -12,6 +12,27 @@
    
 
 
+   <q-breadcrumbs class="text-brown">
+      <template v-slot:separator>
+        <q-icon
+          size="1.5em"
+          name="chevron_right"
+          color="primary"
+        />
+      </template>
+
+      <q-breadcrumbs-el label="Inicio" icon="home" to="dash" />
+  
+      <q-breadcrumbs-el label="Produto" icon="navigation" />
+    </q-breadcrumbs>
+
+
+    <q-space> </q-space>
+
+   <p> ... </p>
+
+
+
     <q-table
       title="Produto Gerado"
       :data="data"
@@ -70,7 +91,13 @@
            
           </q-td>
           
-        
+                  
+<q-td key="expirado" :props="props">
+            {{ props.row.expirado }}
+           
+          </q-td>
+          
+     
 
           <q-td key="iron" :props="props">
 
@@ -186,6 +213,8 @@ mounted()  {
         { name: 'validade', label: 'Valido até', field: 'validade' },
 
         { name: 'triagem.agendamento.dador.FatorRH', label: 'RH', field: 'triagem.agendamento.dador.FatorRH' },
+
+        { name: 'expirado', label: 'Estado', field: 'expirado' },
 
 
         { name: 'iron',align: 'center', label: 'Accão', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }

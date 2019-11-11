@@ -133,7 +133,26 @@
     </q-dialog>
 
 
+ 
 
+    <q-breadcrumbs class="text-brown">
+      <template v-slot:separator>
+        <q-icon
+          size="1.5em"
+          name="chevron_right"
+          color="primary"
+        />
+      </template>
+
+      <q-breadcrumbs-el label="Inicio" icon="home" to="dash" />
+  
+      <q-breadcrumbs-el label="Grupo Sanguineo" icon="navigation" />
+    </q-breadcrumbs>
+
+
+    <q-space> </q-space>
+
+   <p> ... </p>
 
     <q-list bordered class="rounded-borders"  v-model="data" v-for="dat in data" :key="dat.codigo">
       <q-item-label header>Grupo</q-item-label>

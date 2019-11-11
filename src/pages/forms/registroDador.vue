@@ -1,5 +1,29 @@
 <template>
   <div class="q-pa-md">
+
+
+<q-breadcrumbs class="text-brown">
+      <template v-slot:separator>
+        <q-icon
+          size="1.5em"
+          name="chevron_right"
+          color="primary"
+        />
+      </template>
+
+      <q-breadcrumbs-el label="Inicio" icon="home" to="dash" />
+  
+      <q-breadcrumbs-el label="Registro de Dadores" icon="navigation" />
+    </q-breadcrumbs>
+
+
+    <q-space> </q-space>
+
+   <p> ... </p>
+
+
+
+
     <q-stepper
       v-model="step"
       ref="stepper"
@@ -102,7 +126,7 @@
       <q-select
         filled
         v-model="dador.nacionalidade"
-        :options="nacionalidade"
+        :options="cPaises"
          stack-label
         label="Nacionalidade"
         hint="Moçambicana"
@@ -333,6 +357,10 @@ export default {
       this.errors.push(e)
     })
 
+
+
+  this.paises();
+
  }
 ,
 
@@ -344,7 +372,16 @@ lista(val){
 
 
 if(val.length){
-  this.options = this.lista.map(o => {
+  this.cPaises = this.pais.map(o => {
+  return {
+      label:  o.name,
+      value:  o.name,
+  }
+  console.log(o.name);
+
+})
+
+this.options = this.lista.map(o => {
   return {
       label:  o.nome,
       value:  o.codigo
@@ -355,16 +392,24 @@ if(val.length){
 }
 }
 
-
-
 }
+
+
+
+
+
+
+
 ,
  data () {
     return {
       lista: [],
+      pais : [],
       model: null,
       sangue_cod:null,
+       currentObj: "",
       options: [],
+      cPaises : [],
       sexo: ['Masculino', 'Feminino','Outro'],
       grau: ['Irmão(a)', 'Mãe','Pai','Outro'],
       documento: ['BI','Passaporte','DIRE','Cartão de Eleitor','Outro'],
@@ -397,7 +442,8 @@ if(val.length){
         fatorRH: "",
         apelido: "",
         grau: "",
-        nasc: ""
+        nasc: "",
+       
         
       },
      
@@ -416,6 +462,30 @@ if(val.length){
 
 methods:{
 
+paises (){
+
+
+
+ axios.get(`https://restcountries.eu/rest/v2/all`)
+    .then(response => {
+      this.pais  = response.data     
+      console.log("--------------")
+
+    })
+    .catch(e => {
+      this.errors.push(e)
+    })
+
+ },
+
+
+
+ 
+
+
+
+
+
 
 
   editar() {
@@ -430,7 +500,7 @@ methods:{
         email: this.dador.email,
         data_nasc: this.dador.nasc,
         fatorRH: this.dador.fatorRH,
-        nacionalidade: this.dador.nacionalidade,
+        // nacionalidade: this.dador.nacionalidade,
         nomeMae: this.dador.nomeMae,
         nomePai: this.dador.nomePai,
         numeroDeDoacoes: "",
@@ -453,9 +523,9 @@ methods:{
   }
 
 ,
-showNotif (mensagem) {
+showNotif () {
       this.$q.notify({
-        message: mensagem,
+        message: this.currentObj,
         color: 'dark',
        
 
@@ -491,7 +561,7 @@ showNotif (mensagem) {
         email: this.dador.email,
         data_nasc: this.dador.nasc,
         fatorRH: this.dador.fatorRH,
-        nacionalidade: this.dador.nacionalidade,
+        // nacionalidade: this.dador.nacionalidade,
         nomeMae: this.dador.nomeMae,
         nomePai: this.dador.nomePai,
         numeroDeDoacoes: "",
@@ -502,12 +572,11 @@ showNotif (mensagem) {
 
                 })
                 .then(function (response) {
-                    currentObj.output = response.data;
+                     alert(response.data);
+                 
                 })
                 .catch(function (error) {
-                    currentObj.output = error;
                 });
-                this.showNotif("Salvo com sucesso");
 
   }
 }
