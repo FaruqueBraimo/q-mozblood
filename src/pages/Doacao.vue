@@ -2,10 +2,7 @@
 
 
 
-   
-
-
-
+  
 
 
   <div class="q-pa-lg q-ma-lg">
@@ -173,7 +170,6 @@ mounted()  {
       this.data = response.data
       console.log(response.data
       )
-      console.log("--------------")
     })
     .catch(e => {
       this.errors.push(e)

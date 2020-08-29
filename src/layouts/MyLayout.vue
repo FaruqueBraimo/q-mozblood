@@ -59,7 +59,6 @@
           icon="hdr_strong"
           label="Grupo Sanguineo"
         
-          default-opened
         >
 
          <q-expansion-item to="sangue"  switch-toggle-side dense-toggle label="Lista de grupos" :header-inset-level="1" :content-inset-level="2">
@@ -73,7 +72,6 @@
           expand-separator
           icon="person"
           label="Dadores"
-          default-opened
         >
 
           <q-expansion-item switch-toggle-side dense-toggle label="Lista de Dadores" :header-inset-level="1" :content-inset-level="2">
@@ -94,7 +92,6 @@
           <q-expansion-item to="registroDador"  switch-toggle-side dense-toggle label="Adicionar Dador" :header-inset-level="1" :content-inset-level="2">
           </q-expansion-item>
 
-          <q-expansion-item to="confirmar"  switch-toggle-side dense-toggle label="Confirmar Dador" :header-inset-level="1" :content-inset-level="2">
            
           </q-expansion-item>
 
@@ -106,7 +103,6 @@
           expand-separator
           icon="calendar_today"
           label="Agendamentos"
-          default-opened
         >
 
           <q-expansion-item switch-toggle-side dense-toggle label="Visualizar" :header-inset-level="1" :content-inset-level="2">
@@ -165,7 +161,7 @@
           expand-separator
           icon="how_to_reg"
           label="Triagem"
-          default-opened
+          
         >
 
           <q-expansion-item 
@@ -199,7 +195,6 @@
           expand-separator
           icon="favorite"
           label="Doacoes"
-          default-opened
         >
 
           <q-expansion-item 
@@ -219,7 +214,42 @@
         </q-expansion-item>
 
 
-        
+        <q-expansion-item
+					icon="person"
+					label="Funcionarios"
+					dense-toggle
+					my-active-class
+					my-exact-active-class
+					expand-icon-class="text-grey-8"
+					class="ex-item"
+				>
+					<q-list class="text-body1">
+						<q-item clickable v-ripple to="/users">
+							<q-item-section avatar>
+								<q-icon
+									color="white"
+									name="list_alt"
+								/>
+							</q-item-section>
+							<q-item-section class="text-white">
+		
+								<p>Lista de Funcionários</p>
+							</q-item-section>
+						</q-item>
+
+						<q-item clickable v-ripple to='/roles'>
+							<q-item-section avatar>
+								<q-icon
+									color="red-5"
+									name="check_box"
+								/>
+							</q-item-section>
+							<q-item-section>
+								<p>Permissões</p>
+							</q-item-section>
+						</q-item>
+					</q-list>
+				</q-expansion-item>
 
 
 
@@ -272,9 +302,19 @@
 <script>
 import axios from 'axios';
 import agendamentoVue from '../pages/agendamento.vue';
+import { mapGetters, mapState ,mapActions} from 'vuex';
+import { showErrorMessage } from '../functions/handle-error-messages';
+
 export default {
   name: 'MyLayout',
   props: ['msg'],
+
+  computed: {
+			...mapState('auth', ['users', 'userAuth',]),
+			...mapGetters('auth', ['getUserName', 'getUserAuth'])
+			
+		
+		},
 
   data () {
     return {
@@ -285,30 +325,38 @@ export default {
   },
    mounted() {
        
-            this.welcome = localStorage.getItem('Zucula');
-
-       axios.get(`https://sanguemozapi.herokuapp.com/api/contagem`)
-    .then(response => {
-      // JSON responses are automatically parsed.
-      this.agendamento = response.data
-      console.log(this.agendamento)
-      console.log("--------------")
-    })
-    .catch(e => {
-      this.errors.push(e)
-    })
-    
-  
+if (!this.getUserAuth) {
+				this.$router.push('/');
+				showErrorMessage('Sem permissão, por favor autentique-se');
+			}
+      
 
     }
     ,
     methods:{
 
+			...mapActions('auth', ['logoutUser']),
 
     sair(){
-      alert('bro touh a zarpar');
-       this.$router.push('/login') 
+      this.$q
+					.dialog({
+						title: 'Confirme',
+						message: 'Tem certeza que deseja sair do sistema?',
+						ok: 'Sim',
+						cancel: true,
+						cancel: 'Não',
+						persistent: true
+					})
+					.onOk(() => {
+						this.logoutUser();
+					});
     }
+
+
+
+
+
+    
 
     }
 

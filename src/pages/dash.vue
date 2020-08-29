@@ -45,7 +45,6 @@
           icon="hdr_strong"
           label="Grupo Sanguineo"
         
-          default-opened
         >
 
          <q-expansion-item to="sangue"  switch-toggle-side dense-toggle label="Lista de grupos" :header-inset-level="1" :content-inset-level="2">
@@ -59,7 +58,6 @@
           expand-separator
           icon="person"
           label="Dadores"
-          default-opened
         >
 
           <q-expansion-item switch-toggle-side dense-toggle label="Lista de Dadores" :header-inset-level="1" :content-inset-level="2">
@@ -75,32 +73,7 @@
           </q-item-section>
         </q-item>
 
-         <!-- <q-item clickable tag="a" to="/reprovados">
-          <q-item-section avatar>
-            <q-icon name="person_add_disabled" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Reprovados</q-item-label>
-          </q-item-section>
-        </q-item> -->
-
-           <!-- <q-item clickable tag="a" to="/atendidos">
-          <q-item-section avatar>
-            <q-icon name="sentiment_satisfied_alt" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Atendidos</q-item-label>
-          </q-item-section>
-        </q-item> -->
-
-           <!-- <q-item clickable tag="a" to="/faltosos">
-          <q-item-section avatar>
-            <q-icon name="sentiment_very_dissatisfied" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Faltosos</q-item-label>
-          </q-item-section>
-        </q-item> -->
+         
 
           </q-expansion-item>
 
@@ -115,7 +88,6 @@
           expand-separator
           icon="calendar_today"
           label="Agendamentos"
-          default-opened
         >
 
           <q-expansion-item switch-toggle-side dense-toggle label="Visualizar" :header-inset-level="1" :content-inset-level="2">
@@ -199,7 +171,6 @@
           expand-separator
           icon="how_to_reg"
           label="Triagem"
-          default-opened
         >
 
           <q-expansion-item 
@@ -228,7 +199,6 @@
           expand-separator
           icon="favorite"
           label="Doacoes"
-          default-opened
         >
 
           <q-expansion-item 

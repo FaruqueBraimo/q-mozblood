@@ -55,32 +55,32 @@
       <template v-slot:body="props">
         <q-tr :props="props">
           <q-td key="dador.nome" :props="props">
-            {{ props.row.dador.nome }}
+            {{ props.row.dador.nome  || 'Não Informado'}}
          
           </q-td>
           <q-td key="data_agendada" :props="props">
-            {{ props.row.data_agendada }}
+            {{ props.row.data_agendada  || 'Não Informado'}}
            
           </q-td>
           <q-td key="data" :props="props">
-            {{ props.row.data }}
+            {{ props.row.data || 'Não Informado' }}
            
           </q-td>
           <q-td key="hora" :props="props">
-            {{ props.row.hora }}
+            {{ props.row.hora  || 'Não Informado'}}
            
           </q-td>
         
 
           
          <q-td key="descricao" :props="props">
-            {{ props.row.descricao }}
+            {{ props.row.descricao  || 'Não Informado' }}
            
           </q-td>
         
          
          <q-td key="status" :props="props">
-            {{ props.row.status }}
+            {{ props.row.status || 'Não Informado' }}
            
           </q-td>
 

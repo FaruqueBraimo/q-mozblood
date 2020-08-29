@@ -43,31 +43,31 @@
       <template v-slot:body="props">
         <q-tr :props="props">
           <q-td key="nome" :props="props">
-            {{ props.row.nome }}
+            {{ props.row.nome || 'Não Informado'}}
             <q-popup-edit v-model="props.row.name">
               <q-input v-model="props.row.name" dense autofocus counter />
             </q-popup-edit>
           </q-td>
           <q-td key="sexo" :props="props">
-            {{ props.row.sexo }}
+            {{ props.row.sexo || 'Não Informado' }}
             <q-popup-edit v-model="props.row.sexo" title="Update calories" buttons>
             </q-popup-edit>
           </q-td>
           <q-td key="endereco" :props="props">
-            <div class="text-pre-wrap">{{ props.row.endereco }}</div>
+            <div class="text-pre-wrap">{{ props.row.endereco || 'Não Informado' }}</div>
             <q-popup-edit v-model="props.row.fat">
               <q-input type="textarea" v-model="props.row.endereco" dense autofocus />
             </q-popup-edit>
           </q-td>
           <q-td key="email" :props="props">
-            {{ props.row.email }}
+            {{ props.row.email || 'Não Informado' }}
             <q-popup-edit v-model="props.row.email" title="Update carbs" buttons persistent>
               <q-input type="number" v-model="props.row.email" dense autofocus hint="Use buttons to close" />
             </q-popup-edit>
           </q-td>
-          <q-td key="telefone" :props="props">{{ props.row.telefone }}</q-td>
-          <q-td key="data_nasc" :props="props">{{ props.row.data_nasc }}</q-td>
-          <q-td key="sangue.nome" :props="props">{{ props.row.sangue.nome }}</q-td>
+          <q-td key="telefone" :props="props">{{ props.row.telefone || 'Não Informado' }}</q-td>
+          <q-td key="data_nasc" :props="props">{{ props.row.data_nasc  || 'Não Informado'}}</q-td>
+          <q-td key="sangue.nome" :props="props">{{ props.row.sangue.nome  || 'Não Informado'}}</q-td>
 
           <q-td key="iron" :props="props">
 
