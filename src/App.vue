@@ -11,6 +11,7 @@
 		name: 'App',
 		created() {
 			this.listenUsersRealTimeChanges();
+			this.listenRoleRealTimeChanges()
 		
 		},
 				computed: {
@@ -27,6 +28,11 @@
 				'handleAuthStateChange',
 				'listenUsersRealTimeChanges',
 				'deleteUser',
+			]),
+
+			...mapActions('role', [
+				'listenRoleRealTimeChanges',
+				
 			]),
 	
 

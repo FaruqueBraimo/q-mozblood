@@ -35,8 +35,8 @@
 					<div class="row">
 						
 						<q-checkbox
-							v-model="saveObject.sales"
-							label="Vendas"
+							v-model="saveObject.blood"
+							label="Grupo Sanguineo"
 							true-value=true
                            false-value=false
 						   color="teal-5"
@@ -46,8 +46,8 @@
 					<div class="row">
 						
 						<q-checkbox
-							v-model="saveObject.category"
-							label="Categorias"
+							v-model="saveObject.donor"
+							label="Doadores"
 							true-value=true
                            false-value=false
 
@@ -55,8 +55,8 @@
 					</div>
 					<div class="row">
 						<q-checkbox
-							v-model="saveObject.products"
-							label="Produtos"
+							v-model="saveObject.agend"
+							label="Agendamentos"
 							color="red-5"
 							true-value=true
                            false-value=false
@@ -64,8 +64,8 @@
 					</div>
 					<div class="row">
 						<q-checkbox
-							v-model="saveObject.clients"
-							label="Clientes"
+							v-model="saveObject.trial"
+							label="Triagem"
 							color="yellow"
 							true-value=true
                            false-value=false
@@ -73,8 +73,8 @@
 					</div>
 					<div class="row">
 						<q-checkbox
-							v-model="saveObject.providers"
-							label="Forncedores"
+							v-model="saveObject.donations"
+							label="Doacoes"
 							color='teal'
 							true-value=true
                            false-value=false
@@ -83,7 +83,7 @@
 					<div class="row">
 						<q-checkbox
 							v-model="saveObject.reports"
-							label="Relatorios"
+							label="Produto  Gerado"
 							color="pink"
 							true-value=true
                            false-value=false

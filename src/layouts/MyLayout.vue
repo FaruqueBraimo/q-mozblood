@@ -58,6 +58,7 @@
           expand-separator
           icon="hdr_strong"
           label="Grupo Sanguineo"
+           v-if="roles[getUserAuth.role.value].blood === 'true'"
         
         >
 
@@ -72,6 +73,7 @@
           expand-separator
           icon="person"
           label="Dadores"
+            v-if="roles[getUserAuth.role.value].donor === 'true'"
         >
 
           <q-expansion-item switch-toggle-side dense-toggle label="Lista de Dadores" :header-inset-level="1" :content-inset-level="2">
@@ -103,6 +105,8 @@
           expand-separator
           icon="calendar_today"
           label="Agendamentos"
+                      v-if="roles[getUserAuth.role.value].agend === 'true'"
+
         >
 
           <q-expansion-item switch-toggle-side dense-toggle label="Visualizar" :header-inset-level="1" :content-inset-level="2">
@@ -161,7 +165,8 @@
           expand-separator
           icon="how_to_reg"
           label="Triagem"
-          
+                      v-if="roles[getUserAuth.role.value].trial === 'true'"
+
         >
 
           <q-expansion-item 
@@ -195,6 +200,8 @@
           expand-separator
           icon="favorite"
           label="Doacoes"
+           v-if="roles[getUserAuth.role.value].donations === 'true'"
+
         >
 
           <q-expansion-item 
@@ -222,6 +229,9 @@
 					my-exact-active-class
 					expand-icon-class="text-grey-8"
 					class="ex-item"
+          v-if="roles[getUserAuth.role.value].users === 'true'"
+
+          
 				>
 					<q-list class="text-body1">
 						<q-item clickable v-ripple to="/users">
@@ -253,7 +263,8 @@
 
 
 
-         <q-item clickable tag="a"  to="produto">
+         <q-item clickable tag="a"            v-if="roles[getUserAuth.role.value].stock === 'true'"
+ to="produto">
           <q-item-section avatar>
             <q-icon name="nature_people" />
           </q-item-section>
@@ -311,7 +322,9 @@ export default {
 
   computed: {
 			...mapState('auth', ['users', 'userAuth',]),
-			...mapGetters('auth', ['getUserName', 'getUserAuth'])
+      ...mapGetters('auth', ['getUserName', 'getUserAuth']),
+      			...mapState('role', ['roles']),
+
 			
 		
 		},
@@ -326,8 +339,14 @@ export default {
    mounted() {
        
 if (!this.getUserAuth) {
+
 				this.$router.push('/');
 				showErrorMessage('Sem permissão, por favor autentique-se');
+      }
+      
+      if (this.getUserAuth.status == false) {
+				this.$router.push('/');
+				showErrorMessage('Conta bloqueada, contacte o administrador');
 			}
       
 

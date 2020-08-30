@@ -3,25 +3,31 @@
 		<td class="text-left">
 			{{ role.name }}
 		</td>
-		<td class="text-left" v-if="role.category == 'true'">
+		<td class="text-left" v-if="role.blood == 'true'">
 			<q-icon color="green" size="sm" name="check_circle" />
 		</td>
 		<td class="text-left" v-else>
 			<q-icon color="red" size="sm" name="cancel" />
 		</td>
-		<td class="text-left" v-if="role.products == 'true'">
+		<td class="text-left" v-if="role.donor == 'true'">
 			<q-icon color="green" size="sm" name="check_circle" />
 		</td>
 		<td class="text-left" v-else>
 			<q-icon color="red" size="sm" name="cancel" />
 		</td>
-		<td class="text-left" v-if="role.clients == 'true'">
+		<td class="text-left" v-if="role.agend == 'true'">
 			<q-icon color="green" size="sm" name="check_circle" />
 		</td>
 		<td class="text-left" v-else>
 			<q-icon color="red" size="sm" name="cancel" />
 		</td>
-		<td class="text-left" v-if="role.providers == 'true'">
+		<td class="text-left" v-if="role.trial == 'true'">
+			<q-icon color="green" size="sm" name="check_circle" />
+		</td>
+		<td class="text-left" v-else>
+			<q-icon color="red" size="sm" name="cancel" />
+		</td>
+		<td class="text-left" v-if="role.donations == 'true'">
 			<q-icon color="green" size="sm" name="check_circle" />
 		</td>
 		<td class="text-left" v-else>
@@ -33,18 +39,7 @@
 		<td class="text-left" v-else>
 			<q-icon color="red" size="sm" name="cancel" />
 		</td>
-		<td class="text-left" v-if="role.reports == 'true'">
-			<q-icon color="green" size="sm" name="check_circle" />
-		</td>
-		<td class="text-left" v-else>
-			<q-icon color="red" size="sm" name="cancel" />
-		</td>
-		<td class="text-left" v-if="role.sales == 'true'">
-			<q-icon color="green" size="sm" name="check_circle" />
-		</td>
-		<td class="text-left" v-else>
-			<q-icon color="red" size="sm" name="cancel" />
-		</td>
+		
 
 		<td class="text-left" v-if="role.users == 'true'">
 			<q-icon color="green" size="sm" name="check_circle" />

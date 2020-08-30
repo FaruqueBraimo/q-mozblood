@@ -39,6 +39,7 @@ const routes = [
       { path: '/registroDador', component: () => import('pages/forms/registroDador.vue') },
       { path: '/triagem', component: () => import('pages/Triagem.vue') },
       { path: '/users', component: () => import('pages/UsersPage.vue') },
+      { path: '/roles', component: () => import('pages/userRoles.vue') },
       { path: '/agendamento', component: () => import('pages/agendamento.vue') },
       { path: '/marcar', component: () => import('pages/forms/marcarAgendamento.vue') },
       { path: '/inaptidao', component: () => import('pages/forms/inaptidao.vue') },

@@ -18,13 +18,12 @@
 		<tr>
 			<th class="text-left">Acesso</th>
 
-			<th class="text-left">Categorias</th>
-			<th class="text-left">Produtos</th>
-			<th class="text-left">Clientes</th>
-			<th class="text-left">Fornecedores</th>
+			<th class="text-left">Grupo Sanguineo</th>
+			<th class="text-left">Doadores</th>
+			<th class="text-left">Agendamentos</th>
+			<th class="text-left">Triagem</th>
+			<th class="text-left">Doacoes</th>
 			<th class="text-left">Stock</th>
-			<th class="text-left">Relátorios</th>
-			<th class="text-left">Vendas</th>
 			<th class="text-left">Utilizadores</th>
 			<th class="text-center">Ação</th>
 		</tr>

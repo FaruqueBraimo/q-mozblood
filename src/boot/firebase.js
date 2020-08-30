@@ -27,6 +27,7 @@ export const db = firebaseApp.firestore();
 
 
 export const dbUsers = db.collection("users");
+export const dbRoles = db.collection("roles");
 
 
 

@@ -131,6 +131,17 @@
 			};
 		},
 		computed: {
+										...mapState('role', ['roles']),
+										fetchRoles() {
+				Object.keys(this.roles).forEach((element, key) => {
+					this.options.push({
+						value: element,
+						label: this.roles[element].name
+					});
+				});
+
+				return '';
+			},
 
 			toggleDialog: {
 
@@ -144,8 +155,9 @@
 			
 		},
 		mounted() {
-			
+			this.fetchRoles
 		},
+		
 		methods: {
 			...mapActions('auth', ['updateUser',]),
 
