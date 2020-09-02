@@ -118,8 +118,8 @@
      
     </q-list>
 
-          <div class='q-pa-md text-red-5 text-center' v-if="dadores[0].status=='N'">
-              NB : Ainda não és um doador reconhecido, aguarde a confirmacao
+          <div class='q-pa-md text-red-5 text-center' v-if="doacoes.length == 0">
+              NB : Ainda não és um doador reconhecido, sera necessario que doe sangue primeiro
             </div>
 			</q-card-section>
 

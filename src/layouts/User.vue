@@ -65,7 +65,7 @@
         </q-item>
 
 
-      <q-item  exact to="/dador-reg">
+      <q-item  exact to="/dador-reg"  :disable="conf">
           <q-item-section avatar>
             <q-icon name="person" />
           </q-item-section>
@@ -128,7 +128,8 @@ export default {
     return {
       leftDrawerOpen: false,
        welcome: '',
-       agendamento : ''
+       agendamento : '',
+       conf: false
     }
   },
    mounted() {
@@ -149,14 +150,39 @@ if (!this.getUserAuth) {
       if (this.getUserAuth.status == false) {
 				this.$router.push('/');
 				showErrorMessage('Conta bloqueada, contacte o administrador');
-			}
+      }
+      
+
+
+     
+      axios
+        .get(`https://sanguemozapi.herokuapp.com/api/dadores`)
+        .then(response => {
+
+              response.data.forEach(element => {
+                if(element.fatorRH == this.getUserAuth.id) {
+                 this.conf = true
+               
+          } 
+              });
+
+          
+        })
+
+        .catch(e => {
+        });
       
 
     }
     ,
     methods:{
 
-			...mapActions('auth', ['logoutUser']),
+      ...mapActions('auth', ['logoutUser']),
+      
+
+
+
+
 
     sair(){
       this.$q

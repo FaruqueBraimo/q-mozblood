@@ -3,7 +3,7 @@
 		<div class="col-xs-12 col-sm-6 col-md-4 offset-sm-3 offset-sm-4">
 			<q-card class="q-mt-lg shadow-0">
 				<div class="text-center ">
-					<q-icon name="person_pin" color="cyan" size="100px" />
+					<q-icon name="person_pin" color="red-5" size="100px" />
 
 					<p style="font-weight: bold;font-size: 14pt">Registo</p>
 				</div>

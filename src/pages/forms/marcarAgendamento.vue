@@ -83,9 +83,9 @@ export default {
       lista : [],
 
         agendamento: {
-        data_marcada: "2019/02/01",
+        data_marcada: "2020/09/02",
         data_hoje: "",
-        hora_marcada: "10:56",
+        hora_marcada: "14:56",
         desc: "",
         
       },

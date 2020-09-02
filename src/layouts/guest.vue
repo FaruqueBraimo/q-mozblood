@@ -14,6 +14,10 @@
      
       <div class="row no-wrap ">
 
+        <div class=" q-pt-sm  q-pl-xl col">
+            Sobre Nos
+        </div>
+
         <div class="col ">
       
         <q-btn label="Login" color=''  @click="$router.push('/login')" outline   unelevated   />
@@ -34,14 +38,14 @@
       <router-view />
     </q-page-container>
 
-    <q-footer elevated class="bg-red-5 text-white">
+    <!-- <q-footer elevated class="bg-red-5 text-white">
       <q-toolbar>
         <q-toolbar-title class = ' text-bold text-center'>
          
           @Todos os direitos Reservados SangueMoz
         </q-toolbar-title>
       </q-toolbar>
-    </q-footer>
+    </q-footer> -->
 
   </q-layout>
 </template>
