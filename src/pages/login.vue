@@ -18,10 +18,15 @@
         padding
         arrows
         height="300px"
-        class="bg-red-5 text-white shadow-1 rounded-borders"
+        class="bg-red-3 text-white shadow-1 rounded-borders"
       >
         <q-carousel-slide name="style" class="column no-wrap flex-center">
-              q
+              <q-img
+                src="/statics/1.png"
+                :ratio="16/9"
+                spinner-color="whte"
+                spinner-size="20px"
+              />
 
           <div class="q-mt-md text-center">
               Salve Vidas 
@@ -50,7 +55,7 @@
      
     </div>
     <div class="q-pa-md  row justify-center text-center">
-    <q-btn color="red-5" unelevated class="q-pa-lg" label="Tornar-se dador" />
+    <q-btn color="red-5" unelevated class="q-pa-lg q-px-xl" label="Tornar-se dador" />
   </div>
   </div>
 
