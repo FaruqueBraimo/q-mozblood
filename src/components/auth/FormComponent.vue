@@ -74,7 +74,7 @@
 				/>
 				<!--<q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />-->
 			</div>
-			<div  v-if='Object.keys(users).length === 0 '> 
+			<div > 
 				<span v-if="name === 'Entrar'"> Não tem conta? </span>
 				<span v-else> Tem conta? </span>
 
@@ -112,10 +112,13 @@
 					name: '',
 					email: '',
 					password: '',
-					confirmPassword: ''
+					confirmPassword: '',
+					online : true
+
 				}
 			};
-		},
+
+},
 
 	computed : {
 			...mapState('auth', ['users', 'userAuth']),

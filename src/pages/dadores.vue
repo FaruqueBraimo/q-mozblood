@@ -53,12 +53,7 @@
             <q-popup-edit v-model="props.row.sexo" title="Update calories" buttons>
             </q-popup-edit>
           </q-td>
-          <q-td key="endereco" :props="props">
-            <div class="text-pre-wrap">{{ props.row.endereco || 'Não Informado' }}</div>
-            <q-popup-edit v-model="props.row.fat">
-              <q-input type="textarea" v-model="props.row.endereco" dense autofocus />
-            </q-popup-edit>
-          </q-td>
+          
           <q-td key="email" :props="props">
             {{ props.row.email || 'Não Informado' }}
             <q-popup-edit v-model="props.row.email" title="Update carbs" buttons persistent>
@@ -67,7 +62,23 @@
           </q-td>
           <q-td key="telefone" :props="props">{{ props.row.telefone || 'Não Informado' }}</q-td>
           <q-td key="data_nasc" :props="props">{{ props.row.data_nasc  || 'Não Informado'}}</q-td>
-          <q-td key="sangue.nome" :props="props">{{ props.row.sangue.nome  || 'Não Informado'}}</q-td>
+          <q-td class="text-center" key="sangue.nome" :props="props">{{ props.row.sangue.nome  || 'AB'}}</q-td>
+
+     <q-td key="status" :props="props" v-if="props.row.status == 'N'">
+            <div class="text-pre-wrap" >
+               <q-btn  icon="check" round color="green-5" @click='confirmar(props.row.sangue.codigo)'  />
+            </div>
+            
+          </q-td>
+
+
+            <q-td key="status" :props="props" v-else>
+            <div class="text-pre-wrap" >
+              Activo
+            </div>
+            
+          </q-td>
+
 
           <q-td key="iron" :props="props">
 
@@ -90,7 +101,7 @@
          >
         Editar</q-tooltip> </q-btn>
         
-      <q-btn  icon="visibility"  text-color="deep-orange" style="width: 13px"  v-model="props.row.codigo">
+      <q-btn  icon="visibility"  text-color="deep-orange" style="width: 13px"  v-model="props.row.codigo"  @click="$router.push('/donor/' + props.row.codigo )">
 
 
 
@@ -141,10 +152,10 @@ import axios from 'axios';
 export default {
 
  methods:{
-  getSelectedString (codigo) {
+  confirmar (codigo) {
    this.$q.dialog({
         dark: true,
-        message: 'Deseja apagar?',
+        message: 'Deseja Tornar Dador?',
         cancel: true,
         title: 'Confirmacão',
         persistent: true
@@ -165,7 +176,7 @@ export default {
 
 
     
-    axios.delete('https://sanguemozapi.herokuapp.com/api/dador/'  + codigo )
+    axios.delete('https://sanguemozapi.herokuapp.com/api/dadores/'  + codigo )
     
     .then(response => this.selected.splice(index,1) )
 
@@ -248,11 +259,12 @@ listar(){
           
         },
         { name: 'sexo', align: 'center', label: 'Sexo',  field: 'sexo', sortable: true },
-        { name: 'endereco', label: 'Endereco', field: 'endereco', sortable: true },
         { name: 'email', label: 'Email',  field: 'email' , align: 'center',},
         { name: 'telefone', label: 'Telefone', field: 'telefone' },
         { name: 'data_nasc', label: 'Nascimento',  field: 'data_nasc' },
         { name: 'sangue.nome', label: 'Grupo Sanguineo', field: 'sangue.nome', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
+         { name: 'status', label: 'Status', field: 'status', sortable: true },
+
         { name: 'iron',align: 'center', label: 'Accão', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
       ],
      

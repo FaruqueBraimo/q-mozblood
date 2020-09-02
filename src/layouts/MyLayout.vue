@@ -2,6 +2,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
+      
       <q-toolbar class="brand">
         <q-btn
           flat
@@ -337,7 +338,14 @@ export default {
     }
   },
    mounted() {
-       
+
+        if(this.getUserAuth.online) {
+          				this.$router.push('/userdash');
+
+        }
+
+
+
 if (!this.getUserAuth) {
 
 				this.$router.push('/');

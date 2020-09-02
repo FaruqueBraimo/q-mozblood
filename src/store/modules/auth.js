@@ -121,7 +121,7 @@ const actions = {
             })
     },
 
-    loginUser ({ commit, dispatch }, payload) {
+    loginUser ({ commit, dispatch}, payload) {
         Loading.show()
             dispatch('')
         firebaseAuth.signInWithEmailAndPassword(payload.email, payload.password)
@@ -130,6 +130,9 @@ const actions = {
                     id: resp.user.uid,
                     email: resp.user.email,
                 })
+
+                // console.log(auth)
+                
                 if(Platform.is.desktop) {
                     this.$router.push('/admin')
 

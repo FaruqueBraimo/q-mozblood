@@ -107,7 +107,18 @@
 
 
 </div>
-  
+<div class="text-center text-bold text-body1"> Agendamentos de para Hoje</div>
+  <q-separator spaced inset   />
+  <div class="q-pa-md" v-for="a in agendamentos "  :key="a">
+      <q-card class="my-card q-mx-xl" square bordered>
+       
+        <q-card-section>
+         	   Tem um agendamento marcado com o dador  <span class="q-px-sm text-bold text-green-5"> {{a.dador.nome}} </span> as  {{a.hora}}
+        </q-card-section>
+      </q-card>
+
+  </div>
+  <q-separator spaced inset   />
 
 
     <ejs-chart id="container" :title='title' :primaryXAxis='primaryXAxis' :primaryYAxis='primaryYAxis'>
@@ -131,6 +142,7 @@
 import Vue from "vue";
 import { ChartPlugin, LineSeries, Category } from "@syncfusion/ej2-vue-charts";
 import axios from 'axios';
+import { date } from 'quasar'
 
 Vue.use(ChartPlugin);
 
@@ -142,6 +154,7 @@ export default {
 
      this.listar();
      this.atendidos();
+     this.Listaragendamentos()
   
 
     }
@@ -167,6 +180,40 @@ listar(){
 }
 ,
 
+	 Listaragendamentos() {
+      this.$q.loading.show({
+        delay: 400,
+        message: "Por favor aguarde",
+        sanitize: true
+      });
+
+      axios
+        .get(`https://sanguemozapi.herokuapp.com/api/agendamento`)
+        .then(response => {
+let timeStamp = Date.now()
+let formattedString = date.formatDate(timeStamp, 'YYYY/MM/DD')
+
+			response.data.forEach((element,key) => {
+				if(element.data_agendada  === formattedString) {
+				this.agendamentos.push(element)
+				}
+				else {
+					console.log(element.codigo)
+				}
+			
+				
+			});
+			
+        
+          this.$q.loading.hide({});
+        })
+
+        .catch(e => {
+          this.$q.loading.hide({});
+        });
+   
+  },
+
 atendidos(){
   
        axios.get(`https://sanguemozapi.herokuapp.com/api/realizados`)
@@ -187,6 +234,7 @@ atendidos(){
     return {
 
       agendamento : "",
+      agendamentos: [],
       realizados : '',
       litros : '',
       reprovados : '',

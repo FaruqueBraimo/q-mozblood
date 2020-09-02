@@ -13,11 +13,21 @@ const routes = [
 
 
   {
+    path: '/userdash',
+    component: () => import('layouts/User.vue' ),
+    children: [
+      { path: '/menu', component: () => import('pages/UserGuest.vue') },
+      { path: '/dador-reg', component: () => import('pages/forms/user-dador.vue'), props: true  },
+     
+     
+    ]
+  },
+
+  {
     path: '/login',
     component: () => import('layouts/login.vue'),
     children: [
       { path: '', component: () => import('pages/login.vue') },
-      { path: '/',  component: () => import('layouts/MyLayout.vue'), props: true, name: "Mylayout"}  
       
  
     ]
@@ -47,8 +57,8 @@ const routes = [
       { path: '/registroDaocao', component: () => import('pages/forms/registroDaoacao.vue') },
       { path: '/produto', component: () => import('pages/produto.vue') },
       { path: '/cancelar', component: () => import('pages/imprevists/cancelar.vue') },
-      { path: '/adiar', component: () => import('pages/imprevists/adiar.vue') }
-
+      { path: '/adiar', component: () => import('pages/imprevists/adiar.vue') },
+    { path: '/donor/:id', component: () => import('pages/DonorDatailsPage.vue') },
 
 
 
