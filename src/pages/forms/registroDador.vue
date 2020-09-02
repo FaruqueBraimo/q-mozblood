@@ -443,7 +443,7 @@ showNotif(mensagem) {
 
  axios.put('http://localhost:8086/api/dador/'  + this.sangue_cod.value, {
 
-           
+
         nome: this.dador.nome,
         endereco: this.dador.endereco,
         sexo: this.dador.sexo,

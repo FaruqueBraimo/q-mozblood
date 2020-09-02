@@ -60,7 +60,7 @@
       <q-timeline-entry
         title="Agendamento para Triagem"
         :subtitle="a.data_agendada"
-		v-if="a.status=='marcada'"
+		v-if="a.status=='marcada' "
       >
 
         <div>
@@ -202,6 +202,8 @@ export default {
         .catch(e => {
           this.$q.loading.hide({});
         });
+        				this.label = `Doaçoes( ${this.doacoes.length} )`
+
     },
 	
 	 Listaragendamentos() {
@@ -248,7 +250,7 @@ export default {
 	  dadores: [],
 	  agendamentos: [],
 	  doacoes:[],
-	  label: {},
+	  label: '',
     
 
     

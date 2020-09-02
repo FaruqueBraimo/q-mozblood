@@ -5,59 +5,53 @@
 
 
 
+<div class="q-pa-md">
+    <div class="q-gutter-md">
+      <q-carousel
+        v-model="slide"
+        transition-prev="scale"
+        transition-next="scale"
+        swipeable
+        animated
+        control-color="white"
+        navigation
+        padding
+        arrows
+        height="300px"
+        class="bg-red-5 text-white shadow-1 rounded-borders"
+      >
+        <q-carousel-slide name="style" class="column no-wrap flex-center">
+              q
 
+          <div class="q-mt-md text-center">
+              Salve Vidas 
+          </div>
+        </q-carousel-slide>
+        <q-carousel-slide name="tv" class="column no-wrap flex-center">
+          <q-icon name="live_tv" size="56px" />
+          <div class="q-mt-md text-center">
+            {{ lorem }}
+          </div>
+        </q-carousel-slide>
+        <q-carousel-slide name="layers" class="column no-wrap flex-center">
+          <q-icon name="layers" size="56px" />
+          <div class="q-mt-md text-center">
+            {{ lorem }}
+          </div>
+        </q-carousel-slide>
+        <q-carousel-slide name="map" class="column no-wrap flex-center">
+          <q-icon name="terrain" size="56px" />
+          <div class="q-mt-md text-center">
+            {{ lorem }}
+          </div>
+        </q-carousel-slide>
+      </q-carousel>
 
-
- <div class="q-pa-md ">
-
- 
-     <p class="text-white">.</p>
-  
-    <q-card-actions  class="row justify-center">
- 
-      <div class="q-gutter-y-md column" style="max-width: 300px">
-
-      
-    <p class="text-h6 text-center" >Tela login</p> 
-   
-  <q-input outlined bottom-slots v-model="text" label="Usuario" counter :dense="dense">
-        <template v-slot:prepend>
-          <q-icon name="person" />
-        </template>
-        <template v-slot:append>
-          <q-icon name="close" @click="text = ''" class="cursor-pointer" />
-        </template>
-
-        <template v-slot:hint>
-          Faruque
-        </template>
-      </q-input>
- 
-
-      <q-input v-model="password" filled :type="isPwd ? 'password' : 'text'" hint="Data Nascimento" label="Senha">
-        <template v-slot:append>
-          <q-icon
-            :name="isPwd ? 'visibility_off' : 'visibility'"
-            class="cursor-pointer"
-            @click="isPwd = !isPwd"
-          />
-        </template>
-      </q-input>
-
-   <q-btn   color="red-5" v-close-popup @click="salvar()">
-
-    <router-link :to="{ name: 'MyLayout', params: {msg} }">
-         Entrar
-      </router-link>
      
-   </q-btn>
-
-
-
     </div>
-       
-           
-        </q-card-actions>
+    <div class="q-pa-md  row justify-center text-center">
+    <q-btn color="red-5" unelevated class="q-pa-lg" label="Tornar-se dador" />
+  </div>
   </div>
 
 
@@ -65,92 +59,13 @@
  
 </template>
 
-
 <script>
-import {bus} from '../router'
-import axios from 'axios';
-
 export default {
-  data(){
-    return {
-      user:{
-        nome:"Faruk",
-        pass:"123"
-      }
-    }
-  },
-
-mounted()  { 
-        //http://localhost:8085/api || https://sanguemozapi.herokuapp.com/api/
-
-  axios.get(`https://sanguemozapi.herokuapp.com/api/dadores`)
-    .then(response => {
-      // JSON responses are automatically parsed.
-      this.data = response.data
-      console.log(response.data
-      )
-      console.log("--------------")
-    })
-    .catch(e => {
-      this.errors.push(e)
-    })
-    
-
- },
-    methods:{
-
-
-
-   salvar(){
-   
-   
-    if((this.text== "Zucula") && (this.password=="1234")){
-
-       this.$router.push('/') 
-
-       localStorage.setItem('id', "Zucula");
-
-
-  
-
-  }else{
-
-  this.showNotif();
-
-    
-  }
-   },
-    showNotif () {
-      this.$q.notify({
-        message: 'Senha ou Usuario incorretoss',
-        color: 'dark',
-       
-
-      })
-    }
-  
-
-    },
   data () {
     return {
-      msg: 'This is Ali s profile',
-      text: '',
-      ph: '',
-      password: '',
-      isPwd: true,
-
-      email: '',
-      search: '',
-      tel: '',
-      url: '',
-      time: '',
-      date: '',
-      data:[],
-
-      dense: false
+      slide: 'style',
+      lorem: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque voluptatem totam, architecto cupiditate officia rerum, error dignissimos praesentium libero ab nemo.'
     }
   }
-
-
 }
 </script>

@@ -118,6 +118,8 @@
       </q-card>
 
   </div>
+
+  <div class="text-green q-px-md"  v-if="agendamentos.length==0"> Sem Agendamentos  </div>
   <q-separator spaced inset   />
 
 
@@ -194,14 +196,14 @@ let timeStamp = Date.now()
 let formattedString = date.formatDate(timeStamp, 'YYYY/MM/DD')
 
 			response.data.forEach((element,key) => {
-				if(element.data_agendada  === formattedString) {
+				if(element.data_agendada  === formattedString && element.status == 'marcada') {
 				this.agendamentos.push(element)
 				}
 				else {
 					console.log(element.codigo)
 				}
 			
-				
+        
 			});
 			
         

@@ -189,7 +189,7 @@ const actions = {
 
         commit('setUserAuth', null)
   
-        this.$router.push('/')
+        this.$router.push('/login')
       
     },
 

@@ -1,7 +1,10 @@
 <template>
   <div class="q-pa-md">
     <!-- {{getUserAuth}} {{dadores}} -->
-	   <q-card class="my-card q-pa-md q-ma-xl" square >
+        <div v-if="dadores.length == 0" class="absolute-center text-bold text-green-6">
+          Ola {{getUserAuth.name}}  Deseja tornar-se doador? Clica no botao ao lado <samp class="q-px-md"> <q-btn color="primary" icon="check" label="Tornar-me dador" unelevated @click="$router.push('dador-reg')" /> </samp>
+        </div>
+	   <q-card class="my-card q-pa-md q-ma-xl" square  v-if="dadores.length != 0  ">
       <q-item>
         <q-item-section avatar>
           <q-avatar size="38px">
@@ -10,8 +13,8 @@
         </q-item-section>
 
         <q-item-section>
-          <q-item-label class="text-bold text-body1">	{{dadores[0].nome  ||'AB'}}</q-item-label>
-          <q-item-label caption class="text-bold text-body2">	Grupo  : {{dadores[0].sangue.nome ||  'Não Informado'}}	 </q-item-label>
+          <q-item-label class="text-bold text-body1">	{{dadores[0].nome  || 'Não Informado'}}</q-item-label>
+          <q-item-label caption class="text-bold text-body2">	Grupo  : {{dadores[0].sangue.nome ||  'AB'}}	 </q-item-label>
         </q-item-section>
 
       </q-item>
@@ -114,7 +117,12 @@
 
      
     </q-list>
+
+          <div class='q-pa-md text-red-5 text-center' v-if="dadores[0].status=='N'">
+              NB : Ainda não és um doador reconhecido, aguarde a confirmacao
+            </div>
 			</q-card-section>
+
     </q-card>
    
   </div>
@@ -195,11 +203,12 @@ export default {
         .then(response => {
 
 			response.data.forEach((element,key) => {
-				if(element.triagem.agendamento.dador.codigo == this.donorId) {
+				if(element.triagem.agendamento.dador.fatorRH == this.getUserAuth.id) {
 				this.doacoes.push(element)
-				this.label = `Doaçoes( ${this.doacoes.length} )`
+        				this.label = `Doaçoes( ${this.doacoes.length } )`
 
-				}
+        }
+        
 				else {
 					console.log(element.codigo)
 				}
@@ -214,6 +223,8 @@ export default {
         .catch(e => {
           this.$q.loading.hide({});
         });
+        				this.label = `Doaçoes( ${this.doacoes.length } )`
+
     },
 	
 	 Listaragendamentos() {
@@ -228,7 +239,7 @@ export default {
         .then(response => {
 
 			response.data.forEach((element,key) => {
-				if(element.dador.codigo == this.donorId) {
+				if(element.dador.fatorRH == this.getUserAuth.id) {
 				this.agendamentos.push(element)
 				}
 				else {
@@ -260,7 +271,7 @@ export default {
 	  dadores: [],
 	  agendamentos: [],
 	  doacoes:[],
-	  label: {},
+	  label: '',
     
     };
   }

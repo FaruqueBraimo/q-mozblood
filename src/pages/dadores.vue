@@ -37,7 +37,7 @@
           </template>
         </q-input>
       </template>
-
+{{dador}}
 
 
       <template v-slot:body="props">
@@ -66,15 +66,14 @@
 
      <q-td key="status" :props="props" v-if="props.row.status == 'N'">
             <div class="text-pre-wrap" >
-               <q-btn  icon="check" round color="green-5" @click='confirmar(props.row.sangue.codigo)'  />
+              Externa
             </div>
             
           </q-td>
 
-
             <q-td key="status" :props="props" v-else>
             <div class="text-pre-wrap" >
-              Activo
+              Interna
             </div>
             
           </q-td>
@@ -152,6 +151,52 @@ import axios from 'axios';
 export default {
 
  methods:{
+
+   
+editar (id) {
+     alert(id)
+ axios
+        .get(`https://sanguemozapi.herokuapp.com/api/dadores/`)
+        .then(response => {
+          this.dador = response.data;
+          alert( response.data)
+          this.$q.loading.hide({});
+        })
+
+
+
+
+  // axios.put('https://sanguemozapi.herokuapp.com/api/dador' , {
+
+  //       codigo : this.dador.codigo,
+  //       nome: this.dador.nome,
+  //       endereco: this.dador.endereco,
+  //       sexo: this.dador.sexo,
+  //       telefone:this.dador.telefone,
+  //       email: this.dador.email,
+  //       data_nasc: this.dador.nasc,
+  //       fatorRH: this.dador.fatorRH,
+  //       // nacionalidade: this.dador.nacionalidade,
+  //       nomeMae: this.dador.nomeMae,
+  //       nomePai: this.dador.nomePai,
+  //       numeroDeDoacoes: "",
+  //       numeroDocumento: this.dador.numeroDocumento,
+  //       provincia: this.dador.provincia,
+  //       situacaoAptidao: "",
+  //       tipoDocumento: this.dador.tipoDocumento,
+
+
+  //               })
+  //               .then(function (response) {
+  //                   currentObj.output = response.data;
+  //               })
+  //               .catch(function (error) {
+  //                   currentObj.output = error;
+  //               });
+ 
+
+
+},
   confirmar (codigo) {
    this.$q.dialog({
         dark: true,
@@ -161,8 +206,7 @@ export default {
         persistent: true
       }).onOk(() => {
         
-          this.remover(codigo);
-
+          this.editar(codigo)
         
 
       }).onCancel(() => {
@@ -225,6 +269,13 @@ listar(){
 
   },
 
+
+
+
+
+
+
+
  mounted()  { 
     
     this.listar();
@@ -243,6 +294,7 @@ listar(){
           selected: [],
           dadores:[],
           mensagem : '',  
+          dador : [],
             
 
 
@@ -263,7 +315,7 @@ listar(){
         { name: 'telefone', label: 'Telefone', field: 'telefone' },
         { name: 'data_nasc', label: 'Nascimento',  field: 'data_nasc' },
         { name: 'sangue.nome', label: 'Grupo Sanguineo', field: 'sangue.nome', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
-         { name: 'status', label: 'Status', field: 'status', sortable: true },
+         { name: 'status', label: 'Origem', field: 'status', sortable: true },
 
         { name: 'iron',align: 'center', label: 'Accão', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
       ],
