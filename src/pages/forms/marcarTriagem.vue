@@ -142,7 +142,8 @@ methods: {
 
                 })
                 .then(function (response) {
-                    currentObj.output = response.data;
+                   alert(response.data);
+
                 })
                 .catch(function (error) {
                     currentObj.output = error;
@@ -156,7 +157,7 @@ methods: {
 
  mounted(){
 
-  axios.get(`https://sanguemozapi.herokuapp.com/api/agendamento/`)
+  axios.get(`https://sanguemozapi.herokuapp.com/api/porrealizar/`)
     .then(response => {
       this.lista  = response.data     
       console.log("--------------")

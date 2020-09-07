@@ -1,84 +1,121 @@
 <template>
   <div class="q-pa-md">
-    <q-stepper
-      v-model="step"
-      ref="stepper"
-      animated
-      done-color="red-5"
-      active-color="red"
-      inactive-color="secondary"
-    >
-    
-      <q-step
-        :name="1"
-        title="Dados Básicos"
-        icon="user"
-        :done="step > 1"
-      >
-   
-      
+
+<div class="flex fixed flex-center">
+		<div class="row justify-center ">
 
 
-       <div class="q-pa-lg">
-    <div class="q-gutter-md row items-end">
-
-       <q-input filled bottom-slots v-model="dador.nome" label="Nome" counter :dense="dense">
-        <template v-slot:prepend>
-          <q-icon name="person_outline" />
-        </template>
-        <template v-slot:append>
-          <q-icon name="close" @click="dador.nome = ''" class="cursor-pointer" />
-        </template>
-
-        <template v-slot:hint>
-         Judite
-        </template>
-      </q-input>
+			<p class="text-h6 text-center q-pb-md text-center ">
+				Preencha os campos abaixo para registar um Doador
+			</p>
 
 
-  <q-input filled bottom-slots v-model="dador.apelido" label="Apelido" counter :dense="dense">
-        <template v-slot:prepend>
-          <q-icon name="person_outline" />
-        </template>
+			<q-card square bordered>
+				<q-tabs
+					v-model="tab"
+					dense
+					inline-label
+					class="text-grey q-pa-sm"
+					active-color="primary"
+					indicator-color="primary"
+					align="justify"
+					narrow-indicator
+				>
+					<q-tab name="mails" icon="info" label="Detalhes" />
+					<q-tab name="alarms" icon="attach_money" label=" Complementar" />
+				</q-tabs>
+
+				<q-separator />
+
+				<q-tab-panels v-model="tab" animated>
+					<q-tab-panel name="mails">
+						<div class="row q-px-sm">
+							<div class="col-6 ">
+                 <q-input square
+									filled
+									dense
+                   v-model="dador.apelido" label="Apelido" >
+        
         <template v-slot:append>
           <q-icon name="close" @click="dador.apelido = ''" class="cursor-pointer" />
         </template>
 
-        <template v-slot:hint>
-         Manjate
-        </template>
+       
       </q-input>
+							
+							</div>
 
-        <q-input filled bottom-slots v-model="dador.email" label="Email" counter :dense="dense">
-        <template v-slot:prepend>
-          <q-icon name="mail" />
-        </template>
-        <template v-slot:append>
-          <q-icon name="close" @click="dador.email = ''" class="cursor-pointer" />
-        </template>
+							<div class="col-6 q-px-sm">
+								<q-input
+									square
+									filled
+									dense
+									label="Primeiro Nome "
+									v-model="dador.nome"
+									:rules="[
+										val =>
+											(val !== null && val !== '') ||
+											'Por favor insira o nome'
+									]"
+								/>
+							</div>
 
-        <template v-slot:hint>
-         judite123@gmail.com
-        </template>
-      </q-input>
+							<div class="col-6 q-py-sm">
+								<q-select
+									dense
+									label="Genero"
+									square
+									filled
+									 v-model="dador.sexo"
+        :options="sexo"
+									:rules="[
+										val =>
+											(val !== null && val !== '') ||
+											'Por favor insira o genero'
+									]"
+								/>
+							</div>
 
-
-  <q-input filled bottom-slots v-model="dador.telefone" label="Telefone" counter :dense="dense">
-        <template v-slot:prepend>
-          <q-icon name="phone_enabled" />
+							<div class="col-6 q-pa-sm">
+								<q-select
+									square
+									dense
+									filled
+									 v-model="sangue_cod"
+        :options="options"
+          stack-label
+        label="Grupo Sanguineo"
+									:rules="[
+										val =>
+											(val !== null && val !== '') ||
+											'Por favor insira o fornecedor'
+									]"
+								>
+		<template v-slot:append>
+          <q-btn round dense flat icon="add"  />
         </template>
-        <template v-slot:append>
-          <q-icon name="close" @click="dador.telefone = ''" class="cursor-pointer" />
-        </template>
+      </q-select>
+								</q-select>
+							</div>
 
-        <template v-slot:hint>
-         846771216
-        </template>
-      </q-input>
-    
+							<div class="col-6 q-py-sm">
+								<q-input
+									square
+									filled
+									dense
+                  type="email"
+                v-model="dador.email" label="Email"
+									lazy-rules
+									:rules="[
+										val =>
+											(val !== null && val !== '') ||
+											'Por favor insira o telefone'
+									]"
+								/>
+							</div>
 
-<!-- style="min-width: 250px; max-width: 300px ,top: 20px" -->
- <q-input filled v-model="dador.nasc" mask="date" :rules="['date']" @click="$refs.qDateProxy.show()"  hint="Data de Nascimento"  style="width: 250px" >
+							<div class="col-6 q-pa-sm">
+<q-input filled v-model="dador.nasc" mask="date" dense :rules="['date']" @click="$refs.qDateProxy.show()"  hint="Data de Nascimento"   >
       <template v-slot:append>
         <q-icon name="event" class="cursor-pointer">
           <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
@@ -87,241 +124,134 @@
         </q-icon>
       </template>
     </q-input>
+								
+							</div>
 
+							
+						</div>
+					</q-tab-panel>
 
- <q-select
-        filled
-        v-model="dador.sexo"
-        :options="sexo"
-          stack-label
-        label="Sexo"
-        hint="Masculino"
-        style="width: 250px"
-      />
+					<q-tab-panel name="alarms">
+						<div class="row q-px-sm">
+							<div class="col-6 ">
+								<q-input
+									square
+									filled
+									dense
+									type="number"
+									v-model="dador.telefone" label="Telefone"
 
-      <q-select
-        filled
-        v-model="dador.nacionalidade"
-        :options="nacionalidade"
-         stack-label
-        label="Nacionalidade"
-        hint="Moçambicana"
-        style="width: 250px"
-      />
-   
-      <q-select
-        filled
-        v-model="dador.provincia"
-        :options="provincia"
-          stack-label
-        label="Provincia"
-        hint="Maputo"
-        style="width: 250px"
-      />
+								/>
+							</div>
 
-      
-
-    </div>
-
-   
-   
-  </div>
-      </q-step>
-
-      <q-step
-        :name="2"
-        title="Dados Intermediários"
-        caption="Opcionais"
-        icon="create_new_folder"
-        :done="step > 2"
-      >
-
-
-
-
-
-
-
-
-
-
-   <div class="q-pa-lg">
-    <div class="q-gutter-md row items-end">
-
-       <q-input filled bottom-slots v-model="dador.nomePai" label="Nome de Pai" counter :dense="dense">
-        <template v-slot:prepend>
-          <q-icon name="sentiment_satisfied_alt" />
-        </template>
-        <template v-slot:append>
-          <q-icon name="close" @click="dador.nomePai = ''" class="cursor-pointer" />
-        </template>
-
-        <template v-slot:hint>
-         Mandjate Cossa
-        </template>
-      </q-input>
-
-
-  <q-input filled bottom-slots v-model="dador.nomeMae" label="Nome de Mãe" counter :dense="dense">
-        <template v-slot:prepend>
-          <q-icon name="face" />
-        </template>
-        <template v-slot:append>
-          <q-icon name="close" @click="dador.nomeMae = ''" class="cursor-pointer" />
-        </template>
-
-        <template v-slot:hint>
-         Rosita Cumbane
-        </template>
-      </q-input>
-
-
-  <q-input filled bottom-slots v-model="dador.telefoneParente" label="Telefone do Parente" counter :dense="dense">
-        <template v-slot:prepend>
-          <q-icon name="phone_enabled" />
-        </template>
-        <template v-slot:append>
-          <q-icon name="close" @click="dador.telefone = ''" class="cursor-pointer" />
-        </template>
-
-        <template v-slot:hint>
-         846771216
-        </template>
-      </q-input>
-    
-
-<!-- style="min-width: 250px; max-width: 300px ,top: 20px" -->
-
-
-
- <q-select
-        filled
-        v-model="dador.grau"
-        :options="grau"
-          stack-label
-        label="Grau de Parentesco"
-        hint="Irmão"
-        style="width: 250px"
-      />
-
-      <q-select
-        filled
-        v-model="dador.fatorRH"
-        :options="rh"
-         stack-label
-        label="Fator RH"
-        hint="RH+"
-        style="width: 250px"
-      />
-
-
-      
-       
-
-
-
-      <q-select
-        filled
-        v-model="sangue_cod"
-        :options="options"
-          stack-label
-        label="Grupo Sanguineo"
-        hint="A+"
-        style="width: 250px"
-      />
-
-    
-
-
-    
-    </div>
-  </div>
-
-
-  
-      </q-step>
-
-      <q-step
-        :name="3"
-        title="Finalizar"
-        icon="add_comment"
-      >
-       
-
-       
-
-
-
-
-   <div class="q-pa-lg">
-    <div class="q-gutter-md row items-end">
-
-
-
- 
-       <q-select
+							<div class="col-6 q-px-sm">
+							 <q-select
+               square
+               dense
         filled
         v-model="dador.tipoDocumento"
         :options="documento"
-          stack-label
+         
         label="Documento"
-        hint="BI"
-        style="width: 250px"
       />
+							</div>
 
-        
+							<div class="col-6 q-py-sm">
+								<q-input
+									square
+									filled
+								v-model="dador.numeroDocumento" label="Número do Doc"
+									dense
+									
+								/>
+							</div>
 
-       <q-input filled bottom-slots  v-model="dador.numeroDocumento" label="Número do Doc" counter :dense="dense">
-        <template v-slot:prepend>
-          <q-icon name="sentiment_satisfied_alt" />
-        </template>
+							<div class="col-6 q-pa-sm">
+								<q-input
+									square
+									filled
+									label="Endereco"
+									v-model="dador.endereco"
+									dense
+									
+								/>
+							</div>
 
-        <template v-slot:hint>
-        1250448822B
-        </template>
-      </q-input>
+							<div class="col-6 q-py-sm">
+								<q-input
+									square
+									filled
+									disable
+									dense
+									v-model="profit"
+								/>
+							</div>
+
+							<div class="col-6 bg-white q-pa-sm">
+								<q-input
+                class="bg-white"
+									square
+									filled
+									disable
+									dense
+									v-model="profitMargin"
+								/>
+							</div>
+						</div>
+					</q-tab-panel>
+
+				
+				</q-tab-panels>
+
+				<div class="row text-center">
+					<div class="col-6 q-pa-sm">
+						<q-btn
+							label= 'Registar'
+							
+							size="md"
+							@click="salvar"
+							type="submit"
+							color="red-5"
+						
+							unelevated
+							class="full-width "
+						/>
+					</div>
+
+					<div class="col-6 q-pa-sm">
+						<q-btn
+							label="Limpar"
+							size="md"
+							@click="onReset"
+							type="reset"
+							color="primary"
+							unelevated
+							class="full-width "
+						/>
+					</div>
+				</div>
+			</q-card>
+			<div>  </div>
+		</div>
+	</div>
 
 
-    
-
-<!-- style="min-width: 250px; max-width: 300px ,top: 20px" -->
 
 
 
 
-    
 
 
-    
-    </div>
-  </div>
-
-      
-   <div class="row justify-end">
-      <q-btn
-        type="submit"
-        :loading="submitting"
-        label="Salvar"
-        class="q-mt-md"
-        color="teal"
-        @click="salvar"
-      >
-        <template v-slot:loading>
-          <q-spinner-facebook />
-        </template>
-      </q-btn>
-    </div>
 
 
-      </q-step>
 
-      <template v-slot:navigation>
-        <q-stepper-navigation>
-          <q-btn     @click="$refs.stepper.next()" color="deep-orange" :label="step === 3 ? 'Finalizar' : 'Continuar'" />
-          <q-btn v-if="step > 1" flat color="deep-orange" @click="$refs.stepper.previous()" label="Voltar" class="q-ml-sm" />
-        </q-stepper-navigation>
-      </template>
-    </q-stepper>
+
+
+
+
+
+
+
   </div>
 </template>
 
@@ -335,12 +265,15 @@ export default {
   axios.get(`https://sanguemozapi.herokuapp.com/api/sangue`)
     .then(response => {
       this.lista  = response.data     
-      console.log("--------------")
 
     })
     .catch(e => {
       this.errors.push(e)
     })
+
+
+
+  this.paises();
 
  }
 ,
@@ -353,7 +286,16 @@ lista(val){
 
 
 if(val.length){
-  this.options = this.lista.map(o => {
+  this.cPaises = this.pais.map(o => {
+  return {
+      label:  o.name,
+      value:  o.name,
+  }
+  console.log(o.name);
+
+})
+
+this.options = this.lista.map(o => {
   return {
       label:  o.nome,
       value:  o.codigo
@@ -364,29 +306,32 @@ if(val.length){
 }
 }
 
-
-
 }
+
+
+
+
+
+
+
 ,
  data () {
     return {
       lista: [],
+      pais : [],
       model: null,
       sangue_cod:null,
+       currentObj: "",
       options: [],
+      cPaises : [],
       sexo: ['Masculino', 'Feminino','Outro'],
       grau: ['Irmão(a)', 'Mãe','Pai','Outro'],
       documento: ['BI','Passaporte','DIRE','Cartão de Eleitor','Outro'],
       date: '2019/02/01',
       s:'',
       rh: ['RH+','RH-'],
-      nacionalidade: ['Moçambique','Angola'],
-      provincia : ['Maputo','Gaza','Inhambane','Manica','Sofala','Tete','Nampula','Zambezia','Niassa','Cabo Delgado']
-
-
-
-
-
+      nacionalidade: ['Moçambique','Outro'],
+      provincia : ['Maputo','Gaza','Inhambane','Manica','Sofala','Tete','Nampula','Zambezia','Niassa','Cabo Delgado', 'Outro']
 ,
      submitting: false,
       dador: {
@@ -408,9 +353,45 @@ if(val.length){
         grau: "",
         nasc: ""
         
+       
+        
       },
+      optionalcategory: [],
+				Optionalprovider: [{ label: 'Nenhum' }],
+				utility: ['Venda', 'Uso Interno'],
+				nasc: '',
+				disable: true,
+				category: '',
+				price: '',
+				utility: '',
+				quantity: '',
+				code: '',
+				expires: '',
+				profitMargin: '',
+				price_buy: 0,
+				price_payd: 0,
+				iva: '17%',
+				discount_iva: 0,
+				provider: '',
+				profit: '',
+				qtdBalcony: '',
+				qtdWarehouse: '',
+				stockBreak: '',
+				description: '',
+				reference: '',
+				subCategory: '',
+				referenceStatus: '',
+        referenceStatusUpdate:'',
+        date: 'AAAA/MM/DD',
+				tab: 'mails',
+				refCode:"",
+				optionalcategory: [],
+				Optionalprovider: [{ label: 'Nenhum' }],
+				utility: ['Venda', 'Uso Interno'],
+				name: '',
+				disable: true,
      
-
+  
       
      text: '',
      nome: '',
@@ -425,13 +406,44 @@ if(val.length){
 
 methods:{
 
+paises (){
+
+
+
+ axios.get(`https://restcountries.eu/rest/v2/all`)
+    .then(response => {
+      this.pais  = response.data     
+
+    })
+    .catch(e => {
+      this.errors.push(e)
+    })
+
+ },
+
+
+
+ 
+
+
+showNotif(mensagem) {
+      this.$q.notify({ 
+        position: 'top-right',
+        type: 'positive',
+        color:      'green',
+        message:    mensagem,
+        actions: [{ icon: 'close', color: 'white' }]
+      });
+    },
+
+
 
 
   editar() {
 
  axios.put('http://localhost:8086/api/dador/'  + this.sangue_cod.value, {
 
-           
+
         nome: this.dador.nome,
         endereco: this.dador.endereco,
         sexo: this.dador.sexo,
@@ -439,7 +451,7 @@ methods:{
         email: this.dador.email,
         data_nasc: this.dador.nasc,
         fatorRH: this.dador.fatorRH,
-        nacionalidade: this.dador.nacionalidade,
+        // nacionalidade: this.dador.nacionalidade,
         nomeMae: this.dador.nomeMae,
         nomePai: this.dador.nomePai,
         numeroDeDoacoes: "",
@@ -462,7 +474,14 @@ methods:{
   }
 
 ,
+showNotif () {
+      this.$q.notify({
+        message: this.currentObj,
+        color: 'dark',
+       
 
+      })
+    },
   simulateSubmit () {
       this.submitting = true
 
@@ -481,6 +500,30 @@ methods:{
     }
 
 ,
+
+
+	onReset() {
+				this.name = '';
+				this.category = '';
+				this.provider = '';
+				this.quantity = '';
+				this.expires = '';
+				this.price_buy = '';
+				this.price_payd = '';
+				this.description = '';
+				this.iva = '';
+				this.discount_iva = 0;
+				this.qtdBalcony = ' ';
+				this.qtdWarehouse = '';
+				this.stockBreak = '';
+				this.code = '';
+				this.profit = '';
+				this.profitMargin = '';
+				this.reference = '';
+				this.subCategory = '';
+      },
+      	onSubmit() {},
+      
   salvar(){
 
     axios.post('https://sanguemozapi.herokuapp.com/api/dador/'  + this.sangue_cod.value, {
@@ -490,16 +533,24 @@ methods:{
         endereco: this.dador.endereco,
         sexo: this.dador.sexo,
         telefone:this.dador.telefone,
-        email: this.dador.apelido,
+        email: this.dador.email,
         data_nasc: this.dador.nasc,
-
+        fatorRH: this.dador.fatorRH,
+        // nacionalidade: this.dador.nacionalidade,
+        nomeMae: this.dador.nomeMae,
+        nomePai: this.dador.nomePai,
+        numeroDeDoacoes: "",
+        numeroDocumento: this.dador.numeroDocumento,
+        provincia: this.dador.provincia,
+        situacaoAptidao: "",
+        tipoDocumento: this.dador.tipoDocumento,
 
                 })
                 .then(function (response) {
-                    currentObj.output = response.data;
+                     alert(response.data);
+                 
                 })
                 .catch(function (error) {
-                    currentObj.output = error;
                 });
 
   }

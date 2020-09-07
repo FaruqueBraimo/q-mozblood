@@ -1,61 +1,36 @@
 <template>
   <div class="q-pa-lg q-ma-lg">
 
-<q-dialog v-model="edit">
-      <q-card>
 
-        <q-card-section>
-          
+<q-breadcrumbs class="text-brown">
+      <template v-slot:separator>
+        <q-icon
+          size="1.5em"
+          name="chevron_right"
+          color="primary"
+        />
+      </template>
 
-         <div class="q-gutter-md row items-end">
-
-     
-          </div>
-
-              <q-space />
-
-
-
-<div class="q-pt-md" style="max-width: 300px" >
-
-    <q-input
+      <q-breadcrumbs-el label="Inicio" icon="home" to="dash" />
+  
+      <q-breadcrumbs-el label="Triagem" icon="navigation" />
+    </q-breadcrumbs>
 
 
-      v-model="descricao"
-      filled
-      type="textarea"
-      label="Motivos"
+    <q-space> </q-space>
 
-    >
+   <p> ... </p>
 
-      <template v-slot:hint>
-          
-       
 
-        </template>
-    </q-input>
-  </div>
-        
-        </q-card-section>
-
-      
-
-        <q-separator />
-
-        <q-card-actions  class="row justify-end">
-          <q-btn  flat color="primary" v-close-popup @click="editar()">Alterar</q-btn>
-           
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
 
     <q-table
-      title="Triagens"
+      title="Lista Triagens"
       :data="data"
       :columns="columns"
       row-key="name"
       binary-state-sort
        :filter="filter"
+     
       class="my-sticky-header-table"
 
     >
@@ -76,21 +51,86 @@
             {{ props.row.agendamento.dador.nome }}
           
           </q-td>
-          <q-td key="pressao_arterial" :props="props">
-            {{ props.row.pressao_arterial }}
+          <q-td key="pressao_arterial" :props="props"   >
+        
+
+            
+             <q-badge   v-if=" props.row.pressao_arterial < 140 "  color="red"  pressao = props.row.pressao_arterial >
+
+             <div class="text-pre-wrap">{{props.row.pressao_arterial }} mmHg </div>
+
+            </q-badge>
+
+            
+             <q-badge  v-else   color="primary" >
+
+             <div class="text-pre-wrap">{{ props.row.pressao_arterial}} mmHg</div>
+
+            </q-badge>
           
           </q-td>
           <q-td key="peso" :props="props">
-            <div class="text-pre-wrap">{{ props.row.peso }}</div>
+
+             <q-badge  v-if=" props.row.peso < 50"  color="red" v-model=" peso"  >
+
+             <div class="text-pre-wrap">{{ props.row.peso }}</div>
+
+            </q-badge>
+
+            
+             <q-badge  v-else   color="primary" >
+
+             <div class="text-pre-wrap">{{ props.row.peso }}</div>
+
+            </q-badge>
            
           </q-td>
           <q-td key="altura" :props="props">
             {{ props.row.altura }}
           
           </q-td>
-          <q-td key="temperatura" :props="props">{{ props.row.temperatura }}</q-td>
+          <q-td key="temperatura" :props="props">
+            
+           
+            
+              <q-badge  v-if=" props.row.temperatura  > 37"  color="red" v-model="temperatura" >
+
+             <div class="text-pre-wrap">{{ props.row.temperatura  }} ° C </div>
+
+            </q-badge>
+
+            
+             <q-badge  v-else   color="primary" >
+
+             <div class="text-pre-wrap">{{props.row.temperatura  }} ° C</div>
+
+            </q-badge>
+            
+            
+            
+            </q-td>
           <q-td key="Observacoes" :props="props">{{ props.row.Observacoes }}</q-td>
-          <q-td key="Data_triagem" :props="props">{{ props.row.Data_triagem }}</q-td>
+          <q-td key="status" :props="props">
+            
+              <q-badge  v-if=" props.row.status  === 'apto' "  color="yellow" >
+
+             <div class="text-pre-wrap">{{ props.row.status }} </div>
+
+            </q-badge>
+
+            
+             <q-badge  v-else   color="primary" >
+
+             <div class="text-pre-wrap">{{props.row.status }} ° C</div>
+
+            </q-badge>
+            
+            
+         
+            
+            
+            
+            </q-td>
 
           <q-td key="iron" :props="props">
 
@@ -105,7 +145,7 @@
         Remover</q-tooltip> </q-btn>
       
       
-      <q-btn icon="edit"   text-color="secondary"  style="width: 12px" v-model="props.row.iron">
+      <q-btn icon="edit"   text-color="secondary"  style="width: 12px" v-model="props.row.iron" >
         <q-tooltip 
         content-class="bg-secondary" :offset="[10, 10]"       
          transition-show="rotate"
@@ -113,7 +153,7 @@
          >
         Editar</q-tooltip> </q-btn>
         
-      <q-btn  icon="explore_off"  text-color="deep-orange" style="width: 13px"  v-model="props.row.iron" @click="inapto">
+      <q-btn     icon="explore_off"  text-color="deep-orange" style="width: 13px"      @click="getSelectedString (props.row.codigo)"  >
 
 
 
@@ -129,8 +169,12 @@
              
           </q-td>
         </q-tr>
+
+
       </template>
     </q-table>
+
+    
   </div>
 </template>
 
@@ -158,10 +202,11 @@
 
 import axios from 'axios';
 
+
 export default {
 
 
-mounted()  { 
+mounted()  {   
         //http://localhost:8085/api || https://sanguemozapi.herokuapp.com/api/
 
   axios.get(`https://sanguemozapi.herokuapp.com/api/triagem/`)
@@ -180,10 +225,61 @@ mounted()  {
  },
 
 
+methods:{
+
+
+
+
+
+getSelectedString (codigo) {
+   this.$q.dialog({
+        dark: true,
+        message: 'Marcar Inaptidao?',
+        cancel: true,
+        title: 'Confirmacão',
+        persistent: true
+      }).onOk(() => {
+        
+          this.ina(codigo);
+
+        
+
+      }).onCancel(() => {
+        // console.log('Cancel')
+      }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+      })
+   },
+ina(cod){
+ 
+  
+  
+   this.marcar = false 
+ alert(this.pressao);
+  }
+  
+  
+          
+ 
+  
+
+
+
+
+
+
+
+
+},
+
   data () {
     return {
 
          filter: '',
+         peso : '',
+         temperatura : '',
+         pressao :'',
+         marcar: true,
 
 
 
@@ -205,7 +301,7 @@ mounted()  {
         { name: 'altura', label: 'Altura, (m)', field: 'altura' },
         { name: 'temperatura', label: 'Temperatura', field: 'c', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
        { name: 'Observacoes', label: 'Observacoes', field: 'Observacoes', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
-       { name: 'Data_triagem', label: 'Data da Triagem', field: 'Data_triagem' },
+       { name: 'status', label: 'status', field: 'status' , sortable: true },
         { name: 'iron',align: 'center', label: 'Accão', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
       ],
       data: [

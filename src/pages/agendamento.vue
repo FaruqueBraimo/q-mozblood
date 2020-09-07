@@ -8,12 +8,31 @@
   <div class="q-pa-lg q-ma-lg">
 
 
+<q-breadcrumbs class="text-brown">
+      <template v-slot:separator>
+        <q-icon
+          size="1.5em"
+          name="chevron_right"
+          color="primary"
+        />
+      </template>
+
+      <q-breadcrumbs-el label="Inicio" icon="home" to="dash" />
+  
+      <q-breadcrumbs-el label="Agendamento" icon="navigation" />
+    </q-breadcrumbs>
+
+
+    <q-space> </q-space>
+
+   <p> ... </p>
+
 
    
 
 
     <q-table
-      title="Agendamentos"
+      title="Lista de Agendamentos"
       :data="data"
       :columns="columns"
       row-key="name"
@@ -36,29 +55,34 @@
       <template v-slot:body="props">
         <q-tr :props="props">
           <q-td key="dador.nome" :props="props">
-            {{ props.row.dador.nome }}
+            {{ props.row.dador.nome  || 'Não Informado'}}
          
           </q-td>
           <q-td key="data_agendada" :props="props">
-            {{ props.row.data_agendada }}
+            {{ props.row.data_agendada  || 'Não Informado'}}
            
           </q-td>
-          <q-td key="data_marcada" :props="props">
-            {{ props.row.data_marcada }}
+          <q-td key="data" :props="props">
+            {{ props.row.data || 'Não Informado' }}
            
           </q-td>
           <q-td key="hora" :props="props">
-            {{ props.row.hora }}
+            {{ props.row.hora  || 'Não Informado'}}
            
           </q-td>
         
 
           
          <q-td key="descricao" :props="props">
-            {{ props.row.descricao }}
+            {{ props.row.descricao  || 'Não Informado' }}
            
           </q-td>
         
+         
+         <q-td key="status" :props="props">
+            {{ props.row.status || 'Não Informado' }}
+           
+          </q-td>
 
           <q-td key="iron" :props="props">
 
@@ -173,9 +197,11 @@ mounted()  {
           
         },
         { name: 'data_agendada', align: 'center', label: 'Data  Agendanda', field: 'data_agendada', sortable: true , },
-        { name: 'data_marcada', label: 'Data de  Agendamento', field: 'data_marcada', sortable: true, style: 'width: 10px' },
+        { name: 'data', label: 'Data', field: 'data', sortable: true, style: 'width: 10px' },
         { name: 'hora', label: 'Hora de Agendamento', field: 'hora' },
         { name: 'descricao', label: 'descricao', field: 'descricao' },
+       { name: 'status', label: 'Estado', field: 'status' },
+
         { name: 'iron',align: 'center', label: 'Accão', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
       ],
     }

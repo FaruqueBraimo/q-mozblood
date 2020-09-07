@@ -1,328 +1,429 @@
-
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar class="brand">
-        <q-btn
-          flat
-          dense
-          round
-          @click="leftDrawerOpen = !leftDrawerOpen"
-          icon="menu"
-          aria-label="Menu"
-        />
-
-        <q-toolbar-title>
-          Moz Sangue App
-        </q-toolbar-title>
-     <q-space />
-
-     
-      </q-toolbar>
-    </q-header>
-
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      content-class="brand"
-    >
-      <q-list bordered class="rounded-borders">
-        <q-item-label header class="caption">Menu</q-item-label>
-        <q-item clickable tag="a" to="/dash">
-          <q-item-section avatar>
-            <q-icon name="dashboard" />
-          </q-item-section>
-          <q-item-section > 
-            <q-item-label text-color="white" >Home</q-item-label>
-            <q-item-label  class="caption" >pagina principal</q-item-label>
-          </q-item-section>
-        </q-item>
-
-
-<q-expansion-item
-          expand-separator
-          icon="hdr_strong"
-          label="Grupo Sanguineo"
-        
-          default-opened
-        >
-
-         <q-expansion-item to="sangue"  switch-toggle-side dense-toggle label="Lista de grupos" :header-inset-level="1" :content-inset-level="2">
-          </q-expansion-item>
-
-          
-        </q-expansion-item>
-
-
-    <q-expansion-item
-          expand-separator
-          icon="person"
-          label="Dadores"
-          default-opened
-        >
-
-          <q-expansion-item switch-toggle-side dense-toggle label="Lista de Dadores" :header-inset-level="1" :content-inset-level="2">
-           
-           
-         <q-item clickable tag="a" to="/dadores">
-          <q-item-section avatar>
-            <q-icon name="people
-" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Todos </q-item-label>
-          </q-item-section>
-        </q-item>
-
-         <!-- <q-item clickable tag="a" to="/reprovados">
-          <q-item-section avatar>
-            <q-icon name="person_add_disabled" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Reprovados</q-item-label>
-          </q-item-section>
-        </q-item> -->
-
-           <!-- <q-item clickable tag="a" to="/atendidos">
-          <q-item-section avatar>
-            <q-icon name="sentiment_satisfied_alt" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Atendidos</q-item-label>
-          </q-item-section>
-        </q-item> -->
-
-           <!-- <q-item clickable tag="a" to="/faltosos">
-          <q-item-section avatar>
-            <q-icon name="sentiment_very_dissatisfied" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Faltosos</q-item-label>
-          </q-item-section>
-        </q-item> -->
-
-          </q-expansion-item>
-
-          <q-expansion-item to="registroDador"  switch-toggle-side dense-toggle label="Adicionar Dador" :header-inset-level="1" :content-inset-level="2">
-          </q-expansion-item>
-
-        </q-expansion-item>
-
-
-
-<q-expansion-item
-          expand-separator
-          icon="calendar_today"
-          label="Agendamentos"
-          default-opened
-        >
-
-          <q-expansion-item switch-toggle-side dense-toggle label="Visualizar" :header-inset-level="1" :content-inset-level="2">
-           
-           
-         <q-item clickable tag="a" to="/agendamento">
-          <q-item-section avatar>
-            <q-icon name="post_add" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Todos </q-item-label>
-          </q-item-section>
-        </q-item>
-
-         <!-- <q-item clickable tag="a" to="/confirmados">
-          <q-item-section avatar>
-            <q-icon name="done" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Confirmados</q-item-label>
-          </q-item-section>
-        </q-item> -->
-
-           <!-- <q-item clickable tag="a" to="/cancelados">
-          <q-item-section avatar>
-            <q-icon name="clear" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Cancelados</q-item-label>
-          </q-item-section>
-        </q-item>
-
-           <q-item clickable tag="a" to="/adiados">
-          <q-item-section avatar>
-            <q-icon name="refresh" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Adiados</q-item-label>
-          </q-item-section>
-        </q-item> -->
-
-          </q-expansion-item>
-
-          <q-expansion-item  switch-toggle-side dense-toggle label="Mais" :header-inset-level="1" :content-inset-level="2">
-
-                
-         <q-item clickable tag="a" to="/marcar">
-          <q-item-section avatar>
-            <q-icon name="post_add" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Marcar</q-item-label>
-          </q-item-section>
-        </q-item>
-
-<q-item clickable tag="a" to="">
-          <q-item-section avatar>
-            <q-icon name="cancel" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Cancelar</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item clickable tag="a" to="">
-          <q-item-section avatar>
-            <q-icon name="refresh" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Adiar</q-item-label>
-          </q-item-section>
-        </q-item>
-
-          </q-expansion-item>
-
-        </q-expansion-item>
-
-
-
-        <q-expansion-item
-          expand-separator
-          icon="how_to_reg"
-          label="Triagem"
-          default-opened
-        >
-
-          <q-expansion-item 
-          switch-toggle-side dense-toggle label="Lista de Triagens"
-           :header-inset-level="1"
-            :content-inset-level="2" >
-
-<q-item clickable tag="a" to="triagem">
-          <q-item-section avatar>
-            <q-icon name="eco" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Todos </q-item-label>
-          </q-item-section>
-        </q-item>
-
-
-          </q-expansion-item>
-
-          <q-expansion-item  switch-toggle-side dense-toggle label="Adicionar Triagens" :header-inset-level="1" :content-inset-level="2" to="/marcarTriagem">
-          </q-expansion-item>
-
-        </q-expansion-item>
-
-<q-expansion-item
-          expand-separator
-          icon="favorite"
-          label="Doacoes"
-          default-opened
-        >
-
-          <q-expansion-item 
-          switch-toggle-side dense-toggle label="Lista de Doacoes"
-           :header-inset-level="1"
-            :content-inset-level="2" 
-            to="/doacao">
-           
-           
-  
-
-          </q-expansion-item>
-
-          <q-expansion-item  switch-toggle-side dense-toggle label="Adicionar Doacoes" :header-inset-level="1" :content-inset-level="2" to="/registroDaocao">
-          </q-expansion-item>
-
-        </q-expansion-item>
-
-
-        
-
-
-
-         <q-item clickable tag="a" target="_blank">
-          <q-item-section avatar>
-            <q-icon name="nature_people" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Produto gerado / Stock</q-item-label>
-            <q-item-label caption class="caption">Gerenciar Produto gerado e stock</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank">
-          <q-item-section avatar>
-            <q-icon name="insert_chart_outlined" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Relatorios</q-item-label>
-            <q-item-label caption class="caption">Gerenciar Relatorios</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" >
-          <q-item-section avatar>
-            <q-icon name="public" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Definiçoes</q-item-label>
-            <q-item-label caption class="caption">Configurar alguns itens do sistema</q-item-label>
-          </q-item-section>
-        </q-item>
-      </q-list>
-    </q-drawer>
-
-    <q-page-container>
-      <router-view />
-    </q-page-container>
-  </q-layout>
+  <q-page class="flex flex-center">
+    <div>
+        {{ welcome }}
+    </div>
+  </q-page>
 </template>
 
-<style lang="sass">
-
-.brand
-
-    background-image: -webkit-linear-gradient(135deg,#C0602B 30%,#A42153 90%)
-    background-image: linear-gradient(135deg,#C0602B 30%,#A42153 90%)
-    color: white
-    font-size : 16px;
- 
- 
-
-</style>
-
-<style lang="sass">
-
-.caption
-    pading-top: 2px;
-    color: white
-    font-size : 11px;
- 
-
-</style>
-
-
-
-
-
 <script>
+import {bus} from '../router'
+import { async } from 'q'
 export default {
-  name: 'MyLayout',
+  name: 'PageIndex',
+  props: ['msg'],
 
   data () {
     return {
-      leftDrawerOpen: false
+      leftDrawerOpen: false,
+       welcome: 'Esta e a pagina de Administracao'
     }
-  }
+  },
+   mounted() {
+// (async ()=>{
+       bus.$on('changeMsg',user =>{
+    console.log('mera')
+      //  console.log(user)
+    //  })
+})
+  
+ 
+
+    }
 }
 </script>
+package com.OptimizationBlood.blood.resources;
+
+
+import com.OptimizationBlood.blood.config.EmailService;
+import com.OptimizationBlood.blood.models.Agendamento;
+import com.OptimizationBlood.blood.models.Dador;
+import com.OptimizationBlood.blood.models.Triagem;
+import com.OptimizationBlood.blood.repository.AgendamentoRepository;
+import com.OptimizationBlood.blood.repository.DadorRepository;
+import com.OptimizationBlood.blood.repository.TriagemRepository;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+@RestController
+@RequestMapping(value = "/api")
+public class AgendamentoResource {
+
+    @Autowired
+    private DadorRepository dr;
+    @Autowired
+    private EmailService emailService;
+
+    @Autowired
+     private   AgendamentoRepository ar;
+
+    @PostMapping("agendamento/{codigo}")
+    public String guardar(@PathVariable(value = "codigo") int codigo , @RequestBody Agendamento agendamento){
+
+        Dador dador = dr.findByCodigo(codigo);
+        agendamento.setDador(dador);
+
+
+         LocalDate hoje = LocalDate.now();
+
+
+        List<Agendamento> agendamentos = new ArrayList<>();
+
+        agendamentos = ar.findAll();
+
+        String msg = "Ola " + agendamento.getDador().getNome()  + " , Marcaste um agendamento para o dia " +agendamento.getData_agendada()+ " as "
+                + agendamento.getHora() + " , até la "  ;
+
+        if (agendamentos.size()!=0) {
+
+            for (Agendamento a : agendamentos) {
+
+
+                if ( (a.getDador().getCodigo() == dador.getCodigo()) && a.getStatus().equalsIgnoreCase("nao marcada")) {
+
+
+
+                    return "O dador ja tem um agendamento marcado!!!";
+
+
+                } else {
+
+
+                    if(agendamento.getData_agendada().isBefore(hoje)){
+
+
+                        return  "Data invalida";
+                    }
+                    else {
+                        a.setStatus("marcada");
+                        ar.save(agendamento);
+                        emailService.sendMail(agendamento.getDador().getEmail(), " Agendamento para doacaao", msg);
+
+                        return  "agendamento marcado";
+                    }
+
+                }
+
+
+            }
+
+
+        }else {
+            if(agendamento.getData_agendada().isBefore(LocalDate.now())){
+
+
+                return  "Data invalida";
+            }
+            else {
+
+                ar.save(agendamento);
+
+
+               emailService.sendMail(agendamento.getDador().getEmail(), "Agendamento para doacao", msg);
+
+                return  "agendamento marcado";
+            }
+        }
+
+
+
+
+
+
+      return  "";
+    }
+
+    @GetMapping("/agendamento")
+    public List<Agendamento> listar(){
+        return ar.findAll();
+    }
+
+    @GetMapping("agendamento/{codigo}")
+    @ApiOperation(value="retorna um cert agendamento")
+
+    public Agendamento pesquisar(@PathVariable(value = "codigo") int id){
+
+        return ar.findByCodigo(id);
+
+    }
+
+
+    @GetMapping("contagem")
+    public String contagem(){
+
+        return ar.contagem();
+
+    }
+
+    @GetMapping("realizados")
+    public String agendamentoRealizados(){
+
+        return ar.realizados();
+
+    }
+
+      @GetMapping("porrealizar")
+    public List<Agendamento> agendamentos(){
+
+        return ar.agendamento();
+
+    }
+
+
+
+    @GetMapping("dadoragendamento/{codigo}")
+    @ApiOperation(value="retorna um cert agendamento")
+
+    public Agendamento pesquisarAgendamento(@PathVariable(value = "codigo") int id){
+
+        return ar.agendamentoDador(id);
+
+    }
+
+
+    @DeleteMapping("/agendamento")
+    @ApiOperation(value="remove uma certo agendamento")
+    public String deletar(@RequestBody  Agendamento agendamento){
+
+        try {
+            ar.delete(agendamento);
+            return "agendamento removido";
+        } catch (Exception e){
+            return "Algo inexperado aconteceu";
+        }
+    }
+
+    @PutMapping("/agendamento")
+    @ApiOperation(value="Edita um  agendamento")
+    public String editar(@RequestBody Agendamento agendamento){
+
+        Agendamento agendamento1 = ar.findByCodigo(agendamento.getCodigo());
+
+    String msg = "Ola " + agendamento.getDador().getNome()  + " , O agendamnento marcado para o dia  " +agendamento.getData_agendada()+ " as "
+                + agendamento.getHora() + " , foi cancelado "  ;
+
+         if(agendamento.getData_agendada() == null) 
+         
+         {
+        agendamento1.setStatus("cancelado");
+        agendamento1.setDescricao(agendamento.getDescricao());
+        ar.save(agendamento1);
+        emailService.sendMail(agendamento.getDador().getEmail(), "Cancelamento de agendamento", msg);
+
+        return "Agendamento cancelado";  
+         }
+        else{
+        agendamento1.setStatus("adiado");
+     
+        
+        ar.save(agendamento1);
+        return  "agendamento adiado";
+            
+        }
+
+    }
+
+
+    
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package com.OptimizationBlood.blood.resources;
+
+
+import com.OptimizationBlood.blood.models.Agendamento;
+import com.OptimizationBlood.blood.models.Dador;
+import com.OptimizationBlood.blood.models.Doacao;
+import com.OptimizationBlood.blood.models.Triagem;
+import com.OptimizationBlood.blood.repository.DoacaoRepository;
+import com.OptimizationBlood.blood.repository.TriagemRepository;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
+
+@RestController
+@RequestMapping(value = "/api")
+public class DoacaoResource {
+
+
+    @Autowired
+    private TriagemRepository tr;
+
+    @Autowired
+    private DoacaoRepository dr;
+
+
+
+
+
+
+    @PostMapping("doacao/{codigo}")
+    public String   guardar(@PathVariable(value = "codigo") int codigo , @RequestBody Doacao doacao){
+
+
+        List<Doacao> doa = new ArrayList<>();
+         doa = dr.findAll();
+
+
+        Triagem triagem = tr.findByCodigo(codigo);
+        LocalDate data_coletada = LocalDate.now();
+        
+
+
+       if (doa.size() !=0){
+           for(Doacao d : doa){
+
+
+               if(d.getTriagem().getAgendamento().getDador().getCodigo() == triagem.getAgendamento().getDador().getCodigo() ){
+
+                   if(d.getStatus().equalsIgnoreCase("nao verificada")) {
+
+
+                       if (doacao.getData_coletada().isBefore(d.getData_coletada().plusMonths(3))) {
+
+
+                            long dias = ChronoUnit.DAYS.between(data_coletada,d.getData_coletada().plusMonths(3));
+                           return "O Dador ainda nao esta disponivel pra doar sangue, faltam " + dias + " dias " ;
+
+                       } else {
+                           doacao.setTriagem(triagem);
+                           doacao.setValidade(data_coletada.plusDays(45));
+                           d.setStatus("efetuada");
+                           dr.save(d);
+
+
+                           dr.save(doacao);
+                           return "Doacao efetuada";
+                       }
+                   }
+
+               }
+               else{
+                   doacao.setTriagem(triagem);
+                   doacao.setValidade(data_coletada.plusDays(45));
+
+                   dr.save(doacao);
+                   return "Doacao efetuada";
+               }
+
+           }
+       }
+       else{
+           doacao.setTriagem(triagem);
+           doacao.setValidade(data_coletada.plusDays(45));
+           dr.save(doacao);
+
+           return "Doacao efetuada";
+       }
+
+
+
+
+        return "ups";
+    }
+
+    @GetMapping("/doacoes")
+    public List<Doacao> listar(){
+
+        return dr.findAll();
+
+
+
+    }
+
+    @GetMapping("doacao/{codigo}")
+    @ApiOperation(value="retorna uma certa doacao")
+
+    public Doacao pesquisar(@PathVariable(value = "codigo") int codigo){
+
+        return dr.findByCodigo(codigo);
+
+
+
+
+    }
+
+
+    @DeleteMapping("/doacao")
+    @ApiOperation(value="remove uma certa doacao")
+    public String deletar(@RequestBody  Doacao doacao){
+
+        try {
+            dr.delete(doacao);
+            return "doacao removida";
+        } catch (Exception e){
+            return "Algo inexperado aconteceu";
+        }
+
+
+
+
+    }
+
+    @PutMapping("/doacao")
+    @ApiOperation(value="Edita uma certa doacao")
+    public  Doacao editar(@RequestBody Doacao doacao){
+        return dr.save(doacao);
+
+    }
+
+  
+
+}
+
+
+
+
+
+
+

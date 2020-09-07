@@ -2,18 +2,36 @@
 
 
 
-   
-
-
-
+  
 
 
   <div class="q-pa-lg q-ma-lg">
    
 
 
+   <q-breadcrumbs class="text-brown">
+      <template v-slot:separator>
+        <q-icon
+          size="1.5em"
+          name="chevron_right"
+          color="primary"
+        />
+      </template>
+
+      <q-breadcrumbs-el label="Inicio" icon="home" to="dash" />
+  
+      <q-breadcrumbs-el label="Doacao" icon="navigation" />
+    </q-breadcrumbs>
+
+
+    <q-space> </q-space>
+
+   <p> ... </p>
+
+
+
     <q-table
-      title="Doaçoes"
+      title="Lista de Doaçoes"
       :data="data"
       :columns="columns"
       row-key="name"
@@ -43,12 +61,9 @@
 
       <template v-slot:body="props">
         <q-tr :props="props">
-          <q-td key="numero_bolsa" :props="props">
-            {{ props.row.numero_bolsa }}
-         
-          </q-td>
-          <q-td key="triagem.agendamento.dador.sangue.nome" :props="props">
-            {{ props.row.triagem.agendamento.dador.sangue.nome}}
+          
+          <q-td key="triagem.agendamento.dador.nome" :props="props">
+            {{ props.row.triagem.agendamento.dador.nome}}
            
           </q-td>
           <q-td key="data_coletada" :props="props">
@@ -155,7 +170,6 @@ mounted()  {
       this.data = response.data
       console.log(response.data
       )
-      console.log("--------------")
     })
     .catch(e => {
       this.errors.push(e)
@@ -177,11 +191,10 @@ mounted()  {
 
       columns: [
 
-       { name: 'numero_bolsa', align: 'center', label: 'Numero de bolsa', field: 'numero_bolsa', sortable: true , },
 ,
-         { name: 'triagem.agendamento.dador.sangue.nome', label: 'Grupo sanguineo', field: 'triagem.agendamento.dador.sangue.nome' },
+         { name: 'triagem.agendamento.dador.nome', align: 'left', label: 'Dador', field: 'triagem.agendamento.dador.nome' },
 
-        { name: 'data_coletada', align: 'center', label: 'Data  Coletada', field: 'data_coletada', sortable: true , },
+        { name: 'data_coletada', align: 'center', label: 'Data Coletada', field: 'data_coletada', sortable: true , },
         { name: 'hora_coletada', label: 'Hora Coletada', field: 'hora_coletada' },
         { name: 'volume_coletado', label: 'Volume Coletado', field: 'volume_coletado' },
 

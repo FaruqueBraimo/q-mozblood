@@ -48,11 +48,11 @@
 
     </div>
 
-<div class="row justify-end">
+<div class="row justify-start">
       <q-btn
         type="submit"
         :loading="submitting"
-        label="Salvar"
+        label="Marcar"
         class="q-mt-md"
         color="teal"
         @click="salvar"
@@ -78,13 +78,14 @@ export default {
       options: [],
       dador : '',
       obs : '',
+      mensagem : '',
 
       lista : [],
 
         agendamento: {
-        data_marcada: "2019/02/01",
+        data_marcada: "2020/09/02",
         data_hoje: "",
-        hora_marcada: "10:56",
+        hora_marcada: "14:56",
         desc: "",
         
       },
@@ -92,6 +93,9 @@ export default {
   }
 ,
 methods: {
+
+ 
+  
    salvar(){
 //https://sanguemozapi.herokuapp.com/api/agendamento/
     axios.post(`https://sanguemozapi.herokuapp.com/api/agendamento/`  +  this.dador.value, {
@@ -104,20 +108,23 @@ methods: {
        
                 })
                 .then(function (response) {
-                    currentObj.output = response.data;
+               
+                   alert(response.data);
+
                 })
                 .catch(function (error) {
-                    currentObj.output = error;
+
                 });
 
   }
+ 
 }
 
 
 ,
 
  mounted(){
-
+    
   axios.get(`https://sanguemozapi.herokuapp.com/api/dadores/`)
     .then(response => {
       this.lista  = response.data     

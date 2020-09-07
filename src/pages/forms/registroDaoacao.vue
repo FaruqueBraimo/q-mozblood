@@ -99,8 +99,8 @@ methods: {
              
                 })
                 .then(function (response) {
-                    currentObj.output = response.data;
-                    this.showNotif();
+                     alert(response.data);
+
                 })
                 .catch(function (error) {
                     currentObj.output = error;
@@ -122,7 +122,7 @@ methods: {
 
  mounted(){
 
-  axios.get(`https://sanguemozapi.herokuapp.com/api/triagem/`)
+  axios.get(`https://sanguemozapi.herokuapp.com/api/aptos/`)
     .then(response => {
       this.lista  = response.data     
       console.log("--------------")
